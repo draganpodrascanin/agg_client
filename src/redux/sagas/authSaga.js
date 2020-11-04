@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-const { take, put, call, takeEvery } = require('redux-saga/effects');
+const { put, call, takeEvery } = require('redux-saga/effects');
 const {
 	LOADING,
 	LOGIN_SAGA,
@@ -23,14 +23,14 @@ function* loginSaga(action) {
 				password: action.payload.password,
 			})
 		);
-		console.log(admin);
-		const { firstName, lastName, username, role } = admin.data.data;
+		const { firstName, lastName, username, role } = admin.data.data.user;
+
 		yield put({
 			type: LOGIN_SUCCESS,
 			payload: { firstName, lastName, username, role },
 		});
 	} catch (err) {
-		console.dir(err);
+		// console.dir(err);
 		const errors = err.response.data;
 		yield put({ type: LOGIN_ERROR, payload: [errors] });
 	}
@@ -48,7 +48,9 @@ function* getCurrentAdminSaga() {
 		const currentAdmin = yield call(() =>
 			Axios.get('/api/v1/admin/getCurrentAdmin')
 		);
+
 		const { username, firstName, lastName, role } = currentAdmin.data.data;
+
 		yield put({
 			type: GET_CURRENT_ADMIN_SUCCESS,
 			payload: { username, firstName, lastName, role },

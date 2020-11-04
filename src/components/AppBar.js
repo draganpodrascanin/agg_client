@@ -10,7 +10,7 @@ import {
 
 import MenuIcon from '@material-ui/icons/Menu';
 import { logoutAdminAction } from '../redux/actions/authAction';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 const CustomAppBar = (props) => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
+	const admin = useSelector((state) => state.admin);
 
 	const handleLogout = () => {
 		dispatch(logoutAdminAction());
@@ -44,8 +45,12 @@ const CustomAppBar = (props) => {
 				>
 					<MenuIcon />
 				</IconButton>
-				<Typography variant="h6" className={classes.title}>
-					News
+				<Typography
+					style={{ textTransform: 'capitalize' }}
+					variant="h6"
+					className={classes.title}
+				>
+					{`${admin.firstName} ${admin.lastName}`}
 				</Typography>
 				<Button color="inherit" onClick={handleLogout}>
 					Logout

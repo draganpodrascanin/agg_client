@@ -15,6 +15,7 @@ export const LoadingModal = (props) => {
 					top: '50%',
 					left: '50%',
 					transform: 'translate(-50%, -50%)',
+					border: 'none',
 				}}
 			>
 				<CircularProgress
@@ -22,6 +23,7 @@ export const LoadingModal = (props) => {
 						color: '#fff',
 						height: 100,
 						width: 100,
+						border: 'none',
 					}}
 				/>
 			</div>

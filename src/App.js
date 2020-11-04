@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { PrivateRoute } from './components/PrivateRoute';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -8,6 +9,11 @@ import LoginForm from './components/LoginForm';
 
 import 'fontsource-roboto';
 import { getCurrentAdminAction } from './redux/actions/authAction';
+import { LoginRoute } from './components/LoginRoute';
+import { NotAuthorizedPage } from './pages/NotAuthorized';
+import { Dashboard } from './pages/Dashboard';
+
+import './style.css';
 
 const theme = createMuiTheme({
 	palette: {
@@ -23,44 +29,87 @@ const App = () => {
 
 	useEffect(() => {
 		dispatch(getCurrentAdminAction());
-	}, []);
+	}, [dispatch]);
 
 	// if (!admin.isLoggedIn) return <LoginForm />;
 
-	return !admin.isLoggedIn ? (
-		<LoginForm />
-	) : (
+	return (
 		<Router basename="/dashboard">
 			<div>
-				<Navigation />
+				{admin.isLoggedIn && <Navigation />}
 				<Switch>
-					<Route exact path="/">
-						<h1>Dashboard</h1>
-					</Route>
-					<Route exact path="/klijenti">
+					<LoginRoute exact path="/login">
+						<LoginForm />
+					</LoginRoute>
+					<Route path="/forgot-password">forgot password</Route>
+					<PrivateRoute
+						roles={['super-admin', 'admin', 'mechanic', 'blogger']}
+						exact
+						path="/zabranjen-pristup"
+					>
+						<NotAuthorizedPage />
+					</PrivateRoute>
+					<PrivateRoute
+						roles={['super-admin', 'admin', 'mechanic']}
+						exact
+						path="/klijenti"
+					>
 						<h1>klijenti</h1>
-					</Route>
-					<Route exact path="/automobili">
+					</PrivateRoute>
+					<PrivateRoute
+						roles={['super-admin', 'admin', 'mechanic']}
+						exact
+						path="/automobili"
+					>
 						<h1>automobili</h1>
-					</Route>
-					<Route exact path="/servisni-nalozi">
+					</PrivateRoute>
+					<PrivateRoute
+						roles={['super-admin', 'admin', 'mechanic']}
+						exact
+						path="/servisni-nalozi"
+					>
 						<h1>servisni nalozi</h1>
-					</Route>
-					<Route exact path="/radni-nalozi">
+					</PrivateRoute>
+					<PrivateRoute
+						roles={['super-admin', 'admin', 'mechanic']}
+						exact
+						path="/radni-nalozi"
+					>
 						<h1>radni nalozi</h1>
-					</Route>
-					<Route exact path="/zakazani-termini">
+					</PrivateRoute>
+					<PrivateRoute
+						roles={['super-admin', 'admin', 'mechanic']}
+						exact
+						path="/zakazani-termini"
+					>
 						<h1>zakazani termini</h1>
-					</Route>
-					<Route exact path="/racuni">
+					</PrivateRoute>
+					<PrivateRoute
+						roles={['super-admin', 'admin', 'mechanic']}
+						exact
+						path="/racuni"
+					>
 						<h1>racuni</h1>
-					</Route>
-					<Route exact path="/blog">
+					</PrivateRoute>
+					<PrivateRoute
+						roles={['super-admin', 'admin', 'blogger']}
+						exact
+						path="/blog"
+					>
 						<h1>blog</h1>
-					</Route>
-					<Route exact path="/slike">
+					</PrivateRoute>
+					<PrivateRoute
+						roles={['super-admin', 'admin', 'blogger']}
+						exact
+						path="/slike"
+					>
 						<h1>slike</h1>
-					</Route>
+					</PrivateRoute>
+					<PrivateRoute roles={['super-admin', 'admin']} exact path="/">
+						<h1>
+							<Dashboard />
+						</h1>
+					</PrivateRoute>
 				</Switch>
 			</div>
 		</Router>

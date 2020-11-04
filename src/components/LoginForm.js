@@ -52,7 +52,7 @@ const LoginForm = () => {
 			<LoadingModal open={admin.loading} />
 			<Typography
 				display="block"
-				variant="h1"
+				variant="h2"
 				component="h1"
 				style={{ textAlign: 'center' }}
 				className={classes.heading}
@@ -75,6 +75,9 @@ const LoginForm = () => {
 					type="password"
 					onChange={formik.handleChange}
 					className={classes.input}
+					onKeyPress={(e) => {
+						if (e.key === 'Enter') formik.submitForm();
+					}}
 				/>
 				<Button
 					variant="contained"

@@ -18,8 +18,6 @@ const initialState = {
 };
 
 export const authReducer = (state = initialState, action) => {
-	console.log('admin reducer', action);
-
 	switch (action.type) {
 		case LOADING:
 			return { ...state, loading: true };
