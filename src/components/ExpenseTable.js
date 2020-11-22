@@ -11,17 +11,21 @@ import {
 	MuiPickersUtilsProvider,
 	KeyboardDatePicker,
 } from '@material-ui/pickers';
-import DeleteIcon from '@material-ui/icons/Delete';
 import DateFnsUtils from '@date-io/date-fns';
 import dayjs from 'dayjs';
-import { Button, Typography } from '@material-ui/core';
+import { Button, Modal, Typography } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { getExpensesAction } from '../redux/actions/expensesActions';
+import {
+	createExpenseAction,
+	getExpensesAction,
+	updateExpenseAction,
+	deleteExpenseAction,
+} from '../redux/actions/expensesActions';
 import { AddCircle } from '@material-ui/icons';
 import { ExpenseFormModal } from './ExpenseFormModal';
 import { ExpensesForm } from './ExpensesForm';
 
-const useStyle = makeStyles({
+const useStyle = makeStyles((theme) => ({
 	datePickerContainer: {
 		display: 'flex',
 		width: '100%',
@@ -42,11 +46,20 @@ const useStyle = makeStyles({
 		flexDirection: 'column',
 		alignItems: 'flex-start',
 		border: 'none',
-		active: {
+		'&:active': {
 			border: 'none',
 		},
 	},
-});
+	tableRow: {
+		'&:hover': {
+			backgroundColor: 'rgba(0,0,0,0.05)',
+			cursor: 'pointer',
+		},
+	},
+	tableHead: {
+		backgroundColor: '#000',
+	},
+}));
 
 export const ExpenseTable = () => {
 	const classes = useStyle();
@@ -55,8 +68,15 @@ export const ExpenseTable = () => {
 	const [fromDate, setFromDate] = useState(
 		dayjs(new Date()).subtract(1, 'week')
 	);
-	const [toDate, setToDate] = useState(dayjs(new Date()).add(1, 'day'));
+	const [toDate, setToDate] = useState(dayjs(new Date()));
 	const [modalOpen, setModalOpen] = useState(false);
+	const [activeExpense, setActiveExpense] = useState({
+		id: '',
+		description: '',
+		date: '',
+		amount: null,
+		active: false,
+	});
 
 	useEffect(() => {
 		dispatch(getExpensesAction(fromDate, toDate));
@@ -69,13 +89,79 @@ export const ExpenseTable = () => {
 		setToDate(date);
 	};
 
+	const resetTableDates = () => {
+		setToDate(dayjs(new Date()));
+		setFromDate(dayjs(dayjs(new Date()).subtract(1, 'week')));
+	};
+
 	const handleModalOpen = () => {
 		setModalOpen(!modalOpen);
 	};
 
+	const handleCreateExpenseSubmit = (values) => {
+		dispatch(
+			createExpenseAction(values.description, values.amount, values.date)
+		);
+		setModalOpen(false);
+		resetTableDates();
+	};
+
+	const handleActiveEnxpense = (description, date, amount, id) => {
+		setActiveExpense({ description, date, amount, id, active: true });
+	};
+	const handleActiveExpenseModalClose = () => {
+		setActiveExpense({
+			id: '',
+			description: '',
+			date: '',
+			amount: null,
+			active: false,
+		});
+	};
+
+	const handleUpdateExpenseFormSubmit = (values) => {
+		dispatch(
+			updateExpenseAction(
+				values.description,
+				values.amount,
+				values.date,
+				activeExpense.id
+			)
+		);
+		setActiveExpense({
+			id: '',
+			description: '',
+			date: '',
+			amount: null,
+			active: false,
+		});
+	};
+
+	const handleDelete = () => {
+		dispatch(deleteExpenseAction(activeExpense.id));
+		setActiveExpense({
+			id: '',
+			description: '',
+			date: '',
+			amount: null,
+			active: false,
+		});
+	};
+
 	const renderExpenses = expenses.map((expense) => {
 		return (
-			<TableRow key={expense.id}>
+			<TableRow
+				className={classes.tableRow}
+				onClick={() =>
+					handleActiveEnxpense(
+						expense.description,
+						dayjs(expense.createdAt).format('YYYY-MM-DD'),
+						expense.amount,
+						expense.id
+					)
+				}
+				key={expense.id}
+			>
 				<TableCell component="th" scope="row">
 					{expense.description}
 				</TableCell>
@@ -94,9 +180,25 @@ export const ExpenseTable = () => {
 					<Typography variant="h4" component="h3">
 						DODAJ TROŠAK
 					</Typography>
-					<ExpensesForm />
+					<ExpensesForm onSubmit={handleCreateExpenseSubmit} />
 				</div>
 			</ExpenseFormModal>
+
+			<Modal
+				open={activeExpense.active}
+				onClose={handleActiveExpenseModalClose}
+			>
+				<div className={classes.modal}>
+					<ExpensesForm
+						date={activeExpense.date}
+						description={activeExpense.description}
+						amount={activeExpense.amount}
+						onSubmit={handleUpdateExpenseFormSubmit}
+						handleDelete={handleDelete}
+						update
+					/>
+				</div>
+			</Modal>
 
 			<div style={{ display: 'flex', alignItems: 'flex-end' }}>
 				<Typography
@@ -149,10 +251,14 @@ export const ExpenseTable = () => {
 			<TableContainer className={classes.table} component={Paper}>
 				<Table>
 					<TableHead>
-						<TableRow>
-							<TableCell>Opis</TableCell>
-							<TableCell align="right">Iznos</TableCell>
-							<TableCell align="right">Datum</TableCell>
+						<TableRow style={{ backgroundColor: '#1e7be2' }}>
+							<TableCell style={{ color: '#fff' }}>OPIS</TableCell>
+							<TableCell style={{ color: '#fff' }} align="right">
+								IZNOS
+							</TableCell>
+							<TableCell style={{ color: '#fff' }} align="right">
+								DATUM
+							</TableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>{renderExpenses}</TableBody>

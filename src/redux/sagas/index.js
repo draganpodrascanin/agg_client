@@ -5,7 +5,12 @@ import {
 	watchLogoutSaga,
 } from './authSaga';
 import { watchGetChartDataSaga } from './chartSaga';
-import { watchGetExpensesSaga } from './expensesSaga';
+import {
+	watchGetExpensesSaga,
+	watchCreateExpenseSaga,
+	watchUpdateExpenseSaga,
+	watchDeleteExpenseSaga,
+} from './expensesSaga';
 
 function* rootSaga() {
 	yield all([
@@ -14,6 +19,9 @@ function* rootSaga() {
 		watchLogoutSaga(),
 		watchGetChartDataSaga(),
 		watchGetExpensesSaga(),
+		watchCreateExpenseSaga(),
+		watchUpdateExpenseSaga(),
+		watchDeleteExpenseSaga(),
 	]);
 }
 
