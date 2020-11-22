@@ -11,6 +11,7 @@ const useStyle = makeStyles({
 	title: {
 		marginBottom: -15,
 		marginLeft: 50,
+		fontSize: 14,
 	},
 });
 
@@ -19,7 +20,9 @@ export const CustomBarChart = (props) => {
 
 	return (
 		<div className={classes.chartCard}>
-			<Typography className={classes.title}>{props.title}</Typography>
+			<Typography variant="overline" className={classes.title}>
+				{props.children}
+			</Typography>
 			<BarChart
 				width={props.chartWidth}
 				height={props.chartHeight}

@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { PrivateRoute } from './components/PrivateRoute';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import {
+	createMuiTheme,
+	makeStyles,
+	ThemeProvider,
+} from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Navigation } from './components/Navigation';

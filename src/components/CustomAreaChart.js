@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 	title: {
 		marginBottom: -15,
 		marginLeft: 50,
+		fontSize: 14,
 	},
 }));
 
@@ -41,7 +42,7 @@ export const CustomAreaChart = (props) => {
 
 	return (
 		<div className={classes.chartCard}>
-			<Typography className={classes.title}>
+			<Typography variant="overline" className={classes.title}>
 				{props.chartName || null}
 			</Typography>
 			<AreaChart
