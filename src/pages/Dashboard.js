@@ -1,8 +1,9 @@
 import { Container } from '@material-ui/core';
 import React, { useRef, useEffect, useState } from 'react';
 import { Charts } from '../components/Charts';
-import { ExpenseTable } from '../components/ExpenseTable';
+import { Expenses } from '../components/Expenses/index';
 import { Header } from '../components/Header';
+import { Profit } from '../components/Profit';
 
 export const Dashboard = () => {
 	let container = useRef(null);
@@ -22,7 +23,8 @@ export const Dashboard = () => {
 		<Container ref={container}>
 			<Header breadcrums={[{ name: 'Dashboard', path: '/' }]}>Dashboard</Header>
 			<Charts containerWidth={containerWidth - 40}></Charts>
-			<ExpenseTable></ExpenseTable>
+			<Expenses></Expenses>
+			<Profit></Profit>
 		</Container>
 	);
 };

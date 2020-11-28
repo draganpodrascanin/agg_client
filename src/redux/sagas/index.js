@@ -12,6 +12,8 @@ import {
 	watchDeleteExpenseSaga,
 } from './expensesSaga';
 
+import { watchJobConclusionSaga } from './jobConclusionsSaga';
+
 function* rootSaga() {
 	yield all([
 		watchLoginSaga(),
@@ -22,6 +24,7 @@ function* rootSaga() {
 		watchCreateExpenseSaga(),
 		watchUpdateExpenseSaga(),
 		watchDeleteExpenseSaga(),
+		watchJobConclusionSaga(),
 	]);
 }
 

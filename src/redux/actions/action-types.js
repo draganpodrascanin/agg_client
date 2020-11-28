@@ -33,3 +33,8 @@ export const DELETE_EXPENSE = 'DELETE_EXPENSE';
 export const DELETE_EXPENSE_SAGA = 'DELETE_EXPENSE_SAGA';
 export const DELETE_EXPENSE_ERROR = 'DELETE_EXPENSE_ERROR';
 export const EXPENSE_ERROR = 'EXPENSE_ERROR';
+
+//----------------------------------------------------------------
+export const GET_JOBCONCLUSIONS_SAGA = 'GET_JOB_CONCLUSIONS_SAGA';
+export const GET_JOBCONCLUSIONS = 'GET_JOB_CONCLUSIONS';
+export const JOB_CONCLUSIONS_ERROR = 'JOB_CONCLUSIONS_ERROR';

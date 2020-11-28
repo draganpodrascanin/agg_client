@@ -20,7 +20,7 @@ import {
 	getExpensesAction,
 	updateExpenseAction,
 	deleteExpenseAction,
-} from '../redux/actions/expensesActions';
+} from '../../redux/actions/expensesActions';
 import { AddCircle } from '@material-ui/icons';
 import { ExpenseFormModal } from './ExpenseFormModal';
 import { ExpensesForm } from './ExpensesForm';
@@ -61,7 +61,7 @@ const useStyle = makeStyles((theme) => ({
 	},
 }));
 
-export const ExpenseTable = () => {
+export const Expenses = () => {
 	const classes = useStyle();
 	const dispatch = useDispatch();
 	const expenses = useSelector((state) => state.expenses);
