@@ -5,6 +5,7 @@ import {
 	watchLogoutSaga,
 } from './authSaga';
 import { watchGetChartDataSaga } from './chartSaga';
+import { watchCreateClientSaga, watchGetClientsSaga } from './clientsSaga';
 import {
 	watchGetExpensesSaga,
 	watchCreateExpenseSaga,
@@ -25,6 +26,8 @@ function* rootSaga() {
 		watchUpdateExpenseSaga(),
 		watchDeleteExpenseSaga(),
 		watchJobConclusionSaga(),
+		watchGetClientsSaga(),
+		watchCreateClientSaga(),
 	]);
 }
 

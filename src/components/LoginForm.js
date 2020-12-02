@@ -36,6 +36,7 @@ const LoginForm = () => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const admin = useSelector((state) => state.admin);
+	const UI = useSelector((state) => state.UI);
 
 	const formik = useFormik({
 		initialValues: {
@@ -49,7 +50,7 @@ const LoginForm = () => {
 
 	return (
 		<Container maxWidth="sm">
-			<LoadingModal open={admin.loading} />
+			<LoadingModal open={UI.loading} />
 			<Typography
 				display="block"
 				variant="h2"

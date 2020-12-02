@@ -1,6 +1,6 @@
 import { Container, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
-import { ClientCards } from '../components/ClientCards';
+import { ClientCards } from '../components/Clients/ClientCards';
 
 const useStyles = makeStyles((theme) => ({
 	heading: {

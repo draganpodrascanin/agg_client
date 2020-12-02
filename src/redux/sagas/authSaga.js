@@ -11,6 +11,7 @@ const {
 	GET_CURRENT_ADMIN_SUCCESS,
 	LOGOUT_SAGA,
 	LOGOUT,
+	CLEAR_LOADING,
 } = require('../actions/action-types');
 
 //--------LOGIN--------------
@@ -55,7 +56,9 @@ function* getCurrentAdminSaga() {
 			type: GET_CURRENT_ADMIN_SUCCESS,
 			payload: { username, firstName, lastName, role },
 		});
+		yield put({ type: CLEAR_LOADING });
 	} catch (e) {
+		yield put({ type: CLEAR_LOADING });
 		yield put({ type: GET_CURRENT_ADMIN_FAIL });
 	}
 }
@@ -69,7 +72,7 @@ export function* watchGetCurrentAdminSaga() {
 function* logoutSaga() {
 	yield put({ type: LOADING });
 	yield call(() => Axios.post('/api/v1/admin/logout'));
-
+	yield put({ type: CLEAR_LOADING });
 	yield put({ type: LOGOUT });
 }
 

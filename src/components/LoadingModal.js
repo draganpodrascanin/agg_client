@@ -6,8 +6,8 @@ export const LoadingModal = (props) => {
 		<Modal
 			open={props.open}
 			onClose={props.handleClose}
-			aria-labelledby="simple-modal-title"
-			aria-describedby="simple-modal-description"
+			aria-labelledby="loading modal"
+			aria-describedby="loading-modal-please-wait"
 		>
 			<div
 				style={{
@@ -16,6 +16,11 @@ export const LoadingModal = (props) => {
 					left: '50%',
 					transform: 'translate(-50%, -50%)',
 					border: 'none',
+					outline: 'none',
+					zIndex: 1000,
+					'&:fokus': {
+						outline: 'none',
+					},
 				}}
 			>
 				<CircularProgress
