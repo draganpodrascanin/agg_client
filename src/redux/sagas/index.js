@@ -4,8 +4,13 @@ import {
 	watchLoginSaga,
 	watchLogoutSaga,
 } from './authSaga';
+import { watchGetCarSuggestionSaga } from './carSuggestionsSaga';
 import { watchGetChartDataSaga } from './chartSaga';
-import { watchCreateClientSaga, watchGetClientsSaga } from './clientsSaga';
+import {
+	watchCreateClientSaga,
+	watchGetClientsSaga,
+	watchSetClientCarOwnershipSaga,
+} from './clientsSaga';
 import {
 	watchGetExpensesSaga,
 	watchCreateExpenseSaga,
@@ -28,6 +33,8 @@ function* rootSaga() {
 		watchJobConclusionSaga(),
 		watchGetClientsSaga(),
 		watchCreateClientSaga(),
+		watchGetCarSuggestionSaga(),
+		watchSetClientCarOwnershipSaga(),
 	]);
 }
 

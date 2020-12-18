@@ -10,7 +10,6 @@ function* jobConclusionSaga(action) {
 	const url = `/api/v1/jobConclusion/betweenDates?dateFrom=${action.payload.fromDate}&dateTo=${action.payload.toDate}`;
 	try {
 		const response = yield call(() => Axios.get(url));
-		console.log(response);
 		yield put({ type: GET_JOBCONCLUSIONS, payload: response.data.data });
 	} catch (err) {
 		put({

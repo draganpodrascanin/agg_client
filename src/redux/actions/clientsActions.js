@@ -1,4 +1,9 @@
-import { CREATE_CLIENT_SAGA, GET_CLIENTS_SAGA, UI_ERROR } from './action-types';
+import {
+	CREATE_CLIENT_SAGA,
+	GET_CLIENTS_SAGA,
+	SET_CLIENT_CAR_OWNERSHIP_SAGA,
+	UI_ERROR,
+} from './action-types';
 
 export const getClientsAction = (page, limit, search) => {
 	if (!page) page = 1;
@@ -24,7 +29,6 @@ export const createNewClientAction = (
 		!passwordConfirm
 	)
 		return { type: UI_ERROR, payload: 'sva polja su obavezna' };
-	console.log('action razbu');
 	return {
 		type: CREATE_CLIENT_SAGA,
 		payload: {
@@ -35,5 +39,12 @@ export const createNewClientAction = (
 			password,
 			passwordConfirm,
 		},
+	};
+};
+
+export const setClientCarOwnershipAction = (carReg, clientId) => {
+	return {
+		type: SET_CLIENT_CAR_OWNERSHIP_SAGA,
+		payload: { carReg, clientId },
 	};
 };

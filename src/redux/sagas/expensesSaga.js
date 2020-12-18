@@ -31,7 +31,6 @@ export function* watchGetExpensesSaga() {
 }
 
 export function* createExpenseSaga(action) {
-	console.log('action', action);
 	try {
 		yield call(() => {
 			Axios.post('/api/v1/expenses', {

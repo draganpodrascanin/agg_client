@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import {
 	CLEAR_CLIENTS_LOADING,
 	CLEAR_LOADING,
@@ -10,6 +10,8 @@ import {
 	GET_CLIENTS,
 	GET_CLIENTS_SAGA,
 	LOADING,
+	SET_CLIENT_CAR_OWNERSHIP,
+	SET_CLIENT_CAR_OWNERSHIP_SAGA,
 	SUCCESS,
 	UI_ERROR,
 } from '../actions/action-types';
@@ -45,7 +47,6 @@ export function* watchGetClientsSaga() {
 }
 
 function* createClientSaga(action) {
-	console.log('stigao dovden majkane');
 	yield put({ type: LOADING });
 	try {
 		const response = yield call(() =>
@@ -65,4 +66,35 @@ function* createClientSaga(action) {
 
 export function* watchCreateClientSaga() {
 	yield takeLatest(CREATE_CLIENT_SAGA, createClientSaga);
+}
+
+function* setClientCarOwnershipSaga(action) {
+	yield put({ type: LOADING });
+
+	try {
+		const response = yield call(() =>
+			Axios.patch('/api/v1/cars/setOwnerByReg', {
+				carReg: action.payload.carReg,
+				userId: action.payload.clientId,
+			})
+		);
+		console.log('response', response.data.data);
+		yield put({ type: SET_CLIENT_CAR_OWNERSHIP, payload: response.data.data });
+		yield put({ type: CLEAR_LOADING });
+		yield put({
+			type: SUCCESS,
+			payload: 'uspesno stavljeno vlasnistvo automobila',
+		});
+	} catch (err) {
+		yield put({ type: CLEAR_LOADING });
+		yield put({
+			type: UI_ERROR,
+			payload: 'greska pri postavljanju vlasnistva',
+		});
+	}
+}
+
+export function* watchSetClientCarOwnershipSaga() {
+	console.log('hit');
+	yield takeEvery(SET_CLIENT_CAR_OWNERSHIP_SAGA, setClientCarOwnershipSaga);
 }

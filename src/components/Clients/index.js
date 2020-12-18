@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react';
 import {
 	Button,
 	CircularProgress,
@@ -14,7 +15,6 @@ import { Add, Person, Search } from '@material-ui/icons';
 import { Alert } from '@material-ui/lab';
 import Pagination from '@material-ui/lab/Pagination/Pagination';
 import { useFormik } from 'formik';
-import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
@@ -24,6 +24,7 @@ import {
 import { getClientsAction } from '../../redux/actions/clientsActions';
 import { LoadingModal } from '../LoadingModal';
 import { CreateClientModal } from './CreateClientModal';
+import AddCarModal from './AddCarModal';
 
 const useStyles = makeStyles((theme) => ({
 	card: {
@@ -99,7 +100,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const ClientCards = () => {
+const ClientCards = () => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const clients = useSelector((state) => state.clients);
@@ -108,6 +109,8 @@ export const ClientCards = () => {
 	const [limit, setLimit] = useState(12);
 	const [searchedTerm, setSearchedTerm] = useState('');
 	const [openCreateClientModal, setCreateClientModal] = useState(false);
+	const [openAddCarModal, setOpenAddCarModal] = useState(false);
+	const [focusClient, setFocusClient] = useState({});
 
 	useEffect(() => {
 		dispatch(getClientsAction(page, limit, searchedTerm));
@@ -129,6 +132,11 @@ export const ClientCards = () => {
 
 	const handleCreateClientModal = () => {
 		setCreateClientModal(!openCreateClientModal);
+	};
+
+	const handleOpenAddCarModal = (client) => {
+		setOpenAddCarModal(!openAddCarModal);
+		setFocusClient(client);
 	};
 
 	const handleSearchSubmit = (values) => {
@@ -177,7 +185,7 @@ export const ClientCards = () => {
 							{client.phoneNumber}
 						</a>
 					</p>
-					<div style={{ display: 'flex' }}>
+					<div style={{ display: 'flex', flexWrap: 'wrap' }}>
 						{client.cars.map((car) => (
 							<Link
 								className={classes.cardCar}
@@ -191,6 +199,16 @@ export const ClientCards = () => {
 							</Link>
 						))}
 					</div>
+					<Button
+						size="small"
+						variant="outlined"
+						color="inherit"
+						startIcon={<Add />}
+						style={{ marginTop: 5, width: 'fit-content', color: '#2ecc71' }}
+						onClick={() => handleOpenAddCarModal(client)}
+					>
+						Dodaj Automobil
+					</Button>
 				</div>
 			</Paper>
 		</Grid>
@@ -198,10 +216,14 @@ export const ClientCards = () => {
 
 	return (
 		<>
-			{console.log(UI)}
 			<CreateClientModal
 				open={openCreateClientModal}
 				close={handleCreateClientModal}
+			/>
+			<AddCarModal
+				open={openAddCarModal}
+				close={handleOpenAddCarModal}
+				clientId={focusClient.id}
 			/>
 			<LoadingModal open={UI.loading} />
 			<Button
@@ -297,3 +319,5 @@ export const ClientCards = () => {
 		</>
 	);
 };
+
+export default ClientCards;

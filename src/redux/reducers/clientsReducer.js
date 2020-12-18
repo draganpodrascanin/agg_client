@@ -7,6 +7,7 @@ const {
 	CLIENTS_LOADING,
 	CLEAR_CLIENTS_LOADING,
 	CREATE_CLIENT,
+	SET_CLIENT_CAR_OWNERSHIP,
 } = require('../actions/action-types');
 
 const initalState = {
@@ -31,6 +32,20 @@ const clientsReducer = (state = initalState, action) => {
 			return { ...state, activeClient: {} };
 		case CREATE_CLIENT:
 			return { ...state, client: [action.payload, ...state.clients] };
+		case SET_CLIENT_CAR_OWNERSHIP:
+			//---------------------------------------------------------------
+			const updatedClients = state.clients.map((client) => {
+				if (client.id !== action.payload.userId) return client;
+				const newCar = {
+					...action.payload,
+					user: undefined,
+					userId: undefined,
+				};
+				const updatedClientCars = [...client.cars, newCar];
+				return { ...client, cars: updatedClientCars };
+			});
+			return { ...state, clients: updatedClients };
+		//---------------------------------------------------------------
 		case CLIENTS_LOADING:
 			return { ...state, loading: true };
 		case CLEAR_CLIENTS_LOADING:
