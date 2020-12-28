@@ -22,7 +22,7 @@ import {
 	clearUiErrorAction,
 } from '../../redux/actions/actionsUI';
 import { getClientsAction } from '../../redux/actions/clientsActions';
-import { LoadingModal } from '../LoadingModal';
+import { LoadingModal } from '../UI/LoadingModal';
 import { CreateClientModal } from './CreateClientModal';
 import AddCarModal from './AddCarModal';
 

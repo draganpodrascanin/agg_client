@@ -11,6 +11,7 @@ import { Autocomplete } from '@material-ui/lab';
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { createCarAndSetOwnerAction } from '../../redux/actions/carActions';
 import {
 	carSuggestionOpenAction,
 	carSuggestionCloseAction,
@@ -19,12 +20,13 @@ import {
 } from '../../redux/actions/carSuggestionActions';
 import { setClientCarOwnershipAction } from '../../redux/actions/clientsActions';
 import { createDebounce } from '../util/debounce';
+import CreateCarForm from '../Cars/CreateCarForm';
 
 const debounce = createDebounce();
 
 const useStyles = makeStyles((theme) => ({
 	modalForm: {
-		padding: '30px 60px',
+		padding: '40px 60px',
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'flex-start',
@@ -41,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 	modal: {
 		outline: 'none',
 		border: 'none',
+		overflowY: 'scroll',
 		'&:focus': {
 			outline: 'none',
 		},
@@ -61,6 +64,7 @@ const AddCarModal = (props) => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const carSuggestions = useSelector((state) => state.carSuggestions);
+	let modal = useRef(null);
 
 	const [overRegForm, setOverRegForm] = useState({
 		registration: '',
@@ -87,9 +91,30 @@ const AddCarModal = (props) => {
 			);
 	}, [dispatch, overRegForm.registration]);
 
+	setTimeout(() => {
+		if (modal?.current?.offsetHeight >= window.innerHeight) {
+			modal.current.style.height = '80vh';
+			modal.current.style.overflowY = 'scroll';
+		}
+	});
+
+	const handleCreateCarFormSubmit = (val) => {
+		dispatch(
+			createCarAndSetOwnerAction(
+				val.carBrand,
+				val.carModel,
+				val.registration,
+				val.engine,
+				val.milage,
+				val.productionYear,
+				props.clientId
+			)
+		);
+	};
+
 	return (
 		<Modal open={props.open} onClose={props.close} className={classes.modal}>
-			<div className={classes.modalForm}>
+			<div ref={modal} className={classes.modalForm}>
 				<form
 					ref={overRegForm.formRef}
 					style={{ marginBottom: 16 }}
@@ -163,11 +188,14 @@ const AddCarModal = (props) => {
 					</Button>
 				</form>
 				<div className={classes.hr} />
-				<form style={{ marginTop: 10 }}>
-					<Typography variant="h5" type="h5">
-						Novi Automobil:
-					</Typography>
-				</form>
+				<Typography variant="h5" type="h5" style={{ marginTop: 10 }}>
+					Novi Automobil:
+				</Typography>
+
+				<CreateCarForm
+					buttonText="Potvrdi Registraciju novog automobila"
+					handleSubmit={handleCreateCarFormSubmit}
+				/>
 			</div>
 		</Modal>
 	);

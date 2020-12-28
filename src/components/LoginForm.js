@@ -9,7 +9,7 @@ import {
 	TextField,
 	Typography,
 } from '@material-ui/core';
-import { LoadingModal } from './LoadingModal';
+import { LoadingModal } from './UI/LoadingModal';
 
 const useStyles = makeStyles((theme) => ({
 	heading: {

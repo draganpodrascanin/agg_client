@@ -4,6 +4,7 @@ import {
 	watchLoginSaga,
 	watchLogoutSaga,
 } from './authSaga';
+import { watchCreateCarAndSetOwnerSaga } from './carSaga';
 import { watchGetCarSuggestionSaga } from './carSuggestionsSaga';
 import { watchGetChartDataSaga } from './chartSaga';
 import {
@@ -35,6 +36,7 @@ function* rootSaga() {
 		watchCreateClientSaga(),
 		watchGetCarSuggestionSaga(),
 		watchSetClientCarOwnershipSaga(),
+		watchCreateCarAndSetOwnerSaga(),
 	]);
 }
 
