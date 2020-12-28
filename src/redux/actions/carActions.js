@@ -1,4 +1,8 @@
-import { CREATE_CAR_AND_SET_OWNER_SAGA, CREATE_CAR_SAGA } from './action-types';
+import {
+	CREATE_CAR_AND_SET_OWNER_SAGA,
+	CREATE_CAR_SAGA,
+	GET_CARS_SAGA,
+} from './action-types';
 
 export const createCarAndSetOwnerAction = (
 	carBrand,
@@ -41,5 +45,12 @@ export const createCarAction = (
 			milage,
 			productionYear,
 		},
+	};
+};
+
+export const getCarsAction = (page, limit, search) => {
+	return {
+		type: GET_CARS_SAGA,
+		payload: { limit, page, search },
 	};
 };

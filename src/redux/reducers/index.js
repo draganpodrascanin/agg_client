@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { authReducer } from './authReducer';
+import carsReducer from './carsReducer';
 import { carSuggestionReducer } from './carSuggestionReducer';
 import { chartDataReducer } from './chartReducer';
 import clientsReducer from './clientsReducer';
@@ -15,4 +16,5 @@ export const combinedReducers = combineReducers({
 	jobConclusions: jobConclusionsReducer,
 	UI: UIReducer,
 	carSuggestions: carSuggestionReducer,
+	cars: carsReducer,
 });

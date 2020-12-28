@@ -10,11 +10,15 @@ import {
 	SET_CLIENT_CAR_OWNERSHIP,
 	SUCCESS,
 	UI_ERROR,
+	GET_CARS_SAGA,
+	SET_CARS_LOADING,
+	CLEAR_CARS_LOADING,
+	GET_CARS,
 } from '../actions/action-types';
 
 function* createCarSaga({ payload }) {
 	yield put({ type: LOADING });
-
+	console.log('in saga');
 	try {
 		const car = yield call(() =>
 			Axios.post('/api/v1/cars', {
@@ -59,8 +63,6 @@ function* createCarAndSetOwner(action) {
 			})
 		);
 
-		console.log('CAR -> ', car);
-
 		const res = yield call(() =>
 			Axios.patch(`/api/v1/cars/${car.data.data.id}/setOwner`, {
 				userId: payload.userId,
@@ -84,4 +86,32 @@ function* createCarAndSetOwner(action) {
 
 export function* watchCreateCarAndSetOwnerSaga() {
 	yield takeLatest(CREATE_CAR_AND_SET_OWNER_SAGA, createCarAndSetOwner);
+}
+
+function* getCarSaga(action) {
+	yield put({ type: SET_CARS_LOADING });
+	let url = '/api/v1/cars?';
+
+	if (action.payload.search) url += `search=${action.payload.search}&`;
+	if (action.payload.page) url += `page=${action.payload.page}&`;
+	if (action.payload.limit) url += `limit=${action.payload.limit}&`;
+
+	try {
+		const response = yield call(() => Axios.get(url));
+		yield put({ type: CLEAR_CARS_LOADING });
+		yield put({
+			type: GET_CARS,
+			payload: { count: response.data.count, cars: response.data.data },
+		});
+	} catch (err) {
+		yield put({ type: CLEAR_CARS_LOADING });
+		yield put({
+			type: UI_ERROR,
+			payload: 'Greska pri preuzimanju automobila sa servera.',
+		});
+	}
+}
+
+export function* watchGetCarsSaga() {
+	yield takeLatest(GET_CARS_SAGA, getCarSaga);
 }

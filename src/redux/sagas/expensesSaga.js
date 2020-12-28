@@ -41,7 +41,6 @@ export function* createExpenseSaga(action) {
 		});
 		yield put({ type: CREATE_EXPENSE });
 	} catch (err) {
-		console.log('err', err);
 		yield put({
 			type: EXPENSE_ERROR,
 			payload: 'greška pri kreiranju novog troška',
