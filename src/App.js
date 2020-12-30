@@ -20,6 +20,7 @@ import { Dashboard } from './pages/Dashboard';
 import './style.css';
 import { Klijenti } from './pages/Klijenti';
 import { Cars } from './pages/Cars';
+import { ServisniNalozi } from './pages/ServisniNalozi';
 
 const theme = createMuiTheme({
 	palette: {
@@ -74,7 +75,7 @@ const App = () => {
 						exact
 						path="/servisni-nalozi"
 					>
-						<h1>servisni nalozi</h1>
+						<ServisniNalozi />
 					</PrivateRoute>
 					<PrivateRoute
 						roles={['super-admin', 'admin', 'mechanic']}

@@ -18,7 +18,7 @@ import {
 
 function* createCarSaga({ payload }) {
 	yield put({ type: LOADING });
-	console.log('in saga');
+
 	try {
 		const car = yield call(() =>
 			Axios.post('/api/v1/cars', {
@@ -49,7 +49,7 @@ export function* watchCreateCarSaga() {
 function* createCarAndSetOwner(action) {
 	yield put({ type: LOADING });
 	const { payload } = action;
-	console.log('action', action);
+
 	let car;
 	try {
 		car = yield call(() =>

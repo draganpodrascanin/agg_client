@@ -24,6 +24,10 @@ import {
 } from './expensesSaga';
 
 import { watchJobConclusionSaga } from './jobConclusionsSaga';
+import {
+	watchCreateWorkOrderSaga,
+	watchGetWorkOrdersSaga,
+} from './workOrderSaga';
 
 function* rootSaga() {
 	yield all([
@@ -43,6 +47,8 @@ function* rootSaga() {
 		watchCreateCarAndSetOwnerSaga(),
 		watchCreateCarSaga(),
 		watchGetCarsSaga(),
+		watchCreateWorkOrderSaga(),
+		watchGetWorkOrdersSaga(),
 	]);
 }
 

@@ -64,11 +64,11 @@ const AddCarModal = (props) => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const carSuggestions = useSelector((state) => state.carSuggestions);
-	let modal = useRef(null);
+	let modal = useRef();
 
 	const [overRegForm, setOverRegForm] = useState({
 		registration: '',
-		formRef: useRef(null),
+		formRef: useRef(),
 		handleChange(e) {
 			setOverRegForm({ ...overRegForm, registration: e.target.value });
 		},

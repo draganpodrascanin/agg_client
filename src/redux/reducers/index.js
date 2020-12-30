@@ -7,6 +7,7 @@ import clientsReducer from './clientsReducer';
 import expensesReducer from './expensesReducer';
 import { jobConclusionsReducer } from './jobConclusionReducer';
 import UIReducer from './UIReducer';
+import { workOrdersReducer } from './workOrdersReducer';
 
 export const combinedReducers = combineReducers({
 	admin: authReducer,
@@ -17,4 +18,5 @@ export const combinedReducers = combineReducers({
 	UI: UIReducer,
 	carSuggestions: carSuggestionReducer,
 	cars: carsReducer,
+	workOrders: workOrdersReducer,
 });

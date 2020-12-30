@@ -13,7 +13,7 @@ function* getChartDataSaga(action) {
 
 	try {
 		const res = yield call(() =>
-			Axios.get(`/api/v1/aggregations/expencesAndProfit${queryStr}`)
+			Axios.get(`/api/v1/aggregations/expensesAndProfit${queryStr}`)
 		);
 		yield put({ type: GET_CHART_DATA_SUCCESS, payload: res.data.data });
 	} catch (e) {

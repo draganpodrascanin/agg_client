@@ -28,7 +28,6 @@ const RegisterCarModal = (props) => {
 	const dispatch = useDispatch();
 
 	const registerCarModalHandleSubmit = (val) => {
-		console.log('submited');
 		dispatch(
 			createCarAction(
 				val.carBrand,

@@ -3,7 +3,7 @@ import React from 'react';
 import CarsComponent from '../components/Cars';
 
 const useStyles = makeStyles((theme) => ({
-	container: { padding: '20px 0' },
+	container: { padding: '20px 0', width: '90%' },
 }));
 
 export const Cars = () => {

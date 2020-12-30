@@ -15,7 +15,7 @@ export const createDebounce = () => {
 	/**
 	 * @param function, callback - debounced and executed
 	 * @param number, time in ms
-	 * @param function, *optional - executes on every call (not debounced)
+	 * @param function, *optional callback - executes on every call (not debounced)
 	 */
 	const debounce = (cb, time, optCb) => {
 		if (optCb) optCb();

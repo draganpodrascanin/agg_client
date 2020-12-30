@@ -78,7 +78,7 @@ function* setClientCarOwnershipSaga(action) {
 				userId: action.payload.clientId,
 			})
 		);
-		console.log('response', response.data.data);
+
 		yield put({ type: SET_CLIENT_CAR_OWNERSHIP, payload: response.data.data });
 		yield put({ type: CLEAR_LOADING });
 		yield put({
@@ -95,6 +95,5 @@ function* setClientCarOwnershipSaga(action) {
 }
 
 export function* watchSetClientCarOwnershipSaga() {
-	console.log('hit');
 	yield takeEvery(SET_CLIENT_CAR_OWNERSHIP_SAGA, setClientCarOwnershipSaga);
 }

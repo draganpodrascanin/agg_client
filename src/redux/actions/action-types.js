@@ -82,3 +82,12 @@ export const SET_CARS_LOADING = 'SET_CARS_LOADING';
 export const CLEAR_CARS_LOADING = 'CLEAR_CARS_LOADING';
 export const SET_CARS_ERROR = 'SET_CARS_ERROR';
 export const CLEAR_CARS_ERROR = 'CLEAR_CARS_ERROR';
+
+//--------------------------------------------------------------------
+export const CREATE_WORK_ORDER_SAGA = 'CREATE_WORK_ORDER_SAGA';
+export const CREATE_WORK_ORDER = 'CREATE_WORK_ORDER';
+export const GET_WORK_ORDERS_SAGA = 'GET_WORK_ORDERS_SAGA';
+export const GET_WORK_ORDERS = 'GET_WORK_ORDERS';
+export const SET_WORK_ORDERS_LOADING = 'SET_WORK_ORDERS_LOADING';
+export const CLEAR_WORK_ORDERS_LOADING = 'CLEAR_WORK_ORDERS_LOADING';
+export const CLEAR_WORK_ORDERS = 'CLEAR_WORK_ORDERS';
