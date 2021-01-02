@@ -7,6 +7,7 @@ import clientsReducer from './clientsReducer';
 import expensesReducer from './expensesReducer';
 import { jobConclusionsReducer } from './jobConclusionReducer';
 import UIReducer from './UIReducer';
+import { workOrderReducer } from './workOrderReducer';
 import { workOrdersReducer } from './workOrdersReducer';
 
 export const combinedReducers = combineReducers({
@@ -19,4 +20,5 @@ export const combinedReducers = combineReducers({
 	carSuggestions: carSuggestionReducer,
 	cars: carsReducer,
 	workOrders: workOrdersReducer,
+	workOrder: workOrderReducer,
 });

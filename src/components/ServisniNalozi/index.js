@@ -21,6 +21,7 @@ const ServisniNalozi = () => {
 				variant="outlined"
 				startIcon={<Add />}
 				color="default"
+				style={{ background: '#fff' }}
 				onClick={handleOpenCreateNewModal}
 			>
 				Dodaj Novi Servisni Nalog

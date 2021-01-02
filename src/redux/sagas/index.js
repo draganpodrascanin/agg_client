@@ -26,6 +26,7 @@ import {
 import { watchJobConclusionSaga } from './jobConclusionsSaga';
 import {
 	watchCreateWorkOrderSaga,
+	watchGetWorkOrderSaga,
 	watchGetWorkOrdersSaga,
 } from './workOrderSaga';
 
@@ -49,6 +50,7 @@ function* rootSaga() {
 		watchGetCarsSaga(),
 		watchCreateWorkOrderSaga(),
 		watchGetWorkOrdersSaga(),
+		watchGetWorkOrderSaga(),
 	]);
 }
 

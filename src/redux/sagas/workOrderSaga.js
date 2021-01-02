@@ -3,10 +3,12 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import {
 	CLEAR_LOADING,
 	CLEAR_WORK_ORDERS_LOADING,
-	CREATE_WORK_ORDER,
-	CREATE_WORK_ORDER_SAGA,
+	CREATE_WORK_ORDERS,
+	CREATE_WORK_ORDERS_SAGA,
+	GET_WORK_ORDER,
 	GET_WORK_ORDERS,
 	GET_WORK_ORDERS_SAGA,
+	GET_WORK_ORDER_SAGA,
 	LOADING,
 	SET_WORK_ORDERS_LOADING,
 	SUCCESS,
@@ -23,7 +25,7 @@ function* createWorkOrderSaga(action) {
 			})
 		);
 		yield put({ type: CLEAR_LOADING });
-		yield put({ type: CREATE_WORK_ORDER, payload: response.data.data });
+		yield put({ type: CREATE_WORK_ORDERS, payload: response.data.data });
 		yield put({ type: SUCCESS, payload: 'uspešno otvoren servisni nalog' });
 	} catch (err) {
 		yield put({ type: CLEAR_LOADING });
@@ -35,7 +37,7 @@ function* createWorkOrderSaga(action) {
 }
 
 export function* watchCreateWorkOrderSaga() {
-	yield takeLatest(CREATE_WORK_ORDER_SAGA, createWorkOrderSaga);
+	yield takeLatest(CREATE_WORK_ORDERS_SAGA, createWorkOrderSaga);
 }
 
 function* getWorkOrdersSaga(action) {
@@ -64,4 +66,26 @@ function* getWorkOrdersSaga(action) {
 
 export function* watchGetWorkOrdersSaga() {
 	yield takeLatest(GET_WORK_ORDERS_SAGA, getWorkOrdersSaga);
+}
+
+function* getWorkOrderSaga(action) {
+	yield put({ type: LOADING });
+
+	try {
+		const response = yield call(() =>
+			Axios.get(`/api/v1/workOrders/${action.payload.id}`)
+		);
+		yield put({ type: GET_WORK_ORDER, payload: response.data.data });
+		yield put({ type: CLEAR_LOADING });
+	} catch (er) {
+		yield put({ type: CLEAR_LOADING });
+		yield put({
+			type: UI_ERROR,
+			payload: 'Greška pri preuzimanju servisnog naloga sa servera.',
+		});
+	}
+}
+
+export function* watchGetWorkOrderSaga() {
+	yield takeLatest(GET_WORK_ORDER_SAGA, getWorkOrderSaga);
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, makeStyles, Typography } from '@material-ui/core';
-import ServisniNaloziBase from '../components/ServisniNalog';
+import ServisniNaloziBase from '../components/ServisniNalozi';
 
 const useStyles = makeStyles((theme) => ({
 	heading: {

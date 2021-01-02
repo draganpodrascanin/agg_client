@@ -21,6 +21,7 @@ import './style.css';
 import { Klijenti } from './pages/Klijenti';
 import { Cars } from './pages/Cars';
 import { ServisniNalozi } from './pages/ServisniNalozi';
+import { ServisniNalog } from './pages/ServisniNalog';
 
 const theme = createMuiTheme({
 	palette: {
@@ -38,8 +39,6 @@ const App = () => {
 		dispatch(getCurrentAdminAction());
 	}, [dispatch]);
 
-	// if (!admin.isLoggedIn) return <LoginForm />;
-
 	return (
 		<Router basename="/dashboard">
 			<div>
@@ -48,6 +47,12 @@ const App = () => {
 					<LoginRoute exact path="/login">
 						<LoginForm />
 					</LoginRoute>
+					<PrivateRoute
+						roles={['super-admin', 'admin', 'mechanic']}
+						path="/servisni-nalozi/:id"
+					>
+						<ServisniNalog />
+					</PrivateRoute>
 					<Route path="/forgot-password">forgot password</Route>
 					<PrivateRoute
 						roles={['super-admin', 'admin', 'mechanic', 'blogger']}
