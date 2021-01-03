@@ -6,7 +6,9 @@ import { getWorkOrderAction } from '../../../redux/actions/workOrderActions';
 import { ErrorSnackbar } from '../../UI/ErrorSnackbar';
 import { LoadingModal } from '../../UI/LoadingModal';
 import { SuccessSnackbar } from '../../UI/SuccessSnackbar';
-import { Car } from './Car';
+import Car from './Car';
+import Exam from './Exam';
+import Reception from './Reception';
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -20,11 +22,11 @@ const Nalog = () => {
 		dispatch(getWorkOrderAction(workOrderId));
 	}, [dispatch, workOrderId]);
 
-	console.log(workOrder);
-
 	return (
 		<>
 			<Car car={workOrder.car} />
+			<Reception reception={workOrder.carReception} />
+			<Exam exam={workOrder.carExam} />
 
 			{/*-----------------UI-------------------------- */}
 			<LoadingModal />

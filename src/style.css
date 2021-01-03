@@ -8,4 +8,5 @@
 
 body {
 	background-color: rgba(77, 148, 255, 0.1);
+	overflow-x: hidden;
 }

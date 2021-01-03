@@ -1,5 +1,6 @@
-import { makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
+import { makeStyles, Typography } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
 	textImportant: {
@@ -7,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export const Car = ({ car }) => {
+const Car = ({ car }) => {
 	const classes = useStyles();
 	if (!car) return <Typography variant="h4">Nepoznat Automobil..</Typography>;
 	return (
@@ -49,3 +50,9 @@ export const Car = ({ car }) => {
 		</section>
 	);
 };
+
+Car.propTypes = {
+	car: PropTypes.object,
+};
+
+export default Car;
