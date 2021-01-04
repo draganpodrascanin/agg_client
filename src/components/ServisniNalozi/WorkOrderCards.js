@@ -5,7 +5,6 @@ import {
 	Button,
 	CircularProgress,
 	makeStyles,
-	Paper,
 	Typography,
 } from '@material-ui/core';
 import {
@@ -396,8 +395,6 @@ export const WorkOrderCards = () => {
 			</AccordionDetails>
 		</Accordion>
 	));
-
-	console.log(workOrders);
 
 	return (
 		<div style={{ width: '100%', marginTop: 50 }}>

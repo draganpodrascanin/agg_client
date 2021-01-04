@@ -12,10 +12,10 @@ const useStyles = makeStyles((theme) => ({
 	container: { padding: '20px 0', width: '90%' },
 	bckImg: {
 		position: 'absolute',
-		height: '180vh',
-		width: '110vw',
+		height: '170vh',
+		width: '100vw',
 		right: '-35vw',
-		top: '-65vh',
+		top: '-69vh',
 		zIndex: -1,
 
 		'@media only screen and (max-width: 900px)': {

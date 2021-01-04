@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 		alignSelf: 'center',
 	},
 	text: {
-		width: 600,
+		maxWidth: 600,
 	},
 }));
 
