@@ -4,6 +4,8 @@ import {
 	watchLoginSaga,
 	watchLogoutSaga,
 } from './authSaga';
+import { watchCreateCarExamSaga } from './carExamSaga';
+import { watchCreateCarReceptionSaga } from './carReceptionSaga';
 import {
 	watchCreateCarAndSetOwnerSaga,
 	watchCreateCarSaga,
@@ -23,7 +25,15 @@ import {
 	watchDeleteExpenseSaga,
 } from './expensesSaga';
 
-import { watchJobConclusionSaga } from './jobConclusionsSaga';
+import {
+	watchCreateJobConclusionSaga,
+	watchEditJobConclusionSaga,
+	watchGetJobConclusionsSaga,
+} from './jobConclusionsSaga';
+import {
+	watchCreateJobTicketSaga,
+	watchEditJobTicketSaga,
+} from './jobTicketSaga';
 import {
 	watchCreateWorkOrderSaga,
 	watchGetWorkOrderSaga,
@@ -40,7 +50,7 @@ function* rootSaga() {
 		watchCreateExpenseSaga(),
 		watchUpdateExpenseSaga(),
 		watchDeleteExpenseSaga(),
-		watchJobConclusionSaga(),
+		watchGetJobConclusionsSaga(),
 		watchGetClientsSaga(),
 		watchCreateClientSaga(),
 		watchGetCarSuggestionSaga(),
@@ -51,6 +61,12 @@ function* rootSaga() {
 		watchCreateWorkOrderSaga(),
 		watchGetWorkOrdersSaga(),
 		watchGetWorkOrderSaga(),
+		watchCreateCarReceptionSaga(),
+		watchCreateCarExamSaga(),
+		watchCreateJobTicketSaga(),
+		watchCreateJobConclusionSaga(),
+		watchEditJobTicketSaga(),
+		watchEditJobConclusionSaga(),
 	]);
 }
 

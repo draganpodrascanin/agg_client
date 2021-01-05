@@ -16,6 +16,7 @@ import Reception from './Reception';
 import CreateCarReception from '../../Forms/CarReception';
 import CeateCarExamForm from '../../Forms/CarExam';
 import CreateJobTicketForm from '../../Forms/JobTicket';
+import CreateJobConclusionForm from '../../Forms/JobConclusion';
 
 const useStyles = makeStyles((theme) => ({
 	createButtonsContainer: {
@@ -73,6 +74,17 @@ const Nalog = () => {
 	};
 
 	//-----------------------------------------------------------------------------
+	const [
+		openCreateJobConclusionModal,
+		setOpenCreateJobConclusionModal,
+	] = useState(false);
+
+	const handleOpenCreateJobConclusionModal = () => {
+		setOpenCreateJobConclusionModal(!openCreateJobConclusionModal);
+	};
+
+	//-----------------------------------------------------------------------------
+
 	useEffect(() => {
 		dispatch(getWorkOrderAction(workOrderId));
 	}, [dispatch, workOrderId]);
@@ -95,12 +107,21 @@ const Nalog = () => {
 				>
 					<CeateCarExamForm />
 				</CustomModal>
+
 				{/*-------------------CREATE JOB TICKET MODAL FORM ------------------------ */}
 				<CustomModal
 					open={openJobTicketFormModal}
 					onClose={handleOpenJobTicketFormModal}
 				>
 					<CreateJobTicketForm />
+				</CustomModal>
+
+				{/*-------------------CREATE JOB CONCLUSION MODAL FORM ------------------------ */}
+				<CustomModal
+					open={openCreateJobConclusionModal}
+					onClose={handleOpenCreateJobConclusionModal}
+				>
+					<CreateJobConclusionForm />
 				</CustomModal>
 
 				{/*---------------------------------------------------------------------- */}
@@ -112,6 +133,7 @@ const Nalog = () => {
 					variant="contained"
 					color="inherit"
 					onClick={handleCreateReceptionModal}
+					disabled={!!workOrder.carReception}
 				>
 					Prijem
 				</Button>
@@ -122,6 +144,7 @@ const Nalog = () => {
 					variant="contained"
 					color="inherit"
 					onClick={handleCreateCarExamModal}
+					disabled={!!workOrder.carExam}
 				>
 					Pregled
 				</Button>
@@ -132,6 +155,7 @@ const Nalog = () => {
 					variant="contained"
 					color="inherit"
 					onClick={handleOpenJobTicketFormModal}
+					disabled={!!workOrder.jobConclusion}
 				>
 					Radni Nalog
 				</Button>
@@ -139,6 +163,8 @@ const Nalog = () => {
 					className={classes.buttonSuccess}
 					size="small"
 					variant="contained"
+					onClick={handleOpenCreateJobConclusionModal}
+					disabled={!!workOrder.jobConclusion}
 				>
 					Zaključi Servisni Nalog
 				</Button>

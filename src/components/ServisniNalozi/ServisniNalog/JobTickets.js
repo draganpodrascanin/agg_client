@@ -12,6 +12,9 @@ import { statusTranslate } from '../../util/statusTranslate';
 import { Build, Create } from '@material-ui/icons';
 import CustomModal from '../../CustomModal';
 import ChangeJobTicketStatusForm from '../../Forms/JobTicketStatus';
+import EditJobTicketForm from '../../Forms/JobTicket';
+import { useDispatch, useSelector } from 'react-redux';
+import { editJobTicketAction } from '../../../redux/actions/jobTicketsActions';
 
 const useStyles = makeStyles((theme) => ({
 	header: {
@@ -55,17 +58,32 @@ const useStyles = makeStyles((theme) => ({
 
 const JobTickets = ({ jobTickets }) => {
 	const classes = useStyles();
+	const admin = useSelector((state) => state.admin);
+	const dispatch = useDispatch();
 
-	//-----------------------------------------------------------------------------
+	const [openEditTicketModalForm, setOpenEditTicketModalForm] = useState(false);
+	const [activeTicket, setActiveTicket] = useState({});
 	const [openChangeStatusModalForm, setOpenChangeStatusModalForm] = useState(
 		false
 	);
 
-	const handleOpenChangeStatusModalForm = () => {
+	//-----------------------------------------------------------------------------
+
+	const handleOpenChangeStatusModalForm = (ticket) => {
+		setActiveTicket(ticket);
 		setOpenChangeStatusModalForm(!openChangeStatusModalForm);
 	};
 
 	const [status, setStatus] = useState('');
+
+	//-----------------------------------------------------------------------------
+
+	const handleOpenEditTicketModalForm = (ticket) => {
+		if (ticket) setActiveTicket(ticket);
+		else setActiveTicket({});
+
+		setOpenEditTicketModalForm(!openEditTicketModalForm);
+	};
 
 	//--------------------------------------------------------------------------------
 
@@ -75,7 +93,9 @@ const JobTickets = ({ jobTickets }) => {
 				key={ticket.id}
 				className={classes.ticketCard}
 				style={
-					ticket.status === 'finished'
+					ticket.status === 'in-progress'
+						? { background: 'rgb(75, 149, 231)' }
+						: ticket.status === 'finished'
 						? { background: '#5FC0B4' }
 						: { background: '#FFa820' }
 				}
@@ -86,15 +106,18 @@ const JobTickets = ({ jobTickets }) => {
 							{statusTranslate(ticket.status)}
 							<Build className={classes.headingIcon} />
 						</Typography>
-						<Button
-							size="small"
-							color="inherit"
-							className={classes.cardButton}
-							startIcon={<Create />}
-							variant="outlined"
-						>
-							Izmeni
-						</Button>
+						{(admin.role === 'super-admin' || admin.role === 'admin') && (
+							<Button
+								size="small"
+								color="inherit"
+								className={classes.cardButton}
+								startIcon={<Create />}
+								variant="outlined"
+								onClick={() => handleOpenEditTicketModalForm(ticket)}
+							>
+								Izmeni
+							</Button>
+						)}
 					</div>
 					<Typography variant="body2" component="p">
 						{ticket.ticket}
@@ -107,7 +130,7 @@ const JobTickets = ({ jobTickets }) => {
 						className={classes.cardButton}
 						onClick={() => {
 							setStatus(ticket.status);
-							handleOpenChangeStatusModalForm();
+							handleOpenChangeStatusModalForm(ticket);
 						}}
 					>
 						Promeni status naloga
@@ -116,6 +139,10 @@ const JobTickets = ({ jobTickets }) => {
 			</Card>
 		));
 
+	const onSubmitEditJobTicket = (v) => {
+		dispatch(editJobTicketAction(activeTicket.id, v.status, v.ticket));
+	};
+	console.log(activeTicket);
 	return (
 		<section>
 			{/*-------------------CHANGE STATUS JOB TICKET MODAL FORM ------------------------ */}
@@ -123,7 +150,23 @@ const JobTickets = ({ jobTickets }) => {
 				open={openChangeStatusModalForm}
 				onClose={handleOpenChangeStatusModalForm}
 			>
-				<ChangeJobTicketStatusForm status={status} />
+				<ChangeJobTicketStatusForm
+					jobTicketId={activeTicket.id}
+					status={status}
+				/>
+			</CustomModal>
+
+			{/*----------------------- EDIT JOB TICKET MODAL FORM ------------------------------ */}
+			<CustomModal
+				open={openEditTicketModalForm}
+				onClose={handleOpenEditTicketModalForm}
+			>
+				<EditJobTicketForm
+					ticket={activeTicket.ticket}
+					status={status}
+					onSubmit={onSubmitEditJobTicket}
+					heading="Izmeni Radni Nalog"
+				/>
 			</CustomModal>
 
 			{/*-------------------------------------------------------------------------------- */}

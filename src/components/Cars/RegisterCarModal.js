@@ -57,8 +57,8 @@ const RegisterCarModal = (props) => {
 };
 
 RegisterCarModal.propTypes = {
-	open: PropTypes.bool.isRequired,
-	close: PropTypes.func.isRequired,
+	open: PropTypes.bool,
+	close: PropTypes.func,
 };
 
 export default RegisterCarModal;

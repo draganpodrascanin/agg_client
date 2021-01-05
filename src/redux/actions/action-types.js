@@ -5,6 +5,7 @@ export const CLEAR_LOADING = 'CLEAR_LOADING';
 export const CLEAR_SUCCESS = ' CLEAR_SUCCESS';
 export const UI_ERROR = 'UI_ERROR';
 export const CLEAR_UI_ERROR = 'CLEAR_UI_ERROR';
+
 //----------------------- AUTH ----------------------------------
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
@@ -94,3 +95,39 @@ export const CLEAR_WORK_ORDER = 'CLEAR_WORK_ORDER';
 export const SET_WORK_ORDERS_LOADING = 'SET_WORK_ORDERS_LOADING';
 export const CLEAR_WORK_ORDERS_LOADING = 'CLEAR_WORK_ORDERS_LOADING';
 export const CLEAR_WORK_ORDERS = 'CLEAR_WORK_ORDERS';
+
+//---------------------------------------------------------------------
+export const CREATE_CAR_RECEPTION = 'CREATE_CAR_RECEPTION';
+export const CREATE_CAR_RECEPTION_SAGA = 'CREATE_CAR_RECEPTION_SAGA';
+export const EDIT_CAR_RECEPTION = 'EDIT_CAR_RECEPTION';
+export const EDIT_CAR_RECEPTION_SAGA = 'EDIT_CAR_RECEPTION_SAGA';
+export const DELETE_CAR_RECEPTION = 'DELETE_CAR_RECEPTION';
+export const DELETE_CAR_RECEPTION_SAGA = 'DELETE_CAR_RECEPTION_SAGA';
+
+//---------------------------------------------------------------------
+export const CREATE_CAR_EXAM = 'CREATE_CAR_EXAM';
+export const CREATE_CAR_EXAM_SAGA = 'CREATE_CAR_EXAM_SAGA';
+export const EDIT_CAR_EXAM = 'EDIT_CAR_EXAM';
+export const EDIT_CAR_EXAM_SAGA = 'EDIT_CAR_EXAM_SAGA';
+export const DELETE_CAR_EXAM = 'DELETE_CAR_EXAM';
+export const DELETE_CAR_EXAM_SAGA = 'DELETE_CAR_EXAM_SAGA';
+
+//---------------------------------------------------------------------
+export const GET_JOB_TICKETS = 'GET_JOB_TICKETS';
+export const GET_JOB_TICKETS_SAGA = 'GET_JOB_TICKETS_SAGA';
+export const CREATE_JOB_TICKET = 'CREATE_JOB_TICKET';
+export const CREATE_JOB_TICKET_SAGA = 'CREATE_JOB_TICKET_SAGA';
+export const EDIT_JOB_TICKET = 'EDIT_JOB_TICKET';
+export const EDIT_JOB_TICKET_SAGA = 'EDIT_JOB_TICKET_SAGA';
+export const DELETE_JOB_TICKET = 'DELETE_JOB_TICKET';
+export const DELETE_JOB_TICKET_SAGA = 'DELETE_JOB_TICKET_SAGA';
+
+//---------------------------------------------------------------------
+export const GET_JOB_CONCLUSIONS = 'GET_JOB_CONCLUSIONS';
+export const GET_JOB_CONCLUSIONS_SAGA = 'GET_JOB_CONCLUSIONS_SAGA';
+export const CREATE_JOB_CONCLUSION = 'CREATE_JOB_CONCLUSION';
+export const CREATE_JOB_CONCLUSION_SAGA = 'CREATE_JOB_CONCLUSION_SAGA';
+export const EDIT_JOB_CONCLUSION = 'EDIT_JOB_CONCLUSION';
+export const EDIT_JOB_CONCLUSION_SAGA = 'EDIT_JOB_CONCLUSION_SAGA';
+export const DELETE_JOB_CONCLUSION = 'DELETE_JOB_CONCLUSION';
+export const DELETE_JOB_CONCLUSION_SAGA = 'DELETE_JOB_CONCLUSION_SAGA';

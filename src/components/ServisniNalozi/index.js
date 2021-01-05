@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import { Add } from '@material-ui/icons';
 import CreateWorkOrderModal from './CreateWorkOrderModal';
 import { WorkOrderCards } from './WorkOrderCards';
+import { LoadingModal } from '../UI/LoadingModal';
+import { SuccessSnackbar } from '../UI/SuccessSnackbar';
+import { ErrorSnackbar } from '../UI/ErrorSnackbar';
 
 const ServisniNalozi = () => {
 	const [openCreateNewModal, setOpenCreateNewModal] = useState(false);
@@ -27,6 +30,11 @@ const ServisniNalozi = () => {
 				Dodaj Novi Servisni Nalog
 			</Button>
 			<WorkOrderCards />
+
+			{/*-------------------------UI---------------------------- */}
+			<LoadingModal />
+			<SuccessSnackbar />
+			<ErrorSnackbar />
 		</div>
 	);
 };

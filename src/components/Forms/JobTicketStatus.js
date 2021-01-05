@@ -10,6 +10,8 @@ import {
 	RadioGroup,
 	Typography,
 } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { editJobTicketAction } from '../../redux/actions/jobTicketsActions';
 
 const useStyles = makeStyles((theme) => ({
 	form: {
@@ -26,9 +28,10 @@ const useStyles = makeStyles((theme) => ({
 
 const JobTicketStatus = (props) => {
 	const classes = useStyles();
+	const dispatch = useDispatch();
 
 	const onSubmit = (v) => {
-		alert(JSON.stringify(v));
+		dispatch(editJobTicketAction(props.jobTicketId, v.status));
 	};
 
 	const formik = useFormik({
@@ -41,9 +44,6 @@ const JobTicketStatus = (props) => {
 	const handleOptionChange = (e) => {
 		formik.setFieldValue('status', e.target.value);
 	};
-
-	console.log('props.status', props.status);
-	console.log('formik.status', formik.values.status);
 
 	return (
 		<form className={classes.form}>
@@ -62,22 +62,25 @@ const JobTicketStatus = (props) => {
 				>
 					<FormControlLabel
 						value="to-do"
-						control={<Radio />}
+						control={<Radio checked={formik.values.status === 'to-do'} />}
 						label="Na Čekanju"
+					/>
+
+					<FormControlLabel
+						value="in-progress"
+						control={<Radio checked={formik.values.status === 'in-progress'} />}
+						label="Rad u toku"
 					/>
 					<FormControlLabel
 						value="waiting-for-parts"
-						control={<Radio />}
-						label="U Radu"
-					/>
-					<FormControlLabel
-						value="in-progress"
-						control={<Radio />}
+						control={
+							<Radio checked={formik.values.status === 'waiting-for-parts'} />
+						}
 						label="Čekanje na delove"
 					/>
 					<FormControlLabel
 						value="finished"
-						control={<Radio />}
+						control={<Radio checked={formik.values.status === 'finished'} />}
 						label="Završeno"
 					/>
 				</RadioGroup>
@@ -91,6 +94,7 @@ const JobTicketStatus = (props) => {
 
 JobTicketStatus.propTyps = {
 	onSubmit: PropTypes.func,
+	jobTicketId: PropTypes.string,
 	status: PropTypes.oneOf([
 		'to-do',
 		'waiting-for-parts',

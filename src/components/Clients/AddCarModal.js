@@ -202,8 +202,8 @@ const AddCarModal = (props) => {
 };
 
 AddCarModal.propTypes = {
-	open: PropTypes.bool.isRequired,
-	close: PropTypes.func.isRequired,
+	open: PropTypes.bool,
+	close: PropTypes.func,
 	clientId: PropTypes.string,
 };
 

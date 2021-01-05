@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
 import { Button, makeStyles, TextField, Typography } from '@material-ui/core';
 import * as Yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { createCarExamAction } from '../../redux/actions/carExamActions';
 
 const useStyles = makeStyles((theme) => ({
 	form: {
@@ -20,9 +22,11 @@ const useStyles = makeStyles((theme) => ({
 
 const CarExam = (props) => {
 	const classes = useStyles();
+	const dispatch = useDispatch();
+	const workOrder = useSelector((state) => state.workOrder);
 
 	const onSubmit = (v) => {
-		alert(JSON.stringify(v));
+		dispatch(createCarExamAction(workOrder.id, v.examConclusion));
 	};
 
 	const validationSchema = Yup.object().shape({
@@ -40,7 +44,7 @@ const CarExam = (props) => {
 	return (
 		<form className={classes.form} onSubmit={formik.handleSubmit}>
 			<Typography variant="h4" component="h3">
-				Pregled Automobila
+				{props.heading || 'Pregled Automobila'}
 			</Typography>
 			<TextField
 				className={classes.textField}
@@ -68,6 +72,7 @@ const CarExam = (props) => {
 CarExam.propTypes = {
 	onSubmit: PropTypes.func,
 	examConclusion: PropTypes.string,
+	heading: PropTypes.string,
 };
 
 export default CarExam;

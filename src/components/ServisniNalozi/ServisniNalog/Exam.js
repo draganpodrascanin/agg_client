@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, makeStyles, Typography } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { Create } from '@material-ui/icons';
+import CustomModal from '../../CustomModal';
+import EditExamForm from '../../Forms/CarExam';
 
 const useStyles = makeStyles((theme) => ({
 	examSection: {
@@ -25,6 +27,13 @@ const useStyles = makeStyles((theme) => ({
 const Exam = ({ exam }) => {
 	const classes = useStyles();
 
+	//-----------------------------------------------------------------------------
+	const [openEditExamForm, setOpenEditExamForm] = useState(false);
+
+	const handleOpenEditExamForm = () => {
+		setOpenEditExamForm(!openEditExamForm);
+	};
+	//-----------------------------------------------------------------------------
 	if (!exam)
 		return (
 			<Typography variant="h5" component="h2">
@@ -34,6 +43,15 @@ const Exam = ({ exam }) => {
 
 	return (
 		<section className={classes.examSection}>
+			{/*----------------------- EDIT CAR EXAM MODAL FORM ------------------------------ */}
+			<CustomModal open={openEditExamForm} onClose={handleOpenEditExamForm}>
+				<EditExamForm
+					heading="Izmeni Pregled Automobila"
+					examConclusion={exam.examConclusion}
+				/>
+			</CustomModal>
+
+			{/*-------------------------------------------------------------------------------- */}
 			<div className={classes.header}>
 				<Typography variant="h4" component="h2">
 					Pregled
@@ -44,6 +62,7 @@ const Exam = ({ exam }) => {
 					color="inherit"
 					className={classes.headerButton}
 					size="small"
+					onClick={handleOpenEditExamForm}
 				>
 					Izmeni Pregled
 				</Button>

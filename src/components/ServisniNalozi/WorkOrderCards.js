@@ -325,7 +325,7 @@ export const WorkOrderCards = () => {
 					<div
 						className={`${classes.innerCard} ${classes.jobTickets}`}
 						style={
-							workOrder.jobTickets[0]
+							workOrder?.jobTickets[0]
 								? {}
 								: { padding: '20px 35px', marginBottom: 6 }
 						}
@@ -334,18 +334,20 @@ export const WorkOrderCards = () => {
 							variant="h5"
 							className={classes.innerCardHeading}
 							style={
-								workOrder.jobTickets[0] ? {} : { fontSize: 20, marginBottom: 0 }
+								workOrder?.jobTickets[0]
+									? {}
+									: { fontSize: 20, marginBottom: 0 }
 							}
 						>
 							<Build
 								className={classes.innercardIcon}
 								style={
-									workOrder.jobTickets[0]
+									workOrder?.jobTickets[0]
 										? { fontSize: 22, top: 3, transform: 'rotate(90deg)' }
 										: { fontSize: 20, top: 3 }
 								}
 							/>
-							{workOrder.jobTickets[0]
+							{workOrder?.jobTickets[0]
 								? 'Radni Nalozi'
 								: 'Nema trenutnih naloga za rad.'}
 						</Typography>

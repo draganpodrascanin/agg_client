@@ -11,6 +11,8 @@ import {
 	TextField,
 	Typography,
 } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { createJobTicketAction } from '../../redux/actions/jobTicketsActions';
 
 const useStyles = makeStyles((theme) => ({
 	form: {
@@ -33,9 +35,11 @@ const useStyles = makeStyles((theme) => ({
 
 const JobTicket = (props) => {
 	const classes = useStyles();
+	const dispatch = useDispatch();
+	const workOrder = useSelector((state) => state.workOrder);
 
 	const onSubmit = (v) => {
-		alert(JSON.stringify(v));
+		dispatch(createJobTicketAction(workOrder.id, v.ticket, v.status));
 	};
 
 	const validationSchema = Yup.object().shape({
@@ -65,7 +69,7 @@ const JobTicket = (props) => {
 	return (
 		<form className={classes.form} onSubmit={formik.handleSubmit}>
 			<Typography variant="h4" component="h3" className={classes.heading}>
-				Otvori Radni Nalog
+				{props.heading || 'Otvori Radni Nalog'}
 			</Typography>
 			<TextField
 				className={classes.textField}
@@ -108,6 +112,8 @@ const JobTicket = (props) => {
 };
 
 JobTicket.propTyps = {
+	onSubmit: PropTypes.func,
+	heading: PropTypes.string,
 	status: PropTypes.oneOf([
 		'to-do',
 		'waiting-for-parts',

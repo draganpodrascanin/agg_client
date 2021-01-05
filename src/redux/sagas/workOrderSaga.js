@@ -17,16 +17,19 @@ import {
 
 function* createWorkOrderSaga(action) {
 	yield put({ type: LOADING });
-
+	console.log('ACTION', action);
 	try {
-		const response = yield call(
+		const response = yield call(() =>
 			Axios.post('/api/v1/workOrders', {
 				carRegistration: action.payload.carRegistration,
 			})
 		);
-		yield put({ type: CLEAR_LOADING });
+
+		console.log('response - ', response);
+
 		yield put({ type: CREATE_WORK_ORDERS, payload: response.data.data });
-		yield put({ type: SUCCESS, payload: 'uspešno otvoren servisni nalog' });
+		yield put({ type: CLEAR_LOADING });
+		yield put({ type: SUCCESS, payload: 'Uspešno otvoren servisni nalog.' });
 	} catch (err) {
 		yield put({ type: CLEAR_LOADING });
 		yield put({
@@ -75,6 +78,7 @@ function* getWorkOrderSaga(action) {
 		const response = yield call(() =>
 			Axios.get(`/api/v1/workOrders/${action.payload.id}`)
 		);
+
 		yield put({ type: GET_WORK_ORDER, payload: response.data.data });
 		yield put({ type: CLEAR_LOADING });
 	} catch (er) {

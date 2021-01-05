@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Button, makeStyles, TextField, Typography } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { createCarReceptionAction } from '../../redux/actions/carReceptionActions';
 
 const useStyles = makeStyles((theme) => ({
 	form: {
@@ -19,9 +21,18 @@ const useStyles = makeStyles((theme) => ({
 
 const CreateCarReception = (props) => {
 	const classes = useStyles();
+	const dispatch = useDispatch();
+	const workOrder = useSelector((state) => state.workOrder);
 
 	const onSubmit = (v) => {
-		alert(JSON.stringify(v));
+		dispatch(
+			createCarReceptionAction(
+				workOrder.id,
+				v.carDamage,
+				v.ownerRemarks,
+				v.milage
+			)
+		);
 	};
 
 	const validationSchema = Yup.object().shape({
@@ -42,7 +53,7 @@ const CreateCarReception = (props) => {
 	return (
 		<form className={classes.form} onSubmit={formik.handleSubmit}>
 			<Typography variant="h4" component="h3" style={{ marginLeft: -1 }}>
-				Napravi Prijem
+				{props.heading || 'Napravi Prijem'}
 			</Typography>
 			<TextField
 				className={classes.textField}
@@ -85,6 +96,7 @@ const CreateCarReception = (props) => {
 
 CreateCarReception.propTypes = {
 	onSubmit: PropTypes.func,
+	heading: PropTypes.string,
 	ownerRemarks: PropTypes.string,
 	carDamage: PropTypes.string,
 	milage: PropTypes.number,
