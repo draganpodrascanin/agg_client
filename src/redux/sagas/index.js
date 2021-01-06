@@ -38,6 +38,7 @@ import {
 	watchCreateWorkOrderSaga,
 	watchGetWorkOrderSaga,
 	watchGetWorkOrdersSaga,
+	watchDeleteWorkOrderSaga,
 } from './workOrderSaga';
 
 function* rootSaga() {
@@ -67,6 +68,7 @@ function* rootSaga() {
 		watchCreateJobConclusionSaga(),
 		watchEditJobTicketSaga(),
 		watchEditJobConclusionSaga(),
+		watchDeleteWorkOrderSaga(),
 	]);
 }
 

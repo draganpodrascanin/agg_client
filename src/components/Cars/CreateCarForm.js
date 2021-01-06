@@ -112,7 +112,7 @@ const CreateCarForm = (props) => {
 };
 
 CreateCarForm.propTypes = {
-	handleSubmit: PropTypes.func.isRequired,
+	handleSubmit: PropTypes.func,
 	buttonText: PropTypes.string,
 	btnSize: PropTypes.string,
 };

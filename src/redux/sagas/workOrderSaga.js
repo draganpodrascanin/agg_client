@@ -13,6 +13,8 @@ import {
 	SET_WORK_ORDERS_LOADING,
 	SUCCESS,
 	UI_ERROR,
+	DELETE_WORK_ORDER_SAGA,
+	DELETE_WORK_ORDER,
 } from '../actions/action-types';
 
 function* createWorkOrderSaga(action) {
@@ -43,6 +45,8 @@ export function* watchCreateWorkOrderSaga() {
 	yield takeLatest(CREATE_WORK_ORDERS_SAGA, createWorkOrderSaga);
 }
 
+//-----------------------------------------------------------------------------------
+
 function* getWorkOrdersSaga(action) {
 	yield put({ type: SET_WORK_ORDERS_LOADING });
 
@@ -71,6 +75,8 @@ export function* watchGetWorkOrdersSaga() {
 	yield takeLatest(GET_WORK_ORDERS_SAGA, getWorkOrdersSaga);
 }
 
+//-----------------------------------------------------------------------------------
+
 function* getWorkOrderSaga(action) {
 	yield put({ type: LOADING });
 
@@ -92,4 +98,33 @@ function* getWorkOrderSaga(action) {
 
 export function* watchGetWorkOrderSaga() {
 	yield takeLatest(GET_WORK_ORDER_SAGA, getWorkOrderSaga);
+}
+
+//------------------------------------------------------------------------------------
+
+function* deleteWorkOrderSaga(action) {
+	yield put({ type: LOADING });
+
+	try {
+		yield call(() =>
+			Axios.delete(`/api/v1/workOrders/${action.payload.workOrderId}`)
+		);
+
+		yield put({
+			type: DELETE_WORK_ORDER,
+			payload: { id: action.payload.workOrderId },
+		});
+		yield put({ type: CLEAR_LOADING });
+		yield put({ type: SUCCESS, payload: 'Upešno obrisan servisni nalog.' });
+	} catch (er) {
+		yield put({ type: CLEAR_LOADING });
+		yield put({
+			type: UI_ERROR,
+			payload: 'Greška pri brisanju servisnog naloga.',
+		});
+	}
+}
+
+export function* watchDeleteWorkOrderSaga() {
+	yield takeLatest(DELETE_WORK_ORDER_SAGA, deleteWorkOrderSaga);
 }

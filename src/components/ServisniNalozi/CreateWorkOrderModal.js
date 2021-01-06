@@ -145,8 +145,8 @@ const CreateWorkOrderModal = (props) => {
 };
 
 CreateWorkOrderModal.propTypes = {
-	open: PropTypes.bool.isRequired,
-	onClose: PropTypes.func.isRequired,
+	open: PropTypes.bool,
+	onClose: PropTypes.func,
 };
 
 export default CreateWorkOrderModal;

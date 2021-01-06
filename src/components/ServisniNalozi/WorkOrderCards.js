@@ -10,6 +10,7 @@ import {
 import {
 	Build,
 	CheckBox,
+	Delete,
 	DoneAll,
 	FolderShared,
 	Pageview,
@@ -20,12 +21,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
 	clearWorkOrdersAction,
+	deleteWorkOrderAction,
 	getWorkOrdersAction,
 } from '../../redux/actions/workOrderActions';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import { statusTranslate } from '../util/statusTranslate';
 import Timeline from '@material-ui/icons/Timeline';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import DeleteModal from '../DeleteModal';
 
 const useStyles = makeStyles((theme) => ({
 	loadMoreBtn: {
@@ -61,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
 	headerLink: {
 		color: '#fff',
 		textDecoration: 'none',
-		height: 38,
+		height: 36,
 		width: 250,
 		borderRadius: 5,
 		background: theme.palette.primary.light,
@@ -70,7 +73,20 @@ const useStyles = makeStyles((theme) => ({
 		justifyContent: 'center',
 		textTransform: 'uppercase',
 		marginTop: 10,
-		'&:active, &:visited, &:hover, &:link': {
+		marginRight: 5,
+
+		boxShadow:
+			'0px 3px 1px -2px rgba(0,0,0,0.2), 0px 2px 2px 0px rgba(0,0,0,0.14), 0px 1px 5px 0px rgba(0,0,0,0.12)',
+		transition:
+			'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+
+		'&:hover': {
+			background: 'rgba(21, 86, 158,.85)',
+			boxShadow:
+				'0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)',
+		},
+
+		'&:active, &:visited,  &:link': {
 			textDecoration: 'none',
 		},
 	},
@@ -186,21 +202,40 @@ const useStyles = makeStyles((theme) => ({
 export const WorkOrderCards = () => {
 	const classes = useStyles();
 	const workOrders = useSelector((state) => state.workOrders);
-	const [page, setPage] = useState(1);
-
+	const admin = useSelector((state) => state.admin);
 	const dispatch = useDispatch();
+
+	const [page, setPage] = useState(1);
 
 	useEffect(() => {
 		dispatch(clearWorkOrdersAction());
 	}, [dispatch]);
 
 	useEffect(() => {
-		dispatch(getWorkOrdersAction(page, 20, ''));
+		dispatch(getWorkOrdersAction(page, 10, ''));
 	}, [dispatch, page]);
 
 	const handleLoadMore = () => {
 		setPage(page + 1);
 	};
+
+	//--------------------------------------------------------------------------
+	const [deleteWorkOrderId, setDeleteWorkOrderId] = useState('');
+
+	console.log('dWO-ID', deleteWorkOrderId);
+
+	const handleDeleteWorkOrderId = (id) => {
+		if (typeof id !== 'string') setDeleteWorkOrderId('');
+		else if (id) setDeleteWorkOrderId(id);
+		else setDeleteWorkOrderId('');
+	};
+
+	const onSubmitDeletWorkOrder = () => {
+		dispatch(deleteWorkOrderAction(deleteWorkOrderId));
+		handleDeleteWorkOrderId();
+	};
+
+	//--------------------------------------------------------------------------
 
 	const renderWorkOrders = workOrders.workOrders.map((workOrder) => (
 		<Accordion
@@ -228,12 +263,26 @@ export const WorkOrderCards = () => {
 								{workOrder.car.carBrand} {workOrder.car.carModel}
 							</span>
 						</Typography>
-						<Link
-							to={`/servisni-nalozi/${workOrder.id}`}
-							className={classes.headerLink}
-						>
-							Uđi u Nalog
-						</Link>
+						<div style={{ display: 'flex', alignItems: 'flex-end' }}>
+							<Link
+								to={`/servisni-nalozi/${workOrder.id}`}
+								className={classes.headerLink}
+							>
+								Uđi u Nalog
+							</Link>
+							{(admin.role === 'admin' || admin.role === 'super-admin') && (
+								<Button
+									color="secondary"
+									variant="contained"
+									onClick={(e) => {
+										e.stopPropagation();
+										handleDeleteWorkOrderId(workOrder.id);
+									}}
+								>
+									<Delete />
+								</Button>
+							)}
+						</div>
 					</div>
 				</div>
 			</AccordionSummary>
@@ -400,6 +449,12 @@ export const WorkOrderCards = () => {
 
 	return (
 		<div style={{ width: '100%', marginTop: 50 }}>
+			<DeleteModal
+				id={deleteWorkOrderId}
+				open={!!deleteWorkOrderId}
+				onClose={handleDeleteWorkOrderId}
+				onSubmit={onSubmitDeletWorkOrder}
+			/>
 			<div>{renderWorkOrders}</div>
 			{workOrders.loading && (
 				<div

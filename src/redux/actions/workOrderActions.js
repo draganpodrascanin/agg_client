@@ -1,6 +1,7 @@
 import {
 	CLEAR_WORK_ORDERS,
 	CREATE_WORK_ORDERS_SAGA,
+	DELETE_WORK_ORDER_SAGA,
 	GET_WORK_ORDERS_SAGA,
 	GET_WORK_ORDER_SAGA,
 } from './action-types';
@@ -29,5 +30,12 @@ export const getWorkOrderAction = (id) => {
 	return {
 		type: GET_WORK_ORDER_SAGA,
 		payload: { id },
+	};
+};
+
+export const deleteWorkOrderAction = (workOrderId) => {
+	return {
+		type: DELETE_WORK_ORDER_SAGA,
+		payload: { workOrderId },
 	};
 };

@@ -43,6 +43,10 @@ function* createJobConclusionSaga(action) {
 			})
 		);
 
+		yield call(() =>
+			Axios.patch(`/api/v1/workOrders/${action.payload.workOrderId}/complete`)
+		);
+
 		yield put({ type: CLEAR_LOADING });
 		yield put({ type: CREATE_JOB_CONCLUSION, payload: response.data.data });
 		yield put({

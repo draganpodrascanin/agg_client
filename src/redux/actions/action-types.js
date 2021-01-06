@@ -95,6 +95,8 @@ export const CLEAR_WORK_ORDER = 'CLEAR_WORK_ORDER';
 export const SET_WORK_ORDERS_LOADING = 'SET_WORK_ORDERS_LOADING';
 export const CLEAR_WORK_ORDERS_LOADING = 'CLEAR_WORK_ORDERS_LOADING';
 export const CLEAR_WORK_ORDERS = 'CLEAR_WORK_ORDERS';
+export const DELETE_WORK_ORDER_SAGA = 'DELETE_WORK_ORDER_SAGA';
+export const DELETE_WORK_ORDER = 'DELETE_WORK_ORDER';
 
 //---------------------------------------------------------------------
 export const CREATE_CAR_RECEPTION = 'CREATE_CAR_RECEPTION';
