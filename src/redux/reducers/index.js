@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { appointentsReducer } from './appointmentsReducer';
 import { authReducer } from './authReducer';
 import carsReducer from './carsReducer';
 import { carSuggestionReducer } from './carSuggestionReducer';
@@ -21,4 +22,5 @@ export const combinedReducers = combineReducers({
 	cars: carsReducer,
 	workOrders: workOrdersReducer,
 	workOrder: workOrderReducer,
+	appointments: appointentsReducer,
 });

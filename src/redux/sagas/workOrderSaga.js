@@ -27,8 +27,6 @@ function* createWorkOrderSaga(action) {
 			})
 		);
 
-		console.log('response - ', response);
-
 		yield put({ type: CREATE_WORK_ORDERS, payload: response.data.data });
 		yield put({ type: CLEAR_LOADING });
 		yield put({ type: SUCCESS, payload: 'Uspešno otvoren servisni nalog.' });
@@ -54,6 +52,7 @@ function* getWorkOrdersSaga(action) {
 	if (action.payload.page) url += `page=${action.payload.page}&`;
 	if (action.payload.limit) url += `limit=${action.payload.limit}&`;
 	if (action.payload.search) url += `search=${action.payload.search}&`;
+	if (action.payload.completed) url += `completed=1`;
 
 	try {
 		const response = yield call(() => Axios.get(url));

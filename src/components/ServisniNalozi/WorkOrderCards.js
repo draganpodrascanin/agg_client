@@ -29,6 +29,8 @@ import { statusTranslate } from '../util/statusTranslate';
 import Timeline from '@material-ui/icons/Timeline';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DeleteModal from '../DeleteModal';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 const useStyles = makeStyles((theme) => ({
 	loadMoreBtn: {
@@ -181,7 +183,7 @@ const useStyles = makeStyles((theme) => ({
 		borderRadius: 5,
 		padding: '20px 35px',
 		color: theme.palette.text.primary,
-		margin: window.innerWidth > 900 ? '0 10px 0 0' : '0 0 10px 0',
+		margin: window.innerWidth > 900 ? '0 10px 10px 0' : '0 0 10px 0',
 		width: window.innerWidth > 900 ? 'auto' : '100%',
 	},
 	jobTicketStatus: {
@@ -206,14 +208,24 @@ export const WorkOrderCards = () => {
 	const dispatch = useDispatch();
 
 	const [page, setPage] = useState(1);
+	const [completed, setCompleted] = useState(false);
+
+	const handleCompleted = () => {
+		setCompleted(!completed);
+	};
 
 	useEffect(() => {
 		dispatch(clearWorkOrdersAction());
 	}, [dispatch]);
 
 	useEffect(() => {
-		dispatch(getWorkOrdersAction(page, 10, ''));
-	}, [dispatch, page]);
+		dispatch(clearWorkOrdersAction());
+		setPage(1);
+	}, [dispatch, completed]);
+
+	useEffect(() => {
+		dispatch(getWorkOrdersAction(page, 10, '', completed));
+	}, [dispatch, page, completed]);
 
 	const handleLoadMore = () => {
 		setPage(page + 1);
@@ -455,6 +467,19 @@ export const WorkOrderCards = () => {
 				onClose={handleDeleteWorkOrderId}
 				onSubmit={onSubmitDeletWorkOrder}
 			/>
+			{(admin.role === 'super-admin' || admin.role === 'admin') && (
+				<FormControlLabel
+					control={
+						<Switch
+							checked={completed}
+							onChange={handleCompleted}
+							name="checkedB"
+							color="primary"
+						/>
+					}
+					label="Prikaži zaključene naloge."
+				/>
+			)}
 			<div>{renderWorkOrders}</div>
 			{workOrders.loading && (
 				<div
@@ -463,13 +488,15 @@ export const WorkOrderCards = () => {
 					<CircularProgress />
 				</div>
 			)}
-			<Button
-				className={classes.loadMoreBtn}
-				disabled={workOrders.loading}
-				onClick={handleLoadMore}
-			>
-				Učitaj još
-			</Button>
+			{workOrders.count > workOrders.workOrders.length && (
+				<Button
+					className={classes.loadMoreBtn}
+					disabled={workOrders.loading}
+					onClick={handleLoadMore}
+				>
+					Učitaj još
+				</Button>
+			)}
 		</div>
 	);
 };

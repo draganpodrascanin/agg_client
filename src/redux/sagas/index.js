@@ -1,4 +1,5 @@
 import { all } from 'redux-saga/effects';
+import { watchGetAppointmentsSaga } from './appointmentsSaga';
 import {
 	watchGetCurrentAdminSaga,
 	watchLoginSaga,
@@ -69,6 +70,7 @@ function* rootSaga() {
 		watchEditJobTicketSaga(),
 		watchEditJobConclusionSaga(),
 		watchDeleteWorkOrderSaga(),
+		watchGetAppointmentsSaga(),
 	]);
 }
 

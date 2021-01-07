@@ -13,10 +13,10 @@ export const createWorkOrderAction = (carRegistration) => {
 	};
 };
 
-export const getWorkOrdersAction = (page, limit, search) => {
+export const getWorkOrdersAction = (page, limit, search, completed) => {
 	return {
 		type: GET_WORK_ORDERS_SAGA,
-		payload: { page, limit, search },
+		payload: { page, limit, search, completed },
 	};
 };
 
