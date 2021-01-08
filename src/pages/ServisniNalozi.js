@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, makeStyles, Typography } from '@material-ui/core';
-import ServisniNaloziBase from '../components/ServisniNalozi';
+import WorkOrders from '../components/WorkOrders';
 
 const useStyles = makeStyles((theme) => ({
 	heading: {
@@ -16,7 +16,7 @@ export const ServisniNalozi = () => {
 			<Typography className={classes.heading} variant="h2" component="h1">
 				Servisni Nalozi
 			</Typography>
-			<ServisniNaloziBase />
+			<WorkOrders />
 		</Container>
 	);
 };

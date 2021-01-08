@@ -2,7 +2,7 @@ import { Container, makeStyles } from '@material-ui/core';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Header } from '../components/Header';
-import ServisniNalogBase from '../components/ServisniNalozi/ServisniNalog';
+import ServisniNalogBase from '../components/WorkOrders/WorkOrder';
 import bckImg from '../images/blueNetwork.png';
 
 const useStyles = makeStyles((theme) => ({
