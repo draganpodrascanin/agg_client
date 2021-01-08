@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { GET_APPOINTMENTS_SAGA } from './action-types';
+import { CREATE_APPOINTMENT_SAGA, GET_APPOINTMENTS_SAGA } from './action-types';
 
 export const getAppointmentsAction = (fromDate, toDate) => {
 	const fromD = fromDate || dayjs(new Date()).subtract(1, 'day');
@@ -13,3 +13,14 @@ export const getAppointmentsAction = (fromDate, toDate) => {
 		},
 	};
 };
+
+export const createAppointmentAction = (
+	name,
+	car,
+	phoneNumber,
+	note,
+	datetime
+) => ({
+	type: CREATE_APPOINTMENT_SAGA,
+	payload: { name, car, phoneNumber, note, datetime },
+});

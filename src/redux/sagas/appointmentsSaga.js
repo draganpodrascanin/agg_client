@@ -4,9 +4,12 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 
 import {
 	CLEAR_LOADING,
+	CREATE_APPOINTMENT,
+	CREATE_APPOINTMENT_SAGA,
 	GET_APPOINTMENTS,
 	GET_APPOINTMENTS_SAGA,
 	LOADING,
+	SUCCESS,
 	UI_ERROR,
 } from '../actions/action-types';
 
@@ -34,4 +37,38 @@ function* getAppointmentsSaga(action) {
 
 export function* watchGetAppointmentsSaga() {
 	yield takeLatest(GET_APPOINTMENTS_SAGA, getAppointmentsSaga);
+}
+
+function* createAppointmentsSaga(action) {
+	const { name, car, phoneNumber, note, datetime } = action.payload;
+	yield put({ type: LOADING });
+
+	try {
+		const response = yield call(() =>
+			Axios.post('/api/v1/appointments', {
+				name,
+				car,
+				phoneNumber,
+				note,
+				datetime,
+			})
+		);
+
+		yield put({ type: CLEAR_LOADING });
+		yield put({ type: CREATE_APPOINTMENT, payload: response.data.data });
+		yield put({
+			type: SUCCESS,
+			payload: 'Uspešno zakazan terim.',
+		});
+	} catch (err) {
+		yield put({ type: CLEAR_LOADING });
+		yield put({
+			type: UI_ERROR,
+			payload: 'Greška pri zakazivanju termina.',
+		});
+	}
+}
+
+export function* watchCreateAppointmentsSaga() {
+	yield takeLatest(CREATE_APPOINTMENT_SAGA, createAppointmentsSaga);
 }

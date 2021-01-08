@@ -1,5 +1,5 @@
 import DateFnsUtils from '@date-io/date-fns';
-import { makeStyles } from '@material-ui/core';
+import { Button, makeStyles } from '@material-ui/core';
 import {
 	KeyboardDatePicker,
 	MuiPickersUtilsProvider,
@@ -12,6 +12,9 @@ import { getAppointmentsAction } from '../../redux/actions/appointmentActions';
 import { LoadingModal } from '../UI/LoadingModal';
 import { SuccessSnackbar } from '../UI/SuccessSnackbar';
 import { ErrorSnackbar } from '../UI/ErrorSnackbar';
+import { Add } from '@material-ui/icons';
+import CustomModal from '../CustomModal';
+import CreateAppointmentForm from '../Forms/CreateAppointment';
 
 const useStyles = makeStyles((theme) => ({
 	datesContainer: {
@@ -25,6 +28,16 @@ const Appointments = () => {
 	const dispatch = useDispatch();
 	const appointments = useSelector((state) => state.appointments);
 
+	//------------------------------------------------------------------
+
+	const [showCreateAppointmentModal, setShowCreateAppointmentModal] = useState(
+		false
+	);
+	const handleShowCreateAppointmentModal = () => {
+		setShowCreateAppointmentModal(!showCreateAppointmentModal);
+	};
+
+	//------------------------------------------------------------------
 	const [selectedFromDate, setSelectedFromDate] = useState(
 		dayjs(new Date()).subtract(1, 'day').format('YYYY-MM-DD')
 	);
@@ -46,45 +59,65 @@ const Appointments = () => {
 		dispatch(getAppointmentsAction(selectedFromDate, selectedToDate));
 	}, [dispatch, selectedFromDate, selectedToDate]);
 
+	//------------------------------------------------------------------
+
 	return (
-		<div>
-			<MuiPickersUtilsProvider utils={DateFnsUtils}>
-				<div className={classes.datesContainer}>
-					<KeyboardDatePicker
-						disableToolbar
-						variant="inline"
-						format="dd/MM/yyyy"
-						margin="normal"
-						label="Datum od:"
-						value={selectedFromDate}
-						onChange={handleFromDateChange}
-						KeyboardButtonProps={{
-							'aria-label': 'change date',
-						}}
-						style={{ marginRight: 10 }}
-					/>
+		<>
+			{/*-------------------------CREATE NEW APPOINTMENT MODAL----------------------------------- */}
+			<CustomModal
+				open={showCreateAppointmentModal}
+				onClose={handleShowCreateAppointmentModal}
+			>
+				<CreateAppointmentForm />
+			</CustomModal>
+			{/*---------------------------------------------------------------------------------------- */}
+			<Button
+				startIcon={<Add />}
+				onClick={handleShowCreateAppointmentModal}
+				variant="outlined"
+			>
+				Zakaži termin
+			</Button>
 
-					<KeyboardDatePicker
-						disableToolbar
-						variant="inline"
-						format="dd/MM/yyyy"
-						margin="normal"
-						label="Datum do:"
-						value={selectedToDate}
-						onChange={handleToDateChange}
-						KeyboardButtonProps={{
-							'aria-label': 'change date',
-						}}
-					/>
-				</div>
-			</MuiPickersUtilsProvider>
-			<AppointmentCards appointments={appointments} />
+			<div>
+				<MuiPickersUtilsProvider utils={DateFnsUtils}>
+					<div className={classes.datesContainer}>
+						<KeyboardDatePicker
+							disableToolbar
+							variant="inline"
+							format="dd/MM/yyyy"
+							margin="normal"
+							label="Datum od:"
+							value={selectedFromDate}
+							onChange={handleFromDateChange}
+							KeyboardButtonProps={{
+								'aria-label': 'change date',
+							}}
+							style={{ marginRight: 10 }}
+						/>
 
-			{/*  UI  */}
-			<LoadingModal />
-			<SuccessSnackbar />
-			<ErrorSnackbar />
-		</div>
+						<KeyboardDatePicker
+							disableToolbar
+							variant="inline"
+							format="dd/MM/yyyy"
+							margin="normal"
+							label="Datum do:"
+							value={selectedToDate}
+							onChange={handleToDateChange}
+							KeyboardButtonProps={{
+								'aria-label': 'change date',
+							}}
+						/>
+					</div>
+				</MuiPickersUtilsProvider>
+				<AppointmentCards appointments={appointments} />
+
+				{/*  UI  */}
+				<LoadingModal />
+				<SuccessSnackbar />
+				<ErrorSnackbar />
+			</div>
+		</>
 	);
 };
 

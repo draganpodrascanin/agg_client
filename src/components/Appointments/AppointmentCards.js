@@ -42,14 +42,14 @@ const AppointmentCards = ({ appointments }) => {
 								</Typography>
 
 								<Typography variant="subtitle1" color="secondary" component="p">
-									{dayjs(ap.datetime).format('DD.MM.YYYY HH:MM')}
+									{dayjs(ap.datetime).format('DD.MM.YYYY HH:mm')}
 								</Typography>
 
-								<Typography variant="body2" color="text" component="p">
+								<Typography variant="body2" color="textPrimary" component="p">
 									{ap.car.toUpperCase()}
 								</Typography>
 
-								<Typography variant="body2" color="text" component="p">
+								<Typography variant="body2" color="textPrimary" component="p">
 									{ap.phoneNumber}
 								</Typography>
 
