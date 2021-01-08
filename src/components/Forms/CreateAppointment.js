@@ -69,7 +69,7 @@ const CreateAppointment = ({
 	return (
 		<form>
 			<Typography variant="h4" component="h3" style={{ marginLeft: -1 }}>
-				{props.heading || 'Zakaži termin'}
+				{heading || 'Zakaži termin'}
 			</Typography>
 			<TextField
 				className={classes.textField}
@@ -134,7 +134,7 @@ const CreateAppointment = ({
 
 CreateAppointment.propTypes = {
 	onSubmit: PropTypes.func,
-	heading: PropTypes.func,
+	heading: PropTypes.string,
 	datetime: PropTypes.any,
 	car: PropTypes.string,
 	note: PropTypes.string,

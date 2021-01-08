@@ -19,7 +19,6 @@ import {
 
 function* createWorkOrderSaga(action) {
 	yield put({ type: LOADING });
-	console.log('ACTION', action);
 	try {
 		const response = yield call(() =>
 			Axios.post('/api/v1/workOrders', {
@@ -56,8 +55,6 @@ function* getWorkOrdersSaga(action) {
 
 	try {
 		const response = yield call(() => Axios.get(url));
-
-		console.log(response.data);
 
 		yield put({ type: CLEAR_WORK_ORDERS_LOADING });
 		yield put({ type: GET_WORK_ORDERS, payload: response.data.data });

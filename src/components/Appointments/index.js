@@ -54,8 +54,6 @@ const Appointments = () => {
 	};
 
 	useEffect(() => {
-		console.log('state dates => ', selectedFromDate, selectedToDate);
-
 		dispatch(getAppointmentsAction(selectedFromDate, selectedToDate));
 	}, [dispatch, selectedFromDate, selectedToDate]);
 

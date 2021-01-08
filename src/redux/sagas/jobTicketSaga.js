@@ -44,7 +44,6 @@ export function* watchCreateJobTicketSaga() {
 
 function* editJobTicketSaga(action) {
 	yield put({ type: LOADING });
-	console.log('action - ', action);
 
 	try {
 		const response = yield call(() =>
@@ -61,7 +60,6 @@ function* editJobTicketSaga(action) {
 			payload: 'Uspešno izmenjen radni nalog.',
 		});
 	} catch (err) {
-		console.log('err', err);
 		yield put({ type: CLEAR_LOADING });
 		yield put({
 			type: UI_ERROR,

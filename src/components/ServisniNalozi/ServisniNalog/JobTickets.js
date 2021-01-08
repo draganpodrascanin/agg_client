@@ -142,7 +142,7 @@ const JobTickets = ({ jobTickets }) => {
 	const onSubmitEditJobTicket = (v) => {
 		dispatch(editJobTicketAction(activeTicket.id, v.status, v.ticket));
 	};
-	console.log(activeTicket);
+
 	return (
 		<section>
 			{/*-------------------CHANGE STATUS JOB TICKET MODAL FORM ------------------------ */}

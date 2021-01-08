@@ -6,6 +6,8 @@ import {
 	CLEAR_LOADING,
 	CREATE_APPOINTMENT,
 	CREATE_APPOINTMENT_SAGA,
+	EDIT_APPOINTMENT,
+	EDIT_APPOINTMENT_SAGA,
 	GET_APPOINTMENTS,
 	GET_APPOINTMENTS_SAGA,
 	LOADING,
@@ -23,7 +25,6 @@ function* getAppointmentsSaga(action) {
 
 	try {
 		const response = yield call(() => Axios.get(url));
-		console.log('response = ', response);
 		yield put({ type: CLEAR_LOADING });
 		yield put({ type: GET_APPOINTMENTS, payload: response.data.data });
 	} catch (err) {
@@ -71,4 +72,47 @@ function* createAppointmentsSaga(action) {
 
 export function* watchCreateAppointmentsSaga() {
 	yield takeLatest(CREATE_APPOINTMENT_SAGA, createAppointmentsSaga);
+}
+
+function* editAppointmentsSaga(action) {
+	const {
+		appointmentId,
+		showedUp,
+		name,
+		car,
+		phoneNumber,
+		note,
+		datetime,
+	} = action.payload;
+	yield put({ type: LOADING });
+
+	try {
+		const response = yield call(() =>
+			Axios.patch(`/api/v1/appointments/${appointmentId}`, {
+				showedUp,
+				name,
+				car,
+				phoneNumber,
+				note,
+				datetime,
+			})
+		);
+
+		yield put({ type: CLEAR_LOADING });
+		yield put({ type: EDIT_APPOINTMENT, payload: response.data.data });
+		yield put({
+			type: SUCCESS,
+			payload: 'Uspešno.',
+		});
+	} catch (err) {
+		yield put({ type: CLEAR_LOADING });
+		yield put({
+			type: UI_ERROR,
+			payload: 'Greška pri izmeni termina.',
+		});
+	}
+}
+
+export function* watchEditAppointmentsSaga() {
+	yield takeLatest(EDIT_APPOINTMENT_SAGA, editAppointmentsSaga);
 }

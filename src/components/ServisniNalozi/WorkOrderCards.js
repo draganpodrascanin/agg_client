@@ -234,8 +234,6 @@ export const WorkOrderCards = () => {
 	//--------------------------------------------------------------------------
 	const [deleteWorkOrderId, setDeleteWorkOrderId] = useState('');
 
-	console.log('dWO-ID', deleteWorkOrderId);
-
 	const handleDeleteWorkOrderId = (id) => {
 		if (typeof id !== 'string') setDeleteWorkOrderId('');
 		else if (id) setDeleteWorkOrderId(id);

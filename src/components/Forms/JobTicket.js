@@ -59,12 +59,8 @@ const JobTicket = (props) => {
 	const handleSelectChange = (event) => {
 		const value = event.target.value;
 
-		console.log('value - ', value);
-
 		formik.setFieldValue('status', value);
 	};
-
-	console.log('status - ', formik.values.status);
 
 	return (
 		<form className={classes.form} onSubmit={formik.handleSubmit}>
