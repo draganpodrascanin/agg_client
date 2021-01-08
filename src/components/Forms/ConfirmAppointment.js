@@ -70,7 +70,7 @@ const ConfirmAppointment = (props) => {
 					<FormControlLabel
 						value={false}
 						control={<Radio checked={formik.values.showedUp === false} />}
-						label="Termin ne ispoštovan."
+						label="Termin nije ispoštovan."
 					/>
 				</RadioGroup>
 			</FormControl>
