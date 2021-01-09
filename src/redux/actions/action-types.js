@@ -153,3 +153,12 @@ export const EDIT_ACTIVE_CAR_SAGA = 'EDIT_ACTIVE_CAR_SAGA';
 export const EDIT_ACTIVE_CAR = 'EDIT_ACTIVE_CAR';
 export const DELETE_ACTIVE_CAR_SAGA = 'DELETE_ACTIVE_CAR_SAGA';
 export const DELETE_ACTIVE_CAR = 'DELETE_ACTIVE_CAR';
+
+//--------------------------------------------------------------------
+export const GET_WARRANTIES = 'GET_WARRANTIES';
+export const CREATE_WARRANTY_SAGA = 'CREATE_WARRANTY_SAGA';
+export const CREATE_WARRANTY = 'CREATE_WARRANTY';
+export const EDIT_WARRANTY_SAGA = 'EDIT_WARRANTY_SAGA';
+export const EDIT_WARRANTY = 'EDIT_WARRANTY';
+export const DELETE_WARRANTY_SAGA = 'DELETE_WARRANTY_SAGA';
+export const DELETE_WARRANTY = 'DELETE_WARRANTY';

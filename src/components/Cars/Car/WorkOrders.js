@@ -1,10 +1,8 @@
 import {
 	Button,
 	Card,
-	CardActionArea,
 	CardActions,
 	CardContent,
-	Grid,
 	makeStyles,
 	Typography,
 } from '@material-ui/core';
@@ -19,10 +17,29 @@ const useStyles = makeStyles((theme) => ({
 	},
 	cardContainer: {
 		margin: '15px 0',
+		display: 'flex',
+		// justifyContent: 'space-evenly',
+		alignContent: 'stretch',
+		flexWrap: 'wrap',
 	},
 	card: {
+		alignSelf: 'stretch',
+		marginRight: 20,
+		marginBottom: 10,
+		minWidth: 380,
+		width: 380,
+
+		'@media screen and (max-width: 900px)': {
+			margin: '0 0 20px 0',
+			width: '90%',
+		},
+	},
+	cardContent: {
 		height: '100%',
-		alignItems: 'stretch',
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'flex-start',
+		justifyContent: 'space-between',
 	},
 }));
 
@@ -40,62 +57,48 @@ const WorkOrders = ({ workOrders }) => {
 	//============================================================================================
 
 	const renderCards = workOrders.map((workOrder) => (
-		<Grid
-			item
-			lg={4}
-			sm={6}
-			xs={12}
-			key={workOrder.id}
-			alignItems="stretch"
-			className={classes.card}
-		>
-			<Card>
-				<CardActionArea
-					onClick={() => history.push(`/servisni-nalozi/${workOrder.id}`)}
-				>
-					<CardContent>
-						<Typography gutterBottom variant="h5" component="h2">
-							DATUM: {dayjs(workOrder.createdAt).format('DD.MM.YYYY')}
+		<div key={workOrder.id} className={classes.card}>
+			<Card className={classes.cardContent}>
+				<CardContent>
+					<Typography gutterBottom variant="h5" component="h2">
+						DATUM: {dayjs(workOrder.createdAt).format('DD.MM.YYYY')}
+					</Typography>
+					<Typography variant="body1" component="p">
+						{workOrder.jobConclusion
+							? workOrder.jobConclusion.workDone
+							: 'Nalog i dalje nije zaključen.'}
+					</Typography>
+					{workOrder.jobConclusion && workOrder.jobConclusion.note && (
+						<Typography
+							variant="body2"
+							color="secondary"
+							style={{ marginTop: 10 }}
+						>
+							{workOrder.jobConclusion.note}
 						</Typography>
-						<Typography variant="body1" component="p">
-							{workOrder.jobConclusion
-								? workOrder.jobConclusion.workDone
-								: 'Nalog i dalje nije zaključen.'}
-						</Typography>
-						{workOrder.jobConclusion && workOrder.jobConclusion.note && (
-							<Typography
-								variant="body2"
-								color="secondary"
-								style={{ marginTop: 10 }}
-							>
-								{workOrder.jobConclusion.note}
-							</Typography>
-						)}
-					</CardContent>
-					<CardActions>
-						<Button component="p" size="small" color="primary">
-							Otvori Nalog
-						</Button>
-					</CardActions>
-				</CardActionArea>
+					)}
+				</CardContent>
+				<CardActions>
+					<Button
+						component="p"
+						size="small"
+						color="primary"
+						onClick={() => history.push(`/servisni-nalozi/${workOrder.id}`)}
+					>
+						Otvori Nalog
+					</Button>
+				</CardActions>
 			</Card>
-		</Grid>
+		</div>
 	));
 
 	//------------------------------------------------
 	return (
 		<section className={classes.section}>
-			<Typography variant="h3" component="h3">
+			<Typography variant="h3" component="h3" style={{ marginLeft: -1 }}>
 				Servisni Nalozi
 			</Typography>
-			<Grid
-				container
-				spacing={3}
-				justify="flex-start"
-				className={classes.cardContainer}
-			>
-				{renderCards}
-			</Grid>
+			<div className={classes.cardContainer}>{renderCards}</div>
 		</section>
 	);
 };

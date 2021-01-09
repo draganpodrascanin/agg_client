@@ -67,7 +67,7 @@ const CreateAppointment = ({
 	});
 
 	return (
-		<form>
+		<form onSubmit={formik.handleSubmit}>
 			<Typography variant="h4" component="h3" style={{ marginLeft: -1 }}>
 				{heading || 'Zakaži termin'}
 			</Typography>

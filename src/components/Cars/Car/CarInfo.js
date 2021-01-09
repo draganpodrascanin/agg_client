@@ -33,24 +33,31 @@ const CarInfo = (props) => {
 				Motor:{' '}
 				<span className={classes.attention}>{car.engine.toUpperCase()}</span>
 			</Typography>
-			<Typography variant="body1">
-				Vlasnik:{' '}
-				<span className={classes.attention}>
-					{car.user.firstName} {car.user.lastName}
-				</span>
-			</Typography>
-			<Typography variant="body1">
-				Email:{' '}
-				<a href={`mailto:${car.user.email}`} className={classes.attention}>
-					{car.user.email}
-				</a>
-			</Typography>
-			<Typography variant="body1">
-				Br. Telefona:{' '}
-				<a href={`tel:${car.user.phoneNumber}`} className={classes.attention}>
-					{car.user.phoneNumber}
-				</a>
-			</Typography>
+			{car.user && (
+				<>
+					<Typography variant="body1">
+						Vlasnik:{' '}
+						<span className={classes.attention}>
+							{car.user.firstName} {car.user.lastName}
+						</span>
+					</Typography>
+					<Typography variant="body1">
+						Email:{' '}
+						<a href={`mailto:${car.user.email}`} className={classes.attention}>
+							{car.user.email}
+						</a>
+					</Typography>
+					<Typography variant="body1">
+						Br. Telefona:{' '}
+						<a
+							href={`tel:${car.user.phoneNumber}`}
+							className={classes.attention}
+						>
+							{car.user.phoneNumber}
+						</a>
+					</Typography>
+				</>
+			)}
 		</>
 	);
 };

@@ -1,9 +1,10 @@
-import { makeStyles, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getActiveCarAction } from '../../../redux/actions/activeCarAction';
 import CarInfo from './CarInfo';
+import Warranties from './Warranties';
 import WorkOrders from './WorkOrders';
 
 const useStyles = makeStyles((theme) => ({
@@ -34,6 +35,7 @@ const Car = () => {
 				registration={car.registration}
 			/>
 			<WorkOrders workOrders={car.workOrders} />
+			<Warranties Warranties={car.Warranties} />
 		</>
 	);
 };
