@@ -14,6 +14,7 @@ import { watchCreateCarReceptionSaga } from './carReceptionSaga';
 import {
 	watchCreateCarAndSetOwnerSaga,
 	watchCreateCarSaga,
+	watchGetActiveCarSaga,
 	watchGetCarsSaga,
 } from './carSaga';
 import { watchGetCarSuggestionSaga } from './carSuggestionsSaga';
@@ -38,6 +39,7 @@ import {
 import {
 	watchCreateJobTicketSaga,
 	watchEditJobTicketSaga,
+	watchGetJobTicketSaga,
 } from './jobTicketSaga';
 import {
 	watchCreateWorkOrderSaga,
@@ -77,6 +79,8 @@ function* rootSaga() {
 		watchGetAppointmentsSaga(),
 		watchCreateAppointmentsSaga(),
 		watchEditAppointmentsSaga(),
+		watchGetJobTicketSaga(),
+		watchGetActiveCarSaga(),
 	]);
 }
 

@@ -23,6 +23,8 @@ import { Cars } from './pages/Cars';
 import { ServisniNalozi } from './pages/ServisniNalozi';
 import { ServisniNalog } from './pages/ServisniNalog';
 import { Appointments } from './pages/Appointments';
+import RadniNalozi from './pages/RadniNalozi';
+import Automobil from './pages/Automobil';
 
 const theme = createMuiTheme({
 	palette: {
@@ -79,6 +81,13 @@ const App = () => {
 					<PrivateRoute
 						roles={['super-admin', 'admin', 'mechanic']}
 						exact
+						path="/automobili/:id"
+					>
+						<Automobil />
+					</PrivateRoute>
+					<PrivateRoute
+						roles={['super-admin', 'admin', 'mechanic']}
+						exact
 						path="/servisni-nalozi"
 					>
 						<ServisniNalozi />
@@ -88,7 +97,7 @@ const App = () => {
 						exact
 						path="/radni-nalozi"
 					>
-						<h1>radni nalozi</h1>
+						<RadniNalozi />
 					</PrivateRoute>
 					<PrivateRoute
 						roles={['super-admin', 'admin', 'mechanic']}

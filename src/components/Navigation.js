@@ -121,7 +121,10 @@ export const Navigation = () => {
 
 						<ListItemLink to="/radni-nalozi">
 							<BuildRoundedIcon className={classes.icon} fontSize="small" />
-							<ListItemText className={classes.item} primary="Radni Nalozi" />
+							<ListItemText
+								className={classes.item}
+								primary="Aktivni Radni Nalozi"
+							/>
 						</ListItemLink>
 
 						<ListItemLink to="/zakazani-termini">

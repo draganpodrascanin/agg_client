@@ -14,7 +14,10 @@ import {
 	SET_CARS_LOADING,
 	CLEAR_CARS_LOADING,
 	GET_CARS,
+	GET_ACTIVE_CAR,
+	GET_ACTIVE_CAR_SAGA,
 } from '../actions/action-types';
+import { getActiveCar } from '../actions/activeCarAction';
 
 function* createCarSaga({ payload }) {
 	yield put({ type: LOADING });
@@ -114,4 +117,27 @@ function* getCarSaga(action) {
 
 export function* watchGetCarsSaga() {
 	yield takeLatest(GET_CARS_SAGA, getCarSaga);
+}
+
+function* getActiveCarSaga(action) {
+	yield put({ type: LOADING });
+
+	try {
+		const response = yield call(() =>
+			Axios.get(`/api/v1/cars/${action.payload.id}`)
+		);
+
+		yield put({ type: GET_ACTIVE_CAR, payload: response.data.data });
+		yield put({ type: CLEAR_LOADING });
+	} catch (er) {
+		yield put({ type: CLEAR_LOADING });
+		yield put({
+			type: UI_ERROR,
+			payload: 'Greška pri automobila sa servera.',
+		});
+	}
+}
+
+export function* watchGetActiveCarSaga() {
+	yield takeLatest(GET_ACTIVE_CAR_SAGA, getActiveCarSaga);
 }

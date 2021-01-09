@@ -6,6 +6,8 @@ import {
 	CREATE_JOB_TICKET_SAGA,
 	EDIT_JOB_TICKET,
 	EDIT_JOB_TICKET_SAGA,
+	GET_JOB_TICKETS,
+	GET_JOB_TICKETS_SAGA,
 	LOADING,
 	SUCCESS,
 	UI_ERROR,
@@ -70,4 +72,26 @@ function* editJobTicketSaga(action) {
 
 export function* watchEditJobTicketSaga() {
 	yield takeLatest(EDIT_JOB_TICKET_SAGA, editJobTicketSaga);
+}
+
+function* getJobTicketsSaga() {
+	yield put({ type: LOADING });
+
+	let url = `/api/v1/jobTickets`;
+
+	try {
+		const response = yield call(() => Axios.get(url));
+		yield put({ type: CLEAR_LOADING });
+		yield put({ type: GET_JOB_TICKETS, payload: response.data.data });
+	} catch (err) {
+		yield put({ type: CLEAR_LOADING });
+		yield put({
+			type: UI_ERROR,
+			payload: 'Greška pri preuzimanju zakazanih termina.',
+		});
+	}
+}
+
+export function* watchGetJobTicketSaga() {
+	yield takeLatest(GET_JOB_TICKETS_SAGA, getJobTicketsSaga);
 }

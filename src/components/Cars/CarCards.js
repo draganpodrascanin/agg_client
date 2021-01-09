@@ -1,5 +1,7 @@
 import {
 	Button,
+	Card,
+	CardActionArea,
 	Grid,
 	InputAdornment,
 	makeStyles,
@@ -16,6 +18,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCarsAction } from '../../redux/actions/carActions';
 import DriveEtaIcon from '@material-ui/icons/DriveEta';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
 	cardContainer: {
@@ -62,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
 export const CarCards = () => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const cars = useSelector((state) => state.cars);
 
 	const [searchedTerm, setSearchedTerm] = useState('');
@@ -97,38 +101,47 @@ export const CarCards = () => {
 
 	const renderCards = cars.cars.map((car) => (
 		<Grid key={car.id} item lg={3} sm={6} xs={12}>
-			<Paper className={classes.card}>
-				<Typography variant="h5" component="h4" className={classes.cardHeading}>
-					<DriveEtaIcon className={classes.svgIcon} />
-					{car.carBrand} {car.carModel}{' '}
-				</Typography>
-				<Typography>
-					Godina proizvodnje:{' '}
-					<span className={classes.attentionText}>
-						{dayjs(car.productionYear).format('YYYY')}
-					</span>
-				</Typography>
-				<Typography variant="body1">
-					Registracija:
-					<span className={classes.registration}>
-						{'  '}
-						{car.registration.toUpperCase()}
-					</span>
-				</Typography>
-				<Typography>
-					Motor: <span className={classes.attentionText}>{car.engine}</span>
-				</Typography>
-				<Typography>
-					Kilometraža:{' '}
-					<span className={classes.attentionText}>{car.milage}</span>
-				</Typography>
-				<Typography>
-					Vlasnik:{' '}
-					<span className={classes.attentionText}>
-						{car.user ? `${car.user.firstName} ${car.user.lastName}` : '-'}
-					</span>
-				</Typography>
-			</Paper>
+			<Card>
+				<CardActionArea
+					className={classes.card}
+					onClick={() => history.push(`/automobili/${car.id}`)}
+				>
+					<Typography
+						variant="h5"
+						component="h4"
+						className={classes.cardHeading}
+					>
+						<DriveEtaIcon className={classes.svgIcon} />
+						{car.carBrand} {car.carModel}{' '}
+					</Typography>
+					<Typography>
+						Godina proizvodnje:{' '}
+						<span className={classes.attentionText}>
+							{dayjs(car.productionYear).format('YYYY')}
+						</span>
+					</Typography>
+					<Typography variant="body1">
+						Registracija:
+						<span className={classes.registration}>
+							{'  '}
+							{car.registration.toUpperCase()}
+						</span>
+					</Typography>
+					<Typography>
+						Motor: <span className={classes.attentionText}>{car.engine}</span>
+					</Typography>
+					<Typography>
+						Kilometraža:{' '}
+						<span className={classes.attentionText}>{car.milage}</span>
+					</Typography>
+					<Typography>
+						Vlasnik:{' '}
+						<span className={classes.attentionText}>
+							{car.user ? `${car.user.firstName} ${car.user.lastName}` : '-'}
+						</span>
+					</Typography>
+				</CardActionArea>
+			</Card>
 		</Grid>
 	));
 

@@ -1,4 +1,8 @@
-import { CREATE_JOB_TICKET_SAGA, EDIT_JOB_TICKET_SAGA } from './action-types';
+import {
+	CREATE_JOB_TICKET_SAGA,
+	EDIT_JOB_TICKET_SAGA,
+	GET_JOB_TICKETS_SAGA,
+} from './action-types';
 
 export const createJobTicketAction = (workOrderId, ticket, status) => ({
 	type: CREATE_JOB_TICKET_SAGA,
@@ -17,3 +21,5 @@ export const editJobTicketAction = (jobTicketId, status, ticket) => ({
 		ticket,
 	},
 });
+
+export const getJobTicketsAction = () => ({ type: GET_JOB_TICKETS_SAGA });
