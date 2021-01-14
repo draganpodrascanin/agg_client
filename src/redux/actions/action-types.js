@@ -156,6 +156,7 @@ export const DELETE_ACTIVE_CAR = 'DELETE_ACTIVE_CAR';
 
 //--------------------------------------------------------------------
 export const GET_WARRANTIES = 'GET_WARRANTIES';
+export const GET_WARRANTIES_SAGA = 'GET_WARRANTIES_SAGA';
 export const CREATE_WARRANTY_SAGA = 'CREATE_WARRANTY_SAGA';
 export const CREATE_WARRANTY = 'CREATE_WARRANTY';
 export const EDIT_WARRANTY_SAGA = 'EDIT_WARRANTY_SAGA';

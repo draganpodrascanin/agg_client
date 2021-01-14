@@ -10,6 +10,7 @@ import expensesReducer from './expensesReducer';
 import { jobConclusionsReducer } from './jobConclusionReducer';
 import { jobTicketsReducer } from './jobTicketsReducer';
 import UIReducer from './UIReducer';
+import { warrantyReducer } from './warrantyReducer';
 import { workOrderReducer } from './workOrderReducer';
 import { workOrdersReducer } from './workOrdersReducer';
 
@@ -27,4 +28,5 @@ export const combinedReducers = combineReducers({
 	activeCar: activeCarReducer,
 	appointments: appointentsReducer,
 	jobTickets: jobTicketsReducer,
+	warranties: warrantyReducer,
 });

@@ -42,6 +42,12 @@ import {
 	watchGetJobTicketSaga,
 } from './jobTicketSaga';
 import {
+	watchCreateWarrantiesSaga,
+	watchDeleteWarrantySaga,
+	watchEditWarrantySaga,
+	watchGetWarrantiesSaga,
+} from './warrantySaga';
+import {
 	watchCreateWorkOrderSaga,
 	watchGetWorkOrderSaga,
 	watchGetWorkOrdersSaga,
@@ -81,6 +87,10 @@ function* rootSaga() {
 		watchEditAppointmentsSaga(),
 		watchGetJobTicketSaga(),
 		watchGetActiveCarSaga(),
+		watchGetWarrantiesSaga(),
+		watchCreateWarrantiesSaga(),
+		watchEditWarrantySaga(),
+		watchDeleteWarrantySaga(),
 	]);
 }
 

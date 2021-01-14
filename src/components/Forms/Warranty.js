@@ -10,6 +10,7 @@ import * as Yup from 'yup';
 import { Button, makeStyles, TextField, Typography } from '@material-ui/core';
 import dayjs from 'dayjs';
 import { useFormik } from 'formik';
+import { createWarrantyAction } from '../../redux/actions/warrantyActions';
 
 const useStyles = makeStyles((theme) => ({
 	form: {
@@ -29,9 +30,9 @@ const Warranty = ({ partsUnderWarranty, validUntil, ...props }) => {
 	const dispatch = useDispatch();
 
 	const onSubmit = (v) => {
-		// dispatch();
-		// createAppointmentAction(v.name, v.car, v.phoneNumber, v.note, v.datetime)
-		alert(JSON.stringify(v));
+		dispatch(
+			createWarrantyAction(props.carId, v.partsUnderWarranty, v.validUntil)
+		);
 	};
 
 	const validationSchema = Yup.object().shape({
@@ -39,7 +40,7 @@ const Warranty = ({ partsUnderWarranty, validUntil, ...props }) => {
 	});
 
 	const handleDateChange = (date) => {
-		formik.setFieldValue('datetime', dayjs(date).format('YYYY-MM-DDTHH:mm'));
+		formik.setFieldValue('validUntil', dayjs(date).format('YYYY-MM-DDTHH:mm'));
 	};
 
 	const formik = useFormik({
@@ -73,7 +74,7 @@ const Warranty = ({ partsUnderWarranty, validUntil, ...props }) => {
 					variant="inline"
 					ampm={false}
 					label="Garancija važi do:"
-					value={formik.values.datetime}
+					value={formik.values.validUntil}
 					onChange={handleDateChange}
 					style={{ display: 'block', marginBottom: 10 }}
 					format="dd.MM.yyyy"

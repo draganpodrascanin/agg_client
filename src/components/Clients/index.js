@@ -193,7 +193,7 @@ const ClientCards = () => {
 								variant="contained"
 								color="primary"
 								size="small"
-								to="#"
+								to={`/automobili/${car.id}`}
 							>
 								{car.carBrand} {car.carModel}
 							</Link>

@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
 const CarInfo = (props) => {
 	const classes = useStyles();
 	const car = props;
-	console.log(car);
+
 	//========= NO CAR ===================================================================
 	if (!props.carBrand) return <Typography>Automobil nije učitan..</Typography>;
 	//====================================================================================
