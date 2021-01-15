@@ -23,8 +23,6 @@ const Car = () => {
 
 	const { id } = useParams();
 
-	console.log(car);
-
 	useEffect(() => {
 		dispatch(getActiveCarAction(id));
 	}, [dispatch, id]);

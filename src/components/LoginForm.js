@@ -32,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LoginForm = () => {
-	// const admin = useSelector((state) => state.admin);
 	const classes = useStyles();
 	const dispatch = useDispatch();
 	const admin = useSelector((state) => state.admin);
