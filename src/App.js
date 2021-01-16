@@ -25,6 +25,8 @@ import { ServisniNalog } from './pages/ServisniNalog';
 import { Appointments } from './pages/Appointments';
 import RadniNalozi from './pages/RadniNalozi';
 import Automobil from './pages/Automobil';
+import BlogKreator from './pages/BlogKreator';
+import Blog from './pages/Blog';
 
 const theme = createMuiTheme({
 	palette: {
@@ -118,7 +120,14 @@ const App = () => {
 						exact
 						path="/blog"
 					>
-						<h1>blog</h1>
+						<Blog />
+					</PrivateRoute>
+					<PrivateRoute
+						roles={['super-admin', 'admin', 'blogger']}
+						exact
+						path="/blog/create"
+					>
+						<BlogKreator />
 					</PrivateRoute>
 					<PrivateRoute
 						roles={['super-admin', 'admin', 'blogger']}
