@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { activeCarReducer } from './activeCarReducer';
 import { appointentsReducer } from './appointmentsReducer';
 import { authReducer } from './authReducer';
+import { blogsReducer } from './blogsReducer';
 import carsReducer from './carsReducer';
 import { carSuggestionReducer } from './carSuggestionReducer';
 import { chartDataReducer } from './chartReducer';
@@ -29,4 +30,5 @@ export const combinedReducers = combineReducers({
 	appointments: appointentsReducer,
 	jobTickets: jobTicketsReducer,
 	warranties: warrantyReducer,
+	blogs: blogsReducer,
 });

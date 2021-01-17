@@ -9,6 +9,7 @@ import {
 	watchLoginSaga,
 	watchLogoutSaga,
 } from './authSaga';
+import { watchCreateBlogSaga } from './blogsSaga';
 import { watchCreateCarExamSaga } from './carExamSaga';
 import { watchCreateCarReceptionSaga } from './carReceptionSaga';
 import {
@@ -91,6 +92,7 @@ function* rootSaga() {
 		watchCreateWarrantiesSaga(),
 		watchEditWarrantySaga(),
 		watchDeleteWarrantySaga(),
+		watchCreateBlogSaga(),
 	]);
 }
 

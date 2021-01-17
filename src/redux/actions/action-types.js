@@ -163,3 +163,7 @@ export const EDIT_WARRANTY_SAGA = 'EDIT_WARRANTY_SAGA';
 export const EDIT_WARRANTY = 'EDIT_WARRANTY';
 export const DELETE_WARRANTY_SAGA = 'DELETE_WARRANTY_SAGA';
 export const DELETE_WARRANTY = 'DELETE_WARRANTY';
+
+//--------------------------------------------------------------------
+export const CREATE_BLOG_SAGA = 'CREATE_BLOG_SAGA';
+export const CREATE_BLOG = 'CREATE_BLOG';
