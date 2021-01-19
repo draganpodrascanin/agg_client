@@ -27,6 +27,8 @@ import RadniNalozi from './pages/RadniNalozi';
 import Automobil from './pages/Automobil';
 import BlogKreator from './pages/BlogKreator';
 import Blog from './pages/Blog';
+import IzmeniBlog from './pages/IzmeniBlog';
+import ActiveBlog from './pages/ActiveBlog';
 
 const theme = createMuiTheme({
 	palette: {
@@ -128,6 +130,20 @@ const App = () => {
 						path="/blog/create"
 					>
 						<BlogKreator />
+					</PrivateRoute>
+					<PrivateRoute
+						roles={['super-admin', 'admin', 'blogger']}
+						exact
+						path="/blog/:id/"
+					>
+						<ActiveBlog />
+					</PrivateRoute>
+					<PrivateRoute
+						roles={['super-admin', 'admin', 'blogger']}
+						exact
+						path="/blog/:id/edit"
+					>
+						<IzmeniBlog />
 					</PrivateRoute>
 					<PrivateRoute
 						roles={['super-admin', 'admin', 'blogger']}

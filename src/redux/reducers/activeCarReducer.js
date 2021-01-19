@@ -22,12 +22,7 @@ export const activeCarReducer = (state = initialState, action) => {
 			return { ...state, warranties: newWarranties };
 
 		case DELETE_WARRANTY:
-			console.log('REDUCER POGODJEN');
 			const filteredWarranties = state.warranties.filter((warranty) => {
-				console.log('payload', action.payload);
-				console.log('payload.id', action.payload.id);
-				console.log('warranty.id', warranty.id);
-				console.log('warranty', warranty);
 				return warranty.id !== action.payload.id;
 			});
 

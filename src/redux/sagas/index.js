@@ -9,7 +9,13 @@ import {
 	watchLoginSaga,
 	watchLogoutSaga,
 } from './authSaga';
-import { watchCreateBlogSaga } from './blogsSaga';
+import {
+	watchCreateBlogSaga,
+	watchEditBlogSaga,
+	watchGetActiveBlog,
+	watchGetBlogs,
+	watchPublishBlog,
+} from './blogsSaga';
 import { watchCreateCarExamSaga } from './carExamSaga';
 import { watchCreateCarReceptionSaga } from './carReceptionSaga';
 import {
@@ -92,7 +98,11 @@ function* rootSaga() {
 		watchCreateWarrantiesSaga(),
 		watchEditWarrantySaga(),
 		watchDeleteWarrantySaga(),
+		watchGetBlogs(),
 		watchCreateBlogSaga(),
+		watchGetActiveBlog(),
+		watchEditBlogSaga(),
+		watchPublishBlog(),
 	]);
 }
 

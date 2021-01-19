@@ -165,5 +165,15 @@ export const DELETE_WARRANTY_SAGA = 'DELETE_WARRANTY_SAGA';
 export const DELETE_WARRANTY = 'DELETE_WARRANTY';
 
 //--------------------------------------------------------------------
+export const GET_BLOGS_SAGA = 'GET_BLOGS_SAGA';
+export const GET_BLOGS = 'GET_BLOGS';
+export const GET_ACTIVE_BLOG_SAGA = 'GET_ACTIVE_BLOG_SAGA';
+export const GET_ACTIVE_BLOG = 'GET_ACTIVE_BLOG';
 export const CREATE_BLOG_SAGA = 'CREATE_BLOG_SAGA';
 export const CREATE_BLOG = 'CREATE_BLOG';
+export const EDIT_BLOG_SAGA = 'EDIT_BLOG_SAGA';
+export const EDIT_BLOG = 'EDIT_BLOG';
+export const DELETE_BLOG_SAGA = 'DELETE_BLOG_SAGA';
+export const DELETE_BLOG = 'DELETE_BLOG';
+export const PUBLISH_BLOG = 'PUBLISH_BLOG';
+export const PUBLISH_BLOG_SAGA = 'PUBLISH_BLOG_SAGA';
