@@ -72,10 +72,6 @@ export const CarCards = () => {
 	const [page, setPage] = useState(1);
 	const [searchLimit, setSearchLimit] = useState(12);
 
-	// useEffect(() => {
-	// 	dispatch(getCarsAction(page, searchLimit, searchedTerm));
-	// }, []);
-
 	useEffect(() => {
 		dispatch(getCarsAction(page, searchLimit, searchedTerm));
 	}, [dispatch, page, searchLimit, searchedTerm]);

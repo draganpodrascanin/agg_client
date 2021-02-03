@@ -29,6 +29,7 @@ import BlogKreator from './pages/BlogKreator';
 import Blog from './pages/Blog';
 import IzmeniBlog from './pages/IzmeniBlog';
 import ActiveBlog from './pages/ActiveBlog';
+import Racuni from './pages/Racuni';
 
 const theme = createMuiTheme({
 	palette: {
@@ -115,7 +116,7 @@ const App = () => {
 						exact
 						path="/racuni"
 					>
-						<h1>racuni</h1>
+						<Racuni />
 					</PrivateRoute>
 					<PrivateRoute
 						roles={['super-admin', 'admin', 'blogger']}

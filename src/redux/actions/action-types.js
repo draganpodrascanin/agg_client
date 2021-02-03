@@ -177,3 +177,13 @@ export const DELETE_BLOG_SAGA = 'DELETE_BLOG_SAGA';
 export const DELETE_BLOG = 'DELETE_BLOG';
 export const PUBLISH_BLOG = 'PUBLISH_BLOG';
 export const PUBLISH_BLOG_SAGA = 'PUBLISH_BLOG_SAGA';
+
+//--------------------------------------------------------------------
+export const GET_INVOICES = 'GET_INVOICES';
+export const GET_INVOICES_SAGA = 'GET_INVOICES_SAGA';
+export const GET_ACTIVE_INVOICE = 'GET_ACTIVE_INVOICE';
+export const GET_ACTIVE_INVOICE_SAGA = 'GET_ACTIVE_INVOICE_SAGA';
+export const CREATE_INVOICE = 'CREATE_INVOICE';
+export const CREATE_INVOICE_SAGA = 'CREATE_INVOICE_SAGA';
+export const DELETE_INVOICE_SAGA = 'DELETE_INVOICE_SAGA';
+export const DELETE_INVOICE = 'DELETE_INVOICE';

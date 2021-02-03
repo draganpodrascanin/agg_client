@@ -9,6 +9,7 @@ import { carSuggestionReducer } from './carSuggestionReducer';
 import { chartDataReducer } from './chartReducer';
 import clientsReducer from './clientsReducer';
 import expensesReducer from './expensesReducer';
+import { invoicesReducer } from './invoicesReducer';
 import { jobConclusionsReducer } from './jobConclusionReducer';
 import { jobTicketsReducer } from './jobTicketsReducer';
 import UIReducer from './UIReducer';
@@ -33,4 +34,5 @@ export const combinedReducers = combineReducers({
 	warranties: warrantyReducer,
 	blogs: blogsReducer,
 	activeBlog: activeBlogReducer,
+	invoices: invoicesReducer,
 });
