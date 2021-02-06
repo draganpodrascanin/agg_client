@@ -20,7 +20,7 @@ import {
 	deleteWarrantyAction,
 	editWarrantyAction,
 } from '../../../redux/actions/warrantyActions';
-import DeleteModal from '../../DeleteModal';
+import ConfirmModal from '../../ConfirmModal';
 
 const useStyles = makeStyles((theme) => ({
 	section: {
@@ -168,7 +168,7 @@ const Warranties = ({ warranties }) => {
 			</CustomModal>
 
 			{/**----------------------------------------------------------------------------------- */}
-			<DeleteModal
+			<ConfirmModal
 				heading="Da li ste sigurni da želite da obrišete garanciju?"
 				open={openDeleteModal}
 				onClose={handleDeleteModal}

@@ -97,7 +97,7 @@ const InvoiceTable = ({ invoices, ...props }) => {
 					</TableHead>
 					<TableBody>
 						{invoices.map((invoice) => (
-							<StyledTableRow key={invoice.name}>
+							<StyledTableRow key={invoice.id}>
 								<StyledTableCell component="th" scope="invoice">
 									{invoice.invoiceTitle}
 								</StyledTableCell>

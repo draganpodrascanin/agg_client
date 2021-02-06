@@ -28,7 +28,7 @@ import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import { statusTranslate } from '../util/statusTranslate';
 import Timeline from '@material-ui/icons/Timeline';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import DeleteModal from '../DeleteModal';
+import ConfirmModal from '../ConfirmModal';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 
@@ -459,7 +459,7 @@ export const WorkOrderCards = () => {
 
 	return (
 		<div style={{ width: '100%', marginTop: 50 }}>
-			<DeleteModal
+			<ConfirmModal
 				id={deleteWorkOrderId}
 				open={!!deleteWorkOrderId}
 				onClose={handleDeleteWorkOrderId}

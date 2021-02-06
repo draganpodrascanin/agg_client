@@ -5,13 +5,18 @@ import {
 	MenuItem,
 	TextField,
 } from '@material-ui/core';
-import { Search } from '@material-ui/icons';
+import { Add, Search } from '@material-ui/icons';
 import { Pagination } from '@material-ui/lab';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getInvoicesAction } from '../../redux/actions/invoiceActions';
+import CreateInvoice from '../Forms/CreateInvoice';
+import { ErrorSnackbar } from '../UI/ErrorSnackbar';
+import { LoadingModal } from '../UI/LoadingModal';
+import { SuccessSnackbar } from '../UI/SuccessSnackbar';
 import InvoiceTable from './InvoiceTable';
+import CustomModal from '../CustomModal';
 
 const useStyles = makeStyles((theme) => ({
 	searchContainer: {
@@ -38,6 +43,10 @@ const useStyles = makeStyles((theme) => ({
 	limitField: {
 		width: 170,
 	},
+	newInvoiceButton: {
+		color: theme.palette.text.primary,
+		border: '1px solid',
+	},
 }));
 
 const Invoices = () => {
@@ -46,6 +55,11 @@ const Invoices = () => {
 	const [page, setPage] = useState(1);
 	const [limit, setLimit] = useState(10);
 	const [search, setSearch] = useState('');
+	const [openCreateInvoiceModal, setCreateInvoiceModal] = useState(false);
+
+	const handleCreateInvoiceModal = () => {
+		setCreateInvoiceModal(!openCreateInvoiceModal);
+	};
 
 	const limitOptions = [10, 20, 50, 100];
 
@@ -71,68 +85,90 @@ const Invoices = () => {
 	});
 
 	return (
-		<div>
-			<div className={classes.headContainer}>
-				<form
-					onSubmit={formik.handleSubmit}
-					className={classes.searchContainer}
-				>
-					<TextField
-						className={classes.searchField}
-						name="searchField"
-						onChange={formik.handleChange}
-						label="Pretraži Po Imenu Kupca"
-						value={formik.values.searchField}
-						onKeyPress={(e) => {
-							if (e.key === 'Enter') formik.submitForm();
-						}}
-						InputProps={{
-							startAdornment: (
-								<InputAdornment position="start">
-									<Search />
-								</InputAdornment>
-							),
-						}}
-					/>
-					<Button
-						size="small"
-						variant="outlined"
-						color="primary"
-						onClick={() => {
-							formik.submitForm();
-						}}
+		<>
+			<CustomModal
+				open={openCreateInvoiceModal}
+				onClose={handleCreateInvoiceModal}
+			>
+				<CreateInvoice />
+			</CustomModal>
+			<Button
+				size="medium"
+				variant="outlined"
+				startIcon={<Add />}
+				className={classes.newInvoiceButton}
+				onClick={handleCreateInvoiceModal}
+			>
+				Novi Račun
+			</Button>
+			<div>
+				<div className={classes.headContainer}>
+					<form
+						onSubmit={formik.handleSubmit}
+						className={classes.searchContainer}
 					>
-						Pretraži
-					</Button>
-				</form>
+						<TextField
+							className={classes.searchField}
+							name="searchField"
+							onChange={formik.handleChange}
+							label="Pretraži Po Imenu Kupca"
+							value={formik.values.searchField}
+							onKeyPress={(e) => {
+								if (e.key === 'Enter') formik.submitForm();
+							}}
+							InputProps={{
+								startAdornment: (
+									<InputAdornment position="start">
+										<Search />
+									</InputAdornment>
+								),
+							}}
+						/>
+						<Button
+							size="small"
+							variant="outlined"
+							color="primary"
+							onClick={() => {
+								formik.submitForm();
+							}}
+						>
+							Pretraži
+						</Button>
+					</form>
 
-				<TextField
-					className={classes.limitField}
-					value={limit}
-					onChange={handleLimit}
-					label="Prikaza Po Stranici"
-					select
-				>
-					{limitOptions.map((opt) => (
-						<MenuItem key={opt} value={opt}>
-							{opt}
-						</MenuItem>
-					))}
-				</TextField>
+					<TextField
+						className={classes.limitField}
+						value={limit}
+						onChange={handleLimit}
+						label="Prikaza Po Stranici"
+						select
+					>
+						{limitOptions.map((opt) => (
+							<MenuItem key={opt} value={opt}>
+								{opt}
+							</MenuItem>
+						))}
+					</TextField>
+				</div>
+				{/*----------------TABLE---------------------- */}
+				<InvoiceTable invoices={invoices.invoices} />
+				{/*-------------PAGINATION-------------------- */}
+				<div className={classes.paginationContainer}>
+					<Pagination
+						style={{ marginBottom: 20 }}
+						color="primary"
+						count={Math.ceil(invoices.count / limit)}
+						onChange={handlePageChange}
+						page={page}
+					/>
+				</div>
 			</div>
-			{/*----------------TABLE---------------------- */}
-			<InvoiceTable invoices={invoices.invoices} />
-			{/*-------------PAGINATION-------------------- */}
-			<div className={classes.paginationContainer}>
-				<Pagination
-					style={{ marginBottom: 20 }}
-					color="primary"
-					count={Math.ceil(invoices.count / limit)}
-					onChange={handlePageChange}
-					page={page}
-				/>
-			</div>
-		</div>
+
+			{/*  UI  */}
+			<LoadingModal />
+			<SuccessSnackbar />
+			<ErrorSnackbar />
+		</>
 	);
 };
 

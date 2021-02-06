@@ -18,17 +18,53 @@ const useStyles = makeStyles((theme) => ({
 		textAlign: 'center',
 	},
 	button: { width: 150, marginRight: 15 },
+	headIcon: {
+		display: 'block',
+		textAlign: 'center',
+		color: theme.palette.warning.main,
+
+		'& svg': {
+			fontSize: 100,
+		},
+	},
+
+	text: {
+		textAlign: 'center',
+		marginBottom: 20,
+	},
 }));
 
-const DeleteModal = ({ heading, open, onClose, onSubmit, btn1, btn2 }) => {
+const ConfirmModal = ({
+	heading,
+	text,
+	open,
+	onClose,
+	onSubmit,
+	btn1,
+	btn2,
+	headIcon,
+}) => {
 	const classes = useStyles();
 
 	return (
 		<CustomModal open={open} onClose={onClose}>
 			<form className={classes.form}>
+				<div className={classes.headIcon}>{headIcon && headIcon}</div>
+
 				<Typography variant="h4" component="h3" className={classes.heading}>
 					{heading || 'Da li ste sigurni da želite da obrišete?'}
 				</Typography>
+
+				{text && (
+					<Typography
+						variant="body1"
+						color="textSecondary"
+						component="p"
+						className={classes.text}
+					>
+						{text}
+					</Typography>
+				)}
 
 				<div className={classes.buttonContainer}>
 					<Button
@@ -55,11 +91,13 @@ const DeleteModal = ({ heading, open, onClose, onSubmit, btn1, btn2 }) => {
 	);
 };
 
-DeleteModal.propTypes = {
+ConfirmModal.propTypes = {
 	heading: PropTypes.string,
+	text: PropTypes.string,
 	open: PropTypes.bool,
 	onClose: PropTypes.func,
 	onSubmit: PropTypes.func,
+	headIcon: PropTypes.elementType,
 };
 
-export default DeleteModal;
+export default ConfirmModal;

@@ -33,7 +33,7 @@ const IframeModal = ({ open, onClose, path }) => {
 			<iframe
 				title="invoice-pdf"
 				src={`http://localhost:5000${path}`}
-				frameborder="0"
+				frameBorder="0"
 				width="80%"
 				height="90%"
 				className={classes.iframe}
