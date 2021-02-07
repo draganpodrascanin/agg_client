@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import { Button, makeStyles, TextField } from '@material-ui/core';
 import { AddCircle, Create, Delete } from '@material-ui/icons';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
 	input: {
 		width: '100%',
 		maxWidth: 400,
@@ -21,6 +21,10 @@ export const ExpensesForm = ({ description, amount, date, ...props }) => {
 		},
 		onSubmit: props.onSubmit,
 	});
+
+	const handleDateChange = (e) => {
+		formik.setFieldValue('date', dayjs(e.target.value).format('YYYY-MM-DD'));
+	};
 
 	return (
 		<form>
@@ -43,14 +47,14 @@ export const ExpensesForm = ({ description, amount, date, ...props }) => {
 				value={formik.values.amount}
 				required
 			/>
-			<div style={{ display: 'flex', alignItems: 'flex-end' }}>
+			<div style={{ display: 'flex', alignItems: 'flex-end', marginTop: 15 }}>
 				<TextField
 					id="date"
 					label="datum"
 					type="date"
 					defaultValue={formik.values.date}
 					className={classes.textField}
-					onChange={formik.handleChange}
+					onChange={handleDateChange}
 					InputLabelProps={{
 						shrink: true,
 					}}

@@ -82,6 +82,7 @@ export const CarCards = () => {
 		},
 		onSubmit: (val) => {
 			setSearchedTerm(val.search);
+			setPage(1);
 		},
 	});
 

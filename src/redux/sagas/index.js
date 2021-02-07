@@ -37,7 +37,7 @@ import {
 	watchUpdateExpenseSaga,
 	watchDeleteExpenseSaga,
 } from './expensesSaga';
-import { watchGetInvoicesSaga } from './invoicesSaga';
+import { watchCreateInvoiceSaga, watchGetInvoicesSaga } from './invoicesSaga';
 
 import {
 	watchCreateJobConclusionSaga,
@@ -105,6 +105,7 @@ function* rootSaga() {
 		watchEditBlogSaga(),
 		watchPublishBlog(),
 		watchGetInvoicesSaga(),
+		watchCreateInvoiceSaga(),
 	]);
 }
 

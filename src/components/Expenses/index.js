@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -24,6 +24,7 @@ import {
 import { AddCircle } from '@material-ui/icons';
 import { ExpenseFormModal } from './ExpenseFormModal';
 import { ExpensesForm } from './ExpensesForm';
+import CustomModal from '../CustomModal';
 
 const useStyle = makeStyles((theme) => ({
 	datePickerContainer: {
@@ -60,6 +61,24 @@ const useStyle = makeStyles((theme) => ({
 		backgroundColor: '#000',
 	},
 }));
+
+const StyledTableCell = withStyles((theme) => ({
+	head: {
+		backgroundColor: theme.palette.primary.dark,
+		color: theme.palette.common.white,
+	},
+	body: {
+		fontSize: 14,
+	},
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+	root: {
+		'&:nth-of-type(odd)': {
+			backgroundColor: theme.palette.action.hover,
+		},
+	},
+}))(TableRow);
 
 export const Expenses = () => {
 	const classes = useStyle();
@@ -150,7 +169,7 @@ export const Expenses = () => {
 
 	const renderExpenses = expenses.map((expense) => {
 		return (
-			<TableRow
+			<StyledTableRow
 				className={classes.tableRow}
 				onClick={() =>
 					handleActiveEnxpense(
@@ -169,20 +188,18 @@ export const Expenses = () => {
 				<TableCell align="right">
 					{dayjs(expense.createdAt).format('DD/MM/YYYY')}
 				</TableCell>
-			</TableRow>
+			</StyledTableRow>
 		);
 	});
 
 	return (
 		<>
-			<ExpenseFormModal modalOpen={modalOpen} handleModalOpen={handleModalOpen}>
-				<div className={classes.modal}>
-					<Typography variant="h4" component="h3">
-						DODAJ TROŠAK
-					</Typography>
-					<ExpensesForm onSubmit={handleCreateExpenseSubmit} />
-				</div>
-			</ExpenseFormModal>
+			<CustomModal open={modalOpen} onClose={handleModalOpen}>
+				<Typography variant="h4" component="h3">
+					DODAJ TROŠAK
+				</Typography>
+				<ExpensesForm onSubmit={handleCreateExpenseSubmit} />
+			</CustomModal>
 
 			<Modal
 				open={activeExpense.active}
@@ -251,14 +268,10 @@ export const Expenses = () => {
 			<TableContainer className={classes.table} component={Paper}>
 				<Table>
 					<TableHead>
-						<TableRow style={{ backgroundColor: '#1e7be2' }}>
-							<TableCell style={{ color: '#fff' }}>OPIS</TableCell>
-							<TableCell style={{ color: '#fff' }} align="right">
-								IZNOS
-							</TableCell>
-							<TableCell style={{ color: '#fff' }} align="right">
-								DATUM
-							</TableCell>
+						<TableRow>
+							<StyledTableCell>OPIS</StyledTableCell>
+							<StyledTableCell align="right">IZNOS</StyledTableCell>
+							<StyledTableCell align="right">DATUM</StyledTableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>{renderExpenses}</TableBody>

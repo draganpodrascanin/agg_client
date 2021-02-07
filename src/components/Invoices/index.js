@@ -81,7 +81,10 @@ const Invoices = () => {
 		initialValues: {
 			searchField: '',
 		},
-		onSubmit: (v) => setSearch(v.searchField),
+		onSubmit: (v) => {
+			setSearch(v.searchField);
+			setPage(1);
+		},
 	});
 
 	return (

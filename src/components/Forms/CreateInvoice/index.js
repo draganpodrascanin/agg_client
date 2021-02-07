@@ -14,7 +14,10 @@ import {
 import dayjs from 'dayjs';
 import { useFormik } from 'formik';
 import React, { useMemo, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { createInvoceAction } from '../../../redux/actions/invoiceActions';
 import ConfirmModal from '../../ConfirmModal';
+import { LoadingModal } from '../../UI/LoadingModal';
 import FullPrice from './FullPrice';
 // import InvoiceDescs from './InvoiceDescs';
 
@@ -76,6 +79,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CreateInvoice = ({ heading }) => {
 	const classes = useStyles();
+	const dispatch = useDispatch();
 	const [openConfirmSubmitModal, setConfirmSubmitModal] = useState(false);
 
 	const handleConfirmSubmitModal = () => {
@@ -109,7 +113,7 @@ const CreateInvoice = ({ heading }) => {
 			invoiceDescs: [initialInvoiceDesc],
 		},
 		onSubmit: (v) => {
-			alert(JSON.stringify(v));
+			dispatch(createInvoceAction(v));
 		},
 	});
 
@@ -126,14 +130,13 @@ const CreateInvoice = ({ heading }) => {
 		});
 	};
 
+	console.log('formik.values', formik.values);
+
 	const handleDescChange = (e, index) => {
 		let newDescs = [...formik.values.invoiceDescs];
 		newDescs[index][e.target.name] = e.target.value;
 
-		formik.setValues({
-			...formik.values,
-			invoiceDescs: newDescs,
-		});
+		formik.setFieldValue('invoiceDescs', newDescs);
 
 		if (e.target.focus) e.target.focus();
 	};
@@ -287,7 +290,7 @@ const CreateInvoice = ({ heading }) => {
 				<TextField
 					className={classes.textField}
 					name="customerEmail"
-					label="Broj Telefona Kupca"
+					label="Email Kupca"
 					value={formik.values.customerEmail}
 					onChange={formik.handleChange}
 					helperText={formik.errors.customerEmail}
@@ -320,6 +323,7 @@ const CreateInvoice = ({ heading }) => {
 										label="Ime Proizvoda/Usluge"
 										value={invoiceDesc.desc}
 										onChange={(e) => {
+											console.log('bas before', formik.values);
 											handleDescChange(e, index);
 										}}
 										variant="standard"
@@ -457,6 +461,7 @@ const CreateInvoice = ({ heading }) => {
 					Napravi Fakturu
 				</Button>
 			</form>
+			<LoadingModal />
 		</>
 	);
 };

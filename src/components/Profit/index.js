@@ -9,6 +9,7 @@ import {
 	TableHead,
 	TableRow,
 	Typography,
+	withStyles,
 } from '@material-ui/core';
 import {
 	KeyboardDatePicker,
@@ -30,6 +31,24 @@ const useStyle = makeStyles((theme) => ({
 		margin: 8,
 	},
 }));
+
+const StyledTableCell = withStyles((theme) => ({
+	head: {
+		backgroundColor: theme.palette.primary.dark,
+		color: theme.palette.common.white,
+	},
+	body: {
+		fontSize: 14,
+	},
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+	root: {
+		'&:nth-of-type(odd)': {
+			backgroundColor: theme.palette.action.hover,
+		},
+	},
+}))(TableRow);
 
 export const Profit = () => {
 	const classes = useStyle();
@@ -53,7 +72,7 @@ export const Profit = () => {
 
 	const renderTableContent = jobConclusions.map((jobConclusion) => {
 		return (
-			<TableRow key={jobConclusion.id}>
+			<StyledTableRow key={jobConclusion.id}>
 				<TableCell omponent="th" scope="row">
 					{jobConclusion.workDone}
 				</TableCell>
@@ -61,7 +80,7 @@ export const Profit = () => {
 				<TableCell align="right">
 					{dayjs(jobConclusion.createdAt).format('DD/MM/YYYY')}
 				</TableCell>
-			</TableRow>
+			</StyledTableRow>
 		);
 	});
 
@@ -107,14 +126,10 @@ export const Profit = () => {
 			<TableContainer className={classes.table} component={Paper}>
 				<Table>
 					<TableHead>
-						<TableRow style={{ backgroundColor: '#1e7be2' }}>
-							<TableCell style={{ color: '#fff' }}>OPIS</TableCell>
-							<TableCell style={{ color: '#fff' }} align="right">
-								IZNOS
-							</TableCell>
-							<TableCell style={{ color: '#fff' }} align="right">
-								DATUM
-							</TableCell>
+						<TableRow>
+							<StyledTableCell>OPIS</StyledTableCell>
+							<StyledTableCell align="right">IZNOS</StyledTableCell>
+							<StyledTableCell align="right">DATUM</StyledTableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>{renderTableContent}</TableBody>

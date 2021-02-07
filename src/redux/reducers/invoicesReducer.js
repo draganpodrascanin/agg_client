@@ -1,4 +1,4 @@
-import { GET_INVOICES } from '../actions/action-types';
+import { CREATE_INVOICE, GET_INVOICES } from '../actions/action-types';
 
 const initialState = {
 	invoices: [],
@@ -11,6 +11,11 @@ export const invoicesReducer = (state = initialState, action) => {
 			return {
 				invoices: [...action.payload.invoices],
 				count: action.payload.count,
+			};
+		case CREATE_INVOICE:
+			return {
+				...state,
+				invoices: [action.payload, ...state.invoices],
 			};
 		default:
 			return state;

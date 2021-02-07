@@ -141,6 +141,7 @@ const ClientCards = () => {
 
 	const handleSearchSubmit = (values) => {
 		setSearchedTerm(values.search);
+		setPage(1);
 	};
 
 	const formik = useFormik({

@@ -97,7 +97,7 @@ ConfirmModal.propTypes = {
 	open: PropTypes.bool,
 	onClose: PropTypes.func,
 	onSubmit: PropTypes.func,
-	headIcon: PropTypes.elementType,
+	headIcon: PropTypes.any,
 };
 
 export default ConfirmModal;
