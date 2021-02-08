@@ -7,6 +7,7 @@ import {
 	List,
 	makeStyles,
 	Divider,
+	Typography,
 } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import AppBar from './AppBar';
@@ -19,18 +20,15 @@ import PeopleAltRoundedIcon from '@material-ui/icons/PeopleAltRounded';
 import EventAvailableRoundedIcon from '@material-ui/icons/EventAvailableRounded';
 import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded';
 import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
-import ImageSearchRoundedIcon from '@material-ui/icons/ImageSearchRounded';
 import BuildRoundedIcon from '@material-ui/icons/BuildRounded';
-// import MeetingRoomRoundedIcon from '@material-ui/icons/MeetingRoomRounded';
+import { AssignmentInd, Mail } from '@material-ui/icons';
 
-//---->>> STYLES <<<-----
 const useStyles = makeStyles((theme) => ({
 	list: {
 		paddingTop: 30,
 		width: 360,
 		height: '100%',
 		backgroundColor: theme.palette.primary.dark,
-		// backgroundColor: '#144e90',
 	},
 	item: {
 		color: theme.palette.grey[800],
@@ -61,6 +59,16 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: 'rgba(255,255,255,0.3)',
 		border: 'solid 1px rgba(255,255,255,0.3)',
 	},
+	unreadMessagesDiv: {
+		height: 30,
+		width: 30,
+		background: theme.palette.secondary.main,
+		color: '#fff',
+		borderRadius: '100%',
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
 }));
 
 //helper-component
@@ -78,8 +86,7 @@ const ListItemLink = (props) => {
 	);
 };
 
-//=================COMPONENT=======================================
-export const Navigation = () => {
+export const Navigation = ({ unreadMessages }) => {
 	const classes = useStyles();
 	const [openDrawer, setOpenDrawer] = useState(false);
 
@@ -148,14 +155,19 @@ export const Navigation = () => {
 							<ListItemText className={classes.item} primary="blog" />
 						</ListItemLink>
 
-						<ListItemLink to="/slike">
-							<ImageSearchRoundedIcon
-								className={classes.icon}
-								fontSize="small"
-							/>
-							<ListItemText className={classes.item} primary="slike" />
+						<ListItemLink to="/poruke">
+							<Mail className={classes.icon} fontSize="small" />
+							<ListItemText className={classes.item} primary="Poruke" />
+							{unreadMessages && (
+								<div className={classes.unreadMessagesDiv}>
+									<Typography>3</Typography>
+								</div>
+							)}
 						</ListItemLink>
-
+						<ListItemLink to="/adminpanel">
+							<AssignmentInd className={classes.icon} fontSize="small" />
+							<ListItemText className={classes.item} primary="Admin Panel" />
+						</ListItemLink>
 						<Divider style={{ background: 'rgba(255,255,255,0.3)' }} />
 					</List>
 				</div>

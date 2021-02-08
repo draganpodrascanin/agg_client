@@ -12,6 +12,7 @@ import expensesReducer from './expensesReducer';
 import { invoicesReducer } from './invoicesReducer';
 import { jobConclusionsReducer } from './jobConclusionReducer';
 import { jobTicketsReducer } from './jobTicketsReducer';
+import { messagesReducer } from './messagesReducer';
 import UIReducer from './UIReducer';
 import { warrantyReducer } from './warrantyReducer';
 import { workOrderReducer } from './workOrderReducer';
@@ -35,4 +36,5 @@ export const combinedReducers = combineReducers({
 	blogs: blogsReducer,
 	activeBlog: activeBlogReducer,
 	invoices: invoicesReducer,
+	messages: messagesReducer,
 });

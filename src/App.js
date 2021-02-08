@@ -30,6 +30,8 @@ import Blog from './pages/Blog';
 import IzmeniBlog from './pages/IzmeniBlog';
 import ActiveBlog from './pages/ActiveBlog';
 import Racuni from './pages/Racuni';
+import Poruke from './pages/Poruke';
+import { io } from 'socket.io-client';
 
 const theme = createMuiTheme({
 	palette: {
@@ -39,13 +41,28 @@ const theme = createMuiTheme({
 	},
 });
 
+const socket = io('http://localhost:5000');
+
 const App = () => {
 	const admin = useSelector((state) => state.admin);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
+		socket.on('NewMessage', (message) => {
+			console.log(message);
+		});
+
+		socket.on('disconnect', function () {
+			socket.removeAllListeners('NewMessage');
+			socket.removeAllListeners('disconnect');
+		});
+	}, []);
+
+	useEffect(() => {
 		dispatch(getCurrentAdminAction());
 	}, [dispatch]);
+
+	console.log('app rerender');
 
 	return (
 		<Router basename="/dashboard">
@@ -149,9 +166,9 @@ const App = () => {
 					<PrivateRoute
 						roles={['super-admin', 'admin', 'blogger']}
 						exact
-						path="/slike"
+						path="/poruke"
 					>
-						<h1>slike</h1>
+						<Poruke />
 					</PrivateRoute>
 					<PrivateRoute roles={['super-admin', 'admin']} exact path="/">
 						<h1>

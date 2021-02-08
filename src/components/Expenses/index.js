@@ -201,21 +201,20 @@ export const Expenses = () => {
 				<ExpensesForm onSubmit={handleCreateExpenseSubmit} />
 			</CustomModal>
 
-			<Modal
+			<CustomModal
 				open={activeExpense.active}
 				onClose={handleActiveExpenseModalClose}
+				heading="Izmeni Trošak"
 			>
-				<div className={classes.modal}>
-					<ExpensesForm
-						date={activeExpense.date}
-						description={activeExpense.description}
-						amount={activeExpense.amount}
-						onSubmit={handleUpdateExpenseFormSubmit}
-						handleDelete={handleDelete}
-						update
-					/>
-				</div>
-			</Modal>
+				<ExpensesForm
+					date={activeExpense.date}
+					description={activeExpense.description}
+					amount={activeExpense.amount}
+					onSubmit={handleUpdateExpenseFormSubmit}
+					handleDelete={handleDelete}
+					update
+				/>
+			</CustomModal>
 
 			<div style={{ display: 'flex', alignItems: 'flex-end' }}>
 				<Typography
