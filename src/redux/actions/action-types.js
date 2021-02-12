@@ -5,6 +5,8 @@ export const CLEAR_LOADING = 'CLEAR_LOADING';
 export const CLEAR_SUCCESS = ' CLEAR_SUCCESS';
 export const UI_ERROR = 'UI_ERROR';
 export const CLEAR_UI_ERROR = 'CLEAR_UI_ERROR';
+export const MESSAGE_RECEIVED = 'MESSAGE_RECEIVED';
+export const CLEAR_MESSAGE_RECEIVED = 'CLEAR_MESSAGE_RECEIVED';
 
 //----------------------- AUTH ----------------------------------
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';

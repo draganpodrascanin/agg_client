@@ -1,11 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { PrivateRoute } from './components/PrivateRoute';
-import {
-	createMuiTheme,
-	makeStyles,
-	ThemeProvider,
-} from '@material-ui/core/styles';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Navigation } from './components/Navigation';
@@ -32,6 +28,8 @@ import ActiveBlog from './pages/ActiveBlog';
 import Racuni from './pages/Racuni';
 import Poruke from './pages/Poruke';
 import { io } from 'socket.io-client';
+import { MessageRecievedSnackbar } from './components/UI/MessageRecievedSnackbar';
+import { newMessageAction } from './redux/actions/messageActions';
 
 const theme = createMuiTheme({
 	palette: {
@@ -47,27 +45,42 @@ const App = () => {
 	const admin = useSelector((state) => state.admin);
 	const dispatch = useDispatch();
 
+	// const subscribeToNotifications = async () => {
+	// 	const sw = await navigator.serviceWorker.ready;
+	// 	console.log('sw', sw);
+	// 	const push = await sw.pushManager.subscribe({
+	// 		userVisibleOnly: true,
+	// 		applicationServerKey:
+	// 			'BDiOjQq4Dw7hDp-Jou0fg5XVJuNdJwkbiEEO-pTs18SgwTjbOLXVdVnDR-UJWC7P5ZB4_XWwPOJWjegSrMSfsPM',
+	// 	});
+	// 	console.log('push', push);
+	// };
+
 	useEffect(() => {
 		socket.on('NewMessage', (message) => {
-			console.log(message);
+			dispatch(newMessageAction(message));
 		});
 
 		socket.on('disconnect', function () {
 			socket.removeAllListeners('NewMessage');
 			socket.removeAllListeners('disconnect');
 		});
-	}, []);
+
+		// if ('serviceWorker' in navigator) {
+		// 	subscribeToNotifications();
+		// }
+	}, [dispatch]);
 
 	useEffect(() => {
 		dispatch(getCurrentAdminAction());
 	}, [dispatch]);
 
-	console.log('app rerender');
-
 	return (
 		<Router basename="/dashboard">
 			<div>
 				{admin.isLoggedIn && <Navigation />}
+				{admin.role === 'admin' ||
+					(admin.role === 'super-admin' && <MessageRecievedSnackbar />)}
 				<Switch>
 					<LoginRoute exact path="/login">
 						<LoginForm />

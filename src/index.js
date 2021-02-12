@@ -7,6 +7,7 @@ import { applyMiddleware, createStore } from 'redux';
 import { combinedReducers } from './redux/reducers';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './redux/sagas';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -35,3 +36,4 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+serviceWorkerRegistration.register();

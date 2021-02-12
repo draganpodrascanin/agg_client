@@ -30,7 +30,7 @@ export const messagesReducer = (state = initialState, action) => {
 
 		case UPDATE_MESSAGE_SEEN:
 			const newMessages = state.messages.map((msg) => {
-				if (msg.id === action.payload.id) return action.payload.id;
+				if (msg.id === action.payload.id) return action.payload;
 				return msg;
 			});
 

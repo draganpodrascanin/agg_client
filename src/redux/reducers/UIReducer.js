@@ -5,12 +5,15 @@ const {
 	CLEAR_SUCCESS,
 	UI_ERROR,
 	CLEAR_UI_ERROR,
+	MESSAGE_RECEIVED,
+	CLEAR_MESSAGE_RECEIVED,
 } = require('../actions/action-types');
 
 const initalState = {
 	loading: false,
 	successMessage: '',
 	uiError: '',
+	messageRecieved: '',
 };
 
 const UIReducer = (state = initalState, action) => {
@@ -27,6 +30,11 @@ const UIReducer = (state = initalState, action) => {
 			return { ...state, uiError: action.payload };
 		case CLEAR_UI_ERROR:
 			return { ...state, uiError: '' };
+		case MESSAGE_RECEIVED:
+			console.log(action.payload);
+			return { ...state, messageRecieved: action.payload };
+		case CLEAR_MESSAGE_RECEIVED:
+			return { ...state, messageRecieved: '' };
 		default:
 			return state;
 	}

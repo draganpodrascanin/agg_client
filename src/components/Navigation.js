@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import {
 	// Button,
 	Drawer,
@@ -22,6 +22,8 @@ import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded';
 import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
 import BuildRoundedIcon from '@material-ui/icons/BuildRounded';
 import { AssignmentInd, Mail } from '@material-ui/icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUnreadMessagesNumberAction } from '../redux/actions/messageActions';
 
 const useStyles = makeStyles((theme) => ({
 	list: {
@@ -86,13 +88,22 @@ const ListItemLink = (props) => {
 	);
 };
 
-export const Navigation = ({ unreadMessages }) => {
+export const Navigation = () => {
 	const classes = useStyles();
 	const [openDrawer, setOpenDrawer] = useState(false);
 
 	const toggleDrawer = () => {
 		setOpenDrawer(!openDrawer);
 	};
+
+	const dispatch = useDispatch();
+	const unreadMessagesNumber = useSelector(
+		(state) => state.messages.unreadMessages
+	);
+
+	useEffect(() => {
+		dispatch(getUnreadMessagesNumberAction());
+	}, [dispatch]);
 
 	return (
 		<div>
@@ -158,9 +169,11 @@ export const Navigation = ({ unreadMessages }) => {
 						<ListItemLink to="/poruke">
 							<Mail className={classes.icon} fontSize="small" />
 							<ListItemText className={classes.item} primary="Poruke" />
-							{unreadMessages && (
+							{unreadMessagesNumber !== 0 && (
 								<div className={classes.unreadMessagesDiv}>
-									<Typography>3</Typography>
+									<Typography>
+										{unreadMessagesNumber !== 0 && unreadMessagesNumber}
+									</Typography>
 								</div>
 							)}
 						</ListItemLink>

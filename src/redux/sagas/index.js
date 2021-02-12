@@ -50,6 +50,12 @@ import {
 	watchGetJobTicketSaga,
 } from './jobTicketSaga';
 import {
+	watchGetMessagesSaga,
+	watchGetUnreadMessagesNumberSaga,
+	watchNewMessageSaga,
+	watchUpdateMessageSeenSaga,
+} from './messagesSaga';
+import {
 	watchCreateWarrantiesSaga,
 	watchDeleteWarrantySaga,
 	watchEditWarrantySaga,
@@ -106,6 +112,10 @@ function* rootSaga() {
 		watchPublishBlog(),
 		watchGetInvoicesSaga(),
 		watchCreateInvoiceSaga(),
+		watchGetMessagesSaga(),
+		watchUpdateMessageSeenSaga(),
+		watchGetUnreadMessagesNumberSaga(),
+		watchNewMessageSaga(),
 	]);
 }
 
