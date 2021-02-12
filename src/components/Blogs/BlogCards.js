@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
 	publishedIcon: {
 		color: theme.palette.success.main,
 	},
+	card: {
+		marginRight: 15,
+	},
 }));
 
 const BlogCards = ({ blogs, ...props }) => {
@@ -41,7 +44,7 @@ const BlogCards = ({ blogs, ...props }) => {
 
 	const renderBlogs = (blogs) =>
 		blogs.map((blog) => (
-			<Grid item spacing={3} lg={4} sm={6} xs={12} key={blog.id}>
+			<Grid item lg={4} sm={6} xs={12} key={blog.id}>
 				<Card>
 					<CardActionArea onClick={() => history.push(`/blog/${blog.id}`)}>
 						<CardMedia
@@ -93,7 +96,7 @@ const BlogCards = ({ blogs, ...props }) => {
 					blogId={fokusedBlog?.id}
 				/>
 			</CustomModal>
-			<Grid container style={{ marginTop: 30 }}>
+			<Grid container spacing={3} style={{ marginTop: 30 }}>
 				{blogs && renderBlogs(blogs)}
 			</Grid>
 		</>
