@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { activeBlogReducer } from './activeBlogReducer';
 import { activeCarReducer } from './activeCarReducer';
+import { adminsReducer } from './adminsReducer';
 import { appointentsReducer } from './appointmentsReducer';
 import { authReducer } from './authReducer';
 import { blogsReducer } from './blogsReducer';
@@ -37,4 +38,5 @@ export const combinedReducers = combineReducers({
 	activeBlog: activeBlogReducer,
 	invoices: invoicesReducer,
 	messages: messagesReducer,
+	admins: adminsReducer,
 });

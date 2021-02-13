@@ -1,5 +1,12 @@
 import { all } from 'redux-saga/effects';
 import {
+	watchCreateAdminSaga,
+	watchDeleteAdminSaga,
+	watchGetAdminsSaga,
+	watchUpdateAdminPasswordSaga,
+	watchUpdateAdminSaga,
+} from './adminSaga';
+import {
 	watchCreateAppointmentsSaga,
 	watchEditAppointmentsSaga,
 	watchGetAppointmentsSaga,
@@ -116,6 +123,11 @@ function* rootSaga() {
 		watchUpdateMessageSeenSaga(),
 		watchGetUnreadMessagesNumberSaga(),
 		watchNewMessageSaga(),
+		watchGetAdminsSaga(),
+		watchCreateAdminSaga(),
+		watchUpdateAdminSaga(),
+		watchUpdateAdminPasswordSaga(),
+		watchDeleteAdminSaga(),
 	]);
 }
 

@@ -30,6 +30,7 @@ import Poruke from './pages/Poruke';
 import { io } from 'socket.io-client';
 import { MessageRecievedSnackbar } from './components/UI/MessageRecievedSnackbar';
 import { newMessageAction } from './redux/actions/messageActions';
+import AdminPanel from './pages/AdminPanel';
 
 const theme = createMuiTheme({
 	palette: {
@@ -176,17 +177,18 @@ const App = () => {
 					>
 						<IzmeniBlog />
 					</PrivateRoute>
-					<PrivateRoute
-						roles={['super-admin', 'admin', 'blogger']}
-						exact
-						path="/poruke"
-					>
+					<PrivateRoute roles={['super-admin', 'admin']} exact path="/poruke">
 						<Poruke />
 					</PrivateRoute>
+					<PrivateRoute
+						roles={['super-admin', 'admin']}
+						exact
+						path="/adminpanel"
+					>
+						<AdminPanel />
+					</PrivateRoute>
 					<PrivateRoute roles={['super-admin', 'admin']} exact path="/">
-						<h1>
-							<Dashboard />
-						</h1>
+						<Dashboard />
 					</PrivateRoute>
 				</Switch>
 			</div>
