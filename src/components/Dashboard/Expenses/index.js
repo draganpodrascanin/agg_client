@@ -20,11 +20,11 @@ import {
 	getExpensesAction,
 	updateExpenseAction,
 	deleteExpenseAction,
-} from '../../redux/actions/expensesActions';
+} from '../../../redux/actions/expensesActions';
 import { AddCircle } from '@material-ui/icons';
 import { ExpenseFormModal } from './ExpenseFormModal';
 import { ExpensesForm } from './ExpensesForm';
-import CustomModal from '../CustomModal';
+import CustomModal from '../../CustomModal';
 
 const useStyle = makeStyles((theme) => ({
 	datePickerContainer: {
@@ -218,7 +218,7 @@ export const Expenses = () => {
 
 			<div style={{ display: 'flex', alignItems: 'flex-end' }}>
 				<Typography
-					style={{ marginTop: 40, marginRight: 15 }}
+					style={{ margin: '40px 15px 0 6px' }}
 					variant="h5"
 					component="h2"
 				>

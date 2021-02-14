@@ -1,9 +1,9 @@
 import { Container } from '@material-ui/core';
 import React, { useRef, useEffect, useState } from 'react';
-import { Charts } from '../components/Charts';
-import { Expenses } from '../components/Expenses/index';
+import { Charts } from '../components/Dashboard/Charts';
+import { Expenses } from '../components/Dashboard/Expenses/index';
+import { Profit } from '../components/Dashboard/Profit/index';
 import { Header } from '../components/Header';
-import { Profit } from '../components/Profit';
 
 export const Dashboard = () => {
 	let container = useRef(null);

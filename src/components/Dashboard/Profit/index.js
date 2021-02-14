@@ -18,7 +18,7 @@ import {
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getJobConclusionsAction } from '../../redux/actions/jobConclusionActions';
+import { getJobConclusionsAction } from '../../../redux/actions/jobConclusionActions';
 
 const useStyle = makeStyles((theme) => ({
 	datePickerContainer: {
@@ -87,7 +87,7 @@ export const Profit = () => {
 	return (
 		<>
 			<Typography
-				style={{ marginTop: 50, marginRight: 15 }}
+				style={{ margin: '50px 15px 0 6px' }}
 				variant="h5"
 				component="h2"
 			>

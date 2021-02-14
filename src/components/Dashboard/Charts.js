@@ -1,14 +1,20 @@
-import { Grid, makeStyles } from '@material-ui/core';
+import DateFnsUtils from '@date-io/date-fns';
+import { Grid, makeStyles, Typography } from '@material-ui/core';
+import {
+	KeyboardDatePicker,
+	MuiPickersUtilsProvider,
+} from '@material-ui/pickers';
+import dayjs from 'dayjs';
 import React, { useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	chartDataClearErrorAction,
 	getChartDataAction,
-} from '../redux/actions/chartActions';
-import { CustomAreaChart } from './CustomAreaChart';
-import { CustomBarChart } from './CustomBarChart';
+} from '../../redux/actions/chartActions';
+import { CustomAreaChart } from '../CustomAreaChart';
+import { CustomBarChart } from '../CustomBarChart';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
 	chartCard: {
 		backgroundColor: '#FFF',
 		padding: '10px 30px 10px 0',
@@ -27,7 +33,24 @@ const useStyles = makeStyles({
 		marginLeft: 5,
 		display: 'inline-block',
 	},
-});
+	chartDateContainer: {
+		marginLeft: 10,
+	},
+	chartDatePicker: {
+		marginRight: 10,
+	},
+	chartReport: {
+		textAlign: 'start',
+		marginLeft: 60,
+		marginBottom: 10,
+	},
+	chartReportNegative: {
+		color: theme.palette.secondary.main,
+	},
+	chartReportPositive: {
+		color: theme.palette.success.main,
+	},
+}));
 
 export const Charts = (props) => {
 	const smChartContainer = useRef(null);
@@ -37,9 +60,33 @@ export const Charts = (props) => {
 	const dispatch = useDispatch();
 	const chartData = useSelector((state) => state.chartData);
 
+	const [fromDate, setFromDate] = useState(
+		dayjs(new Date()).subtract(1, 'month').format('YYYY/MM/DD')
+	);
+	const [toDate, setToDate] = useState(dayjs(new Date()).format('YYYY/MM/DD'));
+
+	const handleFromDateChande = (date) => {
+		setFromDate(dayjs(date).format('YYYY/MM/DD'));
+	};
+	const handleToDateChande = (date) => {
+		setToDate(dayjs(date).format('YYYY/MM/DD'));
+	};
+
+	const getProfit = (chartData) => {
+		const exp = chartData.expenses.reduce((prevVal, curVal) => {
+			return prevVal + curVal.expense;
+		}, 0);
+
+		const prof = chartData.profit.reduce((prevVal, curVal) => {
+			return prevVal + curVal.profit;
+		}, 0);
+
+		return prof - exp;
+	};
+
 	useEffect(() => {
-		dispatch(getChartDataAction());
-	}, [dispatch]);
+		dispatch(getChartDataAction(fromDate, toDate));
+	}, [dispatch, fromDate, toDate]);
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -60,8 +107,42 @@ export const Charts = (props) => {
 		};
 	}, []);
 
+	console.log(chartData);
+
 	return (
 		<div>
+			<div className={classes.chartDateContainer}>
+				<MuiPickersUtilsProvider utils={DateFnsUtils}>
+					<KeyboardDatePicker
+						className={classes.chartDatePicker}
+						disableToolbar
+						variant="inline"
+						format="dd/MM/yyyy"
+						margin="normal"
+						label="Datum od"
+						value={fromDate}
+						onChange={handleFromDateChande}
+						KeyboardButtonProps={{
+							'aria-label': 'change date',
+						}}
+					/>
+				</MuiPickersUtilsProvider>
+				<MuiPickersUtilsProvider utils={DateFnsUtils}>
+					<KeyboardDatePicker
+						className={classes.chartDatePicker}
+						disableToolbar
+						variant="inline"
+						format="dd/MM/yyyy"
+						margin="normal"
+						label="Datum do"
+						value={toDate}
+						onChange={handleToDateChande}
+						KeyboardButtonProps={{
+							'aria-label': 'change date',
+						}}
+					/>
+				</MuiPickersUtilsProvider>
+			</div>
 			<Grid container justify="space-between">
 				<Grid ref={smChartContainer} item md={6} xs={12}>
 					<div className={classes.chartCard}>
@@ -117,6 +198,19 @@ export const Charts = (props) => {
 							/>
 							Troškovi
 						</CustomBarChart>
+						<div>
+							<Typography
+								variant="h6"
+								component="p"
+								className={
+									getProfit(chartData) > 0
+										? `${classes.chartReport} ${classes.chartReportPositive}`
+										: `${classes.chartReport} ${classes.chartReportNegative}`
+								}
+							>
+								Profit: {getProfit(chartData)}KM
+							</Typography>
+						</div>
 					</div>
 				</Grid>
 			</Grid>

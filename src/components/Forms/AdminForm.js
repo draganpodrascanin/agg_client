@@ -231,6 +231,7 @@ const AdminForm = ({
 				variant="contained"
 				color="primary"
 				onClick={formik.submitForm}
+				size="large"
 				disabled={!formik.isValid || !formik.dirty}
 			>
 				Potvrdi
