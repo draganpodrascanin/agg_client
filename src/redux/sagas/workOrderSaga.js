@@ -55,9 +55,11 @@ function* getWorkOrdersSaga(action) {
 
 	try {
 		const response = yield call(() => Axios.get(url));
-
 		yield put({ type: CLEAR_WORK_ORDERS_LOADING });
-		yield put({ type: GET_WORK_ORDERS, payload: response.data.data });
+		yield put({
+			type: GET_WORK_ORDERS,
+			payload: { workOrders: response.data.data, count: response.data.count },
+		});
 	} catch (err) {
 		yield put({ type: CLEAR_WORK_ORDERS_LOADING });
 		yield put({

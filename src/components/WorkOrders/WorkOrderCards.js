@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 		padding: '12px 90px',
 		fontSize: 18,
 		background: theme.palette.primary.light,
-		borderRadius: 100,
+		borderRadius: 15,
 		border: 'none',
 		color: '#fff',
 		fontWeight: 600,
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 		padding: '30px 20px',
 		height: '100%',
 		marginBottom: 50,
-		borderRadius: 10,
+		borderRadius: 5,
 	},
 	cardHeader: {
 		display: 'flex',
@@ -124,17 +124,26 @@ const useStyles = makeStyles((theme) => ({
 		justifyContent: 'flex-start',
 		margin: '30px 0',
 		width: '100%',
+		padding: '0 70px',
+
+		'@media screen and (max-width: 900px)': {
+			padding: '0',
+		},
 	},
 	innerCard: {
-		padding: window.innerWidth > 900 ? '30px 45px' : '20px 35px',
+		padding: '30px 45px',
 		width: '100%',
 		background: '#ccc',
-		borderRadius: 10,
+		borderRadius: 5,
 		color: '#fff',
 		boxShadow: '2px 4px 5px rgba(0,0,0,0.15)',
 
+		'@media screen and (max-width: 900px)': {
+			padding: '20px 35px',
+		},
+
 		'&:not(:last-child)': {
-			marginBottom: '20px',
+			marginBottom: '10px',
 		},
 	},
 	innerCardHeading: {
@@ -168,29 +177,38 @@ const useStyles = makeStyles((theme) => ({
 		color: theme.palette.text.primary,
 		backgroundColor: '#fff',
 		marginTop: 3,
-		padding: '20px 32px',
-		borderRadius: 10,
+		padding: '15px 15px',
+		borderRadius: 5,
 	},
 	jobTicketsContainer: {
 		display: 'flex',
-		flexDirection: window.innerWidth > 900 ? 'row' : 'column',
+		flexDirection: 'row',
 		justifyContent: 'flex-start',
 		alignItems: 'center',
 		flexWrap: 'wrap',
+
+		'@media screen and (max-width: 900px)': {
+			flexDirection: 'column',
+		},
 	},
 	jobTicket: {
 		background: '#fff',
-		borderRadius: 5,
+		borderRadius: 3,
 		padding: '20px 35px',
 		color: theme.palette.text.primary,
-		margin: window.innerWidth > 900 ? '0 10px 10px 0' : '0 0 10px 0',
-		width: window.innerWidth > 900 ? 'auto' : '100%',
+		margin: '0 10px 10px 0',
+		width: 'auto',
+
+		'@media screen and (max-width: 900px)': {
+			margin: '0 0 10px 0',
+			width: '100%',
+		},
 	},
 	jobTicketStatus: {
 		color: '#fff',
 		display: 'inline-flex',
 		padding: '7px 14px',
-		borderRadius: 4,
+		borderRadius: 5,
 		marginBottom: 15,
 	},
 	jobTicketStatusSuccess: {
@@ -297,10 +315,7 @@ export const WorkOrderCards = () => {
 				</div>
 			</AccordionSummary>
 			<AccordionDetails>
-				<div
-					className={classes.innerContentContainer}
-					style={{ padding: window.innerWidth > 900 ? '0 70px' : '0' }}
-				>
+				<div className={classes.innerContentContainer}>
 					<div
 						className={`${classes.innerCard} ${classes.carReception}`}
 						style={
@@ -449,8 +464,17 @@ export const WorkOrderCards = () => {
 								className={classes.innercardIcon}
 								style={{ fontSize: 20, top: 3 }}
 							/>
-							Posao nije zaključen.
+							{workOrder.jobConclusion
+								? 'Posao zaključen'
+								: 'Posao nije zaključen.'}
 						</Typography>
+						{workOrder.jobConclusion && (
+							<React.Fragment>
+								<Typography variant="body2" style={{ marginTop: 5 }}>
+									{workOrder.jobConclusion.workDone}
+								</Typography>
+							</React.Fragment>
+						)}
 					</div>
 				</div>
 			</AccordionDetails>

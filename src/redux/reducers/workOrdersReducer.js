@@ -20,7 +20,11 @@ export const workOrdersReducer = (state = initialState, action) => {
 			const newWorkOrder = { ...action.payload, jobTickets: [] };
 			return { ...state, workOrders: [newWorkOrder, ...state.workOrders] };
 		case GET_WORK_ORDERS:
-			return { ...state, workOrders: [...state.workOrders, ...action.payload] };
+			return {
+				...state,
+				workOrders: [...state.workOrders, ...action.payload.workOrders],
+				count: action.payload.count,
+			};
 		case SET_WORK_ORDERS_LOADING:
 			return { ...state, loading: true };
 		case DELETE_WORK_ORDER:
