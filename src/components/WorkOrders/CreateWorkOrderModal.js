@@ -95,15 +95,14 @@ const CreateWorkOrderModal = (props) => {
 						}}
 						getOptionLabel={(option) => `${option.registration}`}
 						loading={carSuggestions.loading}
+						onInputChange={(e, val) => {
+							formik.setFieldValue('registration', val);
+						}}
 						renderOption={(option) => (
-							<div
-								onClick={() => {
-									formik.setFieldValue('registration', option.registration);
-								}}
-							>
+							<React.Fragment>
 								{option.registration} : {option.carBrand} {option.carModel}{' '}
 								{option.productionYear}
-							</div>
+							</React.Fragment>
 						)}
 						renderInput={(params) => (
 							<TextField

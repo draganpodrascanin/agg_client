@@ -21,6 +21,7 @@ import {
 import { setClientCarOwnershipAction } from '../../redux/actions/clientsActions';
 import { createDebounce } from '../util/debounce';
 import CreateCarForm from '../Cars/CreateCarForm';
+import { useFormik } from 'formik';
 
 const debounce = createDebounce();
 
@@ -66,30 +67,29 @@ const AddCarModal = (props) => {
 	const carSuggestions = useSelector((state) => state.carSuggestions);
 	let modal = useRef();
 
-	const [overRegForm, setOverRegForm] = useState({
-		registration: '',
-		formRef: useRef(),
-		handleChange(e) {
-			setOverRegForm({ ...overRegForm, registration: e.target.value });
+	const handleSubmit = (v) => {
+		dispatch(setClientCarOwnershipAction(v.registration, props.clientId));
+	};
+
+	const formik = useFormik({
+		initialValues: {
+			registration: '',
 		},
+		onSubmit: handleSubmit,
 	});
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		dispatch(
-			setClientCarOwnershipAction(overRegForm.registration, props.clientId)
-		);
-		setOverRegForm({ ...overRegForm, registration: '' });
+	const handleOptionChoice = (val) => {
+		formik.setFieldValue('registration', val);
 	};
 
 	useEffect(() => {
-		if (overRegForm.registration !== '')
+		if (formik.values.registration !== '')
 			debounce(
-				() => dispatch(getCarSuggestionsAction(overRegForm.registration)),
+				() => dispatch(getCarSuggestionsAction(formik.values.registration)),
 				700,
 				() => dispatch(carSuggestionLoadingAction())
 			);
-	}, [dispatch, overRegForm.registration]);
+	}, [dispatch, formik.values.registration]);
 
 	setTimeout(() => {
 		if (modal?.current?.offsetHeight >= window.innerHeight) {
@@ -115,14 +115,7 @@ const AddCarModal = (props) => {
 	return (
 		<Modal open={props.open} onClose={props.close} className={classes.modal}>
 			<div ref={modal} className={classes.modalForm}>
-				<form
-					ref={overRegForm.formRef}
-					style={{ marginBottom: 16 }}
-					onSubmit={(e) => {
-						e.preventDefault();
-						handleSubmit(e);
-					}}
-				>
+				<form style={{ marginBottom: 16 }} onSubmit={formik.handleSubmit}>
 					<Typography variant="h5" tyle="h4" style={{ marginBottom: 10 }}>
 						Postojeći automobil preko registracije:
 					</Typography>
@@ -140,24 +133,20 @@ const AddCarModal = (props) => {
 						}}
 						getOptionLabel={(option) => `${option.registration}`}
 						loading={carSuggestions.loading}
+						onInputChange={(e, val, reason) => {
+							handleOptionChoice(val);
+						}}
 						renderOption={(option) => (
-							<div
-								onClick={() => {
-									setOverRegForm({
-										...overRegForm,
-										registration: option.registration,
-									});
-								}}
-							>
+							<React.Fragment>
 								{option.registration} : {option.carBrand} {option.carModel}{' '}
 								{option.productionYear}
-							</div>
+							</React.Fragment>
 						)}
 						renderInput={(params) => (
 							<TextField
 								{...params}
-								value={overRegForm.registration}
-								onChange={overRegForm.handleChange}
+								value={formik.values.registration}
+								onChange={formik.handleChange}
 								className={classes.textInput}
 								label="Registracija"
 								variant="outlined"
@@ -182,7 +171,7 @@ const AddCarModal = (props) => {
 						color="primary"
 						size="medium"
 						style={{ marginTop: 5 }}
-						onClick={handleSubmit}
+						onClick={formik.handleSubmit}
 					>
 						Potvrdi
 					</Button>
