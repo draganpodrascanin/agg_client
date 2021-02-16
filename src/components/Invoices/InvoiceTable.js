@@ -15,6 +15,7 @@ import {
 import { GetApp, Print } from '@material-ui/icons';
 import dayjs from 'dayjs';
 import IframeModal from './IframeModal';
+import { LoadingModal } from '../UI/LoadingModal';
 
 const StyledTableCell = withStyles((theme) => ({
 	head: {
@@ -128,6 +129,8 @@ const InvoiceTable = ({ invoices, ...props }) => {
 					</TableBody>
 				</Table>
 			</TableContainer>
+			{/*  UI  */}
+			<LoadingModal />
 		</div>
 	);
 };

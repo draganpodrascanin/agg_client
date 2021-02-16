@@ -114,6 +114,8 @@ const CreateInvoice = ({ heading }) => {
 		},
 		onSubmit: (v) => {
 			dispatch(createInvoceAction(v));
+			formik.resetForm();
+			setConfirmSubmitModal(false);
 		},
 	});
 

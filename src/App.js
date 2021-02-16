@@ -31,6 +31,8 @@ import { io } from 'socket.io-client';
 import { MessageRecievedSnackbar } from './components/UI/MessageRecievedSnackbar';
 import { newMessageAction } from './redux/actions/messageActions';
 import AdminPanel from './pages/AdminPanel';
+import { Howl } from 'howler';
+import msgAudio from './notification.mp3';
 
 const theme = createMuiTheme({
 	palette: {
@@ -41,6 +43,10 @@ const theme = createMuiTheme({
 });
 
 const socket = io('http://localhost:5000');
+
+const howl = new Howl({
+	src: msgAudio,
+});
 
 const App = () => {
 	const admin = useSelector((state) => state.admin);
@@ -60,6 +66,7 @@ const App = () => {
 	useEffect(() => {
 		socket.on('NewMessage', (message) => {
 			dispatch(newMessageAction(message));
+			howl.play();
 		});
 
 		socket.on('disconnect', function () {

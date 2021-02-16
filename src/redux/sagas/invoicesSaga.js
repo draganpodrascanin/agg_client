@@ -51,14 +51,14 @@ function* createInvoiceSaga(action) {
 
 		yield put({ type: CREATE_INVOICE, payload: resInvoice.data.data.invoice });
 
-		yield put({ type: CLEAR_LOADING });
 		yield put({ type: SUCCESS, payload: 'Uspešno napravljena faktura.' });
-	} catch (err) {
 		yield put({ type: CLEAR_LOADING });
+	} catch (err) {
 		yield put({
 			type: UI_ERROR,
 			payload: 'Doslo je do greške pri kreiranju nove fakture.',
 		});
+		yield put({ type: CLEAR_LOADING });
 	}
 }
 
