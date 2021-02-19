@@ -1,3 +1,4 @@
+import { ControlPointOutlined } from '@material-ui/icons';
 import Axios from 'axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import {
@@ -125,7 +126,7 @@ function* editBlogSaga(action) {
 
 	try {
 		const response = yield call(() =>
-			Axios.patch(`/api/v1/blog/${blogId}`, {
+			Axios.put(`/api/v1/blog/${blogId}`, {
 				imageId,
 				imageAlt,
 				thumbnailId,
