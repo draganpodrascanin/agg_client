@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import {
 	Card,
 	CardActionArea,
@@ -8,9 +6,11 @@ import {
 	makeStyles,
 	Typography,
 } from '@material-ui/core';
-import { statusTranslate } from '../util/statusTranslate';
 import { Build } from '@material-ui/icons';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { statusTranslate } from '../util/statusTranslate';
 
 const useStyles = makeStyles((theme) => ({
 	header: {

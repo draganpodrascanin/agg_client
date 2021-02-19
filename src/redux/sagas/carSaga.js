@@ -17,7 +17,6 @@ import {
 	GET_ACTIVE_CAR,
 	GET_ACTIVE_CAR_SAGA,
 } from '../actions/action-types';
-import { getActiveCar } from '../actions/activeCarAction';
 
 function* createCarSaga({ payload }) {
 	yield put({ type: LOADING });

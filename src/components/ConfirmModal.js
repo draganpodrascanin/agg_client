@@ -1,7 +1,7 @@
+import { Button, makeStyles, Typography } from '@material-ui/core';
+import PropTypes from 'prop-types';
 import React from 'react';
 import CustomModal from './CustomModal';
-import PropTypes from 'prop-types';
-import { Button, makeStyles, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
 	form: {

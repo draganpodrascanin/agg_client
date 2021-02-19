@@ -6,7 +6,6 @@ import {
 	InputAdornment,
 	makeStyles,
 	MenuItem,
-	Paper,
 	TextField,
 	Typography,
 } from '@material-ui/core';

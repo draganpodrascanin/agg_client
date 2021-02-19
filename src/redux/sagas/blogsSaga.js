@@ -1,4 +1,3 @@
-import { ControlPointOutlined } from '@material-ui/icons';
 import Axios from 'axios';
 import { call, put, takeLatest } from 'redux-saga/effects';
 import {

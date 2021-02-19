@@ -8,7 +8,7 @@ export const LoadingModal = (props) => {
 			onClose={props.handleClose}
 			aria-labelledby="loading modal"
 			aria-describedby="loading-modal-please-wait"
-			style={{ zIndex: Infinity }}
+			style={{ zIndex: 9000 }}
 		>
 			<div
 				style={{

@@ -7,6 +7,8 @@ import {
 	makeStyles,
 	Typography,
 } from '@material-ui/core';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 import {
 	Build,
 	CheckBox,
@@ -15,6 +17,9 @@ import {
 	FolderShared,
 	Pageview,
 } from '@material-ui/icons';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Timeline from '@material-ui/icons/Timeline';
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,13 +29,8 @@ import {
 	deleteWorkOrderAction,
 	getWorkOrdersAction,
 } from '../../redux/actions/workOrderActions';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-import { statusTranslate } from '../util/statusTranslate';
-import Timeline from '@material-ui/icons/Timeline';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ConfirmModal from '../ConfirmModal';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
+import { statusTranslate } from '../util/statusTranslate';
 
 const useStyles = makeStyles((theme) => ({
 	loadMoreBtn: {

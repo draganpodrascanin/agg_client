@@ -1,8 +1,6 @@
 import Axios from 'axios';
-import dayjs from 'dayjs';
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import {
-	GET_APPOINTMENTS,
 	GET_MESSAGES,
 	GET_MESSAGES_SAGA,
 	GET_UNREAD_MESSAGES_NUMBER,

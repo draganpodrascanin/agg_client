@@ -1,38 +1,35 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { PrivateRoute } from './components/PrivateRoute';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import { useSelector, useDispatch } from 'react-redux';
-
-import { Navigation } from './components/Navigation';
-import LoginForm from './components/LoginForm';
-
 import 'fontsource-roboto';
-import { getCurrentAdminAction } from './redux/actions/authAction';
-import { LoginRoute } from './components/LoginRoute';
-import { NotAuthorizedPage } from './pages/NotAuthorized';
-import { Dashboard } from './pages/Dashboard';
-
-import './style.css';
-import { Klijenti } from './pages/Klijenti';
-import { Cars } from './pages/Cars';
-import { ServisniNalozi } from './pages/ServisniNalozi';
-import { ServisniNalog } from './pages/ServisniNalog';
-import { Appointments } from './pages/Appointments';
-import RadniNalozi from './pages/RadniNalozi';
-import Automobil from './pages/Automobil';
-import BlogKreator from './pages/BlogKreator';
-import Blog from './pages/Blog';
-import IzmeniBlog from './pages/IzmeniBlog';
-import ActiveBlog from './pages/ActiveBlog';
-import Racuni from './pages/Racuni';
-import Poruke from './pages/Poruke';
-import { io } from 'socket.io-client';
-import { MessageRecievedSnackbar } from './components/UI/MessageRecievedSnackbar';
-import { newMessageAction } from './redux/actions/messageActions';
-import AdminPanel from './pages/AdminPanel';
 import { Howl } from 'howler';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { io } from 'socket.io-client';
+import LoginForm from './components/LoginForm';
+import { LoginRoute } from './components/LoginRoute';
+import { Navigation } from './components/Navigation';
+import { PrivateRoute } from './components/PrivateRoute';
+import { MessageRecievedSnackbar } from './components/UI/MessageRecievedSnackbar';
 import msgAudio from './notification.mp3';
+import ActiveBlog from './pages/ActiveBlog';
+import AdminPanel from './pages/AdminPanel';
+import { Appointments } from './pages/Appointments';
+import Automobil from './pages/Automobil';
+import Blog from './pages/Blog';
+import BlogKreator from './pages/BlogKreator';
+import { Cars } from './pages/Cars';
+import { Dashboard } from './pages/Dashboard';
+import IzmeniBlog from './pages/IzmeniBlog';
+import { Klijenti } from './pages/Klijenti';
+import { NotAuthorizedPage } from './pages/NotAuthorized';
+import Poruke from './pages/Poruke';
+import Racuni from './pages/Racuni';
+import RadniNalozi from './pages/RadniNalozi';
+import { ServisniNalog } from './pages/ServisniNalog';
+import { ServisniNalozi } from './pages/ServisniNalozi';
+import { getCurrentAdminAction } from './redux/actions/authAction';
+import { newMessageAction } from './redux/actions/messageActions';
+import './style.css';
 
 const theme = createMuiTheme({
 	palette: {

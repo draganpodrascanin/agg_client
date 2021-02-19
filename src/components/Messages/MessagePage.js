@@ -1,24 +1,15 @@
 import {
 	Button,
-	Card,
-	CardActionArea,
-	Grid,
 	InputAdornment,
 	makeStyles,
 	MenuItem,
-	Paper,
 	TextField,
-	Typography,
 } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
 import { Pagination } from '@material-ui/lab';
-import dayjs from 'dayjs';
 import { useFormik } from 'formik';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCarsAction } from '../../redux/actions/carActions';
-import DriveEtaIcon from '@material-ui/icons/DriveEta';
-import { useHistory } from 'react-router-dom';
 import MessagesAccordions from './MessagesAccordions';
 import { getMessagesAction } from '../../redux/actions/messageActions';
 

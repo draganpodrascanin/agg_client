@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import DateFnsUtils from '@date-io/date-fns';
+import { Button, Typography } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -6,25 +8,22 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import { AddCircle } from '@material-ui/icons';
 import {
-	MuiPickersUtilsProvider,
 	KeyboardDatePicker,
+	MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
 import dayjs from 'dayjs';
-import { Button, Modal, Typography } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	createExpenseAction,
+	deleteExpenseAction,
 	getExpensesAction,
 	updateExpenseAction,
-	deleteExpenseAction,
 } from '../../../redux/actions/expensesActions';
-import { AddCircle } from '@material-ui/icons';
-import { ExpenseFormModal } from './ExpenseFormModal';
-import { ExpensesForm } from './ExpensesForm';
 import CustomModal from '../../CustomModal';
+import { ExpensesForm } from './ExpensesForm';
 
 const useStyle = makeStyles((theme) => ({
 	datePickerContainer: {

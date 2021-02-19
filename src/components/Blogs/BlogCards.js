@@ -15,7 +15,6 @@ import { useHistory } from 'react-router-dom';
 import { Public } from '@material-ui/icons';
 import CustomModal from '../CustomModal';
 import BlogPublishForm from '../Forms/BlogPublishForm';
-import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
 	unpublishedIcon: {

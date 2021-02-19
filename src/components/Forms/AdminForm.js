@@ -4,7 +4,6 @@ import * as Yup from 'yup';
 import {
 	Button,
 	FormControl,
-	FormControlLabel,
 	IconButton,
 	InputAdornment,
 	InputLabel,
@@ -22,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'flex-start',
-		minWidth: 400,
 	},
 	textField: {
 		width: '100%',

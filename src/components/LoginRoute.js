@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Route, useHistory, useLocation } from 'react-router-dom';
-// import { getCurrentAdminAction } from '../redux/actions/authAction';
 
 export const LoginRoute = (props) => {
 	const admin = useSelector((state) => state.admin);

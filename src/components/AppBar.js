@@ -1,16 +1,15 @@
-import React from 'react';
 import {
+	AppBar,
 	Button,
 	IconButton,
 	makeStyles,
 	Toolbar,
 	Typography,
-	AppBar,
 } from '@material-ui/core';
-
 import MenuIcon from '@material-ui/icons/Menu';
-import { logoutAdminAction } from '../redux/actions/authAction';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { logoutAdminAction } from '../redux/actions/authAction';
 
 const useStyles = makeStyles((theme) => ({
 	root: {

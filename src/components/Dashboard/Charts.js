@@ -5,7 +5,7 @@ import {
 	MuiPickersUtilsProvider,
 } from '@material-ui/pickers';
 import dayjs from 'dayjs';
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	chartDataClearErrorAction,
