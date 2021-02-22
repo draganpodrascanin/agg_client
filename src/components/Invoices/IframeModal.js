@@ -32,7 +32,7 @@ const IframeModal = ({ open, onClose, path }) => {
 		<Modal className={classes.modal} open={open} onClose={onClose}>
 			<iframe
 				title="invoice-pdf"
-				src={`http://localhost:5000${path}`}
+				src={`https://gagatest.xyz${path}`}
 				frameBorder="0"
 				width="80%"
 				height="90%"
