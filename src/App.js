@@ -39,7 +39,7 @@ const theme = createMuiTheme({
 	},
 });
 
-const socket = io('https://gagetest.xyz');
+const socket = io('https://gagatest.xyz');
 
 const howl = new Howl({
 	src: msgAudio,
@@ -51,13 +51,11 @@ const App = () => {
 
 	// const subscribeToNotifications = async () => {
 	// 	const sw = await navigator.serviceWorker.ready;
-	// 	console.log('sw', sw);
 	// 	const push = await sw.pushManager.subscribe({
 	// 		userVisibleOnly: true,
 	// 		applicationServerKey:
 	// 			'BDiOjQq4Dw7hDp-Jou0fg5XVJuNdJwkbiEEO-pTs18SgwTjbOLXVdVnDR-UJWC7P5ZB4_XWwPOJWjegSrMSfsPM',
 	// 	});
-	// 	console.log('push', push);
 	// };
 
 	useEffect(() => {

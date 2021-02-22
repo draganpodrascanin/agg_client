@@ -107,8 +107,6 @@ export const Charts = (props) => {
 		};
 	}, []);
 
-	console.log(chartData);
-
 	return (
 		<div>
 			<div className={classes.chartDateContainer}>

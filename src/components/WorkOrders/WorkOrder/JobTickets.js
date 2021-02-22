@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 	ticketContainer: {
 		marginTop: 10,
 		display: 'flex',
+		flexWrap: 'wrap',
 		'@media screen and (max-width:900px)': {
 			flexDirection: 'column',
 			alignItems: 'center',
@@ -42,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 		maxWidth: 345,
 		minWidth: 300,
 		marginRight: 10,
+		marginBottom: 10,
 		color: '#fff',
 
 		'@media screen and (max-width:900px)': {

@@ -67,8 +67,6 @@ const InvoiceTable = ({ invoices, ...props }) => {
 		setIframePath(val);
 	};
 
-	console.log(iframePath, openIframeModal);
-
 	if (!invoices || !invoices[0]) {
 		return <Typography variant="h5">Nema Računa..</Typography>;
 	}

@@ -31,7 +31,6 @@ const UIReducer = (state = initalState, action) => {
 		case CLEAR_UI_ERROR:
 			return { ...state, uiError: '' };
 		case MESSAGE_RECEIVED:
-			console.log(action.payload);
 			return { ...state, messageRecieved: action.payload };
 		case CLEAR_MESSAGE_RECEIVED:
 			return { ...state, messageRecieved: '' };

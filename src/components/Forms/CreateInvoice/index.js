@@ -132,8 +132,6 @@ const CreateInvoice = ({ heading }) => {
 		});
 	};
 
-	console.log('formik.values', formik.values);
-
 	const handleDescChange = (e, index) => {
 		let newDescs = [...formik.values.invoiceDescs];
 		newDescs[index][e.target.name] = e.target.value;
@@ -313,7 +311,6 @@ const CreateInvoice = ({ heading }) => {
 				<div className={classes.formDescContainer}>
 					{useMemo(() => {
 						const invoiceUnitOptions = ['kom', 'h', 'komplet'];
-						console.log('descs rerender');
 
 						return formik.values.invoiceDescs.map((invoiceDesc, index) => (
 							<div className={classes.invoiceDesc} key={index}>
@@ -325,7 +322,6 @@ const CreateInvoice = ({ heading }) => {
 										label="Ime Proizvoda/Usluge"
 										value={invoiceDesc.desc}
 										onChange={(e) => {
-											console.log('bas before', formik.values);
 											handleDescChange(e, index);
 										}}
 										variant="standard"

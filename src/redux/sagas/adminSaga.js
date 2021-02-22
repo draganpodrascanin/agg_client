@@ -44,7 +44,6 @@ function* createAdminSaga(action) {
 		const res = yield call(() =>
 			Axios.post('/api/v1/admin/createAdmin', payload)
 		);
-		console.log(res);
 
 		yield put({ type: CREATE_ADMIN, payload: res.data.data });
 		yield put({ type: CLEAR_LOADING });
