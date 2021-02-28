@@ -24,6 +24,7 @@ function* createBlogSaga(action) {
 		imageAlt,
 		thumbnailId,
 		thumbnailAlt,
+		synopsis,
 		title,
 		content,
 	} = action.payload;
@@ -35,6 +36,7 @@ function* createBlogSaga(action) {
 				imageAlt,
 				thumbnailId,
 				thumbnailAlt,
+				synopsis,
 				title,
 				content,
 			})
